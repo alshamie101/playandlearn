@@ -2,74 +2,38 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المكتبة الرقمية الإثرائية | د. رباب الشامي</title>
+    <title>المكتبة الرقمية - د. رباب الشامي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #f5f0e6; color: #4a4a4a; font-family: sans-serif; }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 50; align-items: center; justify-content: center; }
-        .modal.active { display: flex; }
+        body { background-color: #1a1a1a; color: #e5e5e5; }
+        .glass-btn { background: #2d2d2d; border: 1px solid #444; padding: 20px; text-align: center; border-radius: 12px; }
     </style>
 </head>
-<body class="p-6">
-
-    <!-- العنوان الرئيسي -->
-    <header class="text-center my-10">
-        <h1 class="text-3xl font-bold text-gray-800">المكتبة الرقمية الإثرائية والتفاعلية</h1>
-        <p class="text-lg text-gray-600">لكتاب نظريات التعلم | د. رباب الشامي</p>
-    </header>
-
-    <!-- الأزرار الستة -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <button onclick="openModal('m1')" class="bg-[#e3d0b2] p-6 rounded-2xl shadow hover:shadow-lg transition">١- كتاب نظريات التعلم</button>
-        <button onclick="openModal('m2')" class="bg-[#e3d0b2] p-6 rounded-2xl shadow hover:shadow-lg transition">٢- الفيديو التعليمي</button>
-        <button onclick="openModal('m3')" class="bg-[#e3d0b2] p-6 rounded-2xl shadow hover:shadow-lg transition">٣- البودكاست الصوتي</button>
-        <button onclick="openModal('m4')" class="bg-[#e3d0b2] p-6 rounded-2xl shadow hover:shadow-lg transition">٤- العرض التقديمي</button>
-        <button onclick="openModal('m5')" class="bg-[#e3d0b2] p-6 rounded-2xl shadow hover:shadow-lg transition">٥- الخرائط والملحقات</button>
-        <button onclick="openModal('m6')" class="bg-[#e3d0b2] p-6 rounded-2xl shadow hover:shadow-lg transition">٦- لعبة التحدي</button>
+<body class="p-8">
+    <div class="max-w-4xl mx-auto text-center">
+        <header class="mb-12">
+            <h1 class="text-4xl font-bold text-white">المكتبة الرقمية الإثرائية</h1>
+            <p class="mt-4 text-gray-400">د. رباب الشامي - متخصصة في نظريات التعلم وتطوير المناهج الإثرائية. نؤمن بأن التعلم رحلة إبداعية مستمرة.</p>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-btn">١- كتاب نظريات التعلم</div>
+            <div class="glass-btn">٢- الفيديو التعليمي</div>
+            <div class="glass-btn">٣- البودكاست الصوتي</div>
+            <div class="glass-btn">٤- العرض التقديمي</div>
+            <div class="glass-btn">٥- الخرائط والملحقات</div>
+            <div class="glass-btn">٦- لعبة التحدي</div>
+        </div>
+        <section class="mt-16 p-8 bg-[#222] rounded-xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 bg-[#2d2d2d] rounded">الخاطرة الأولى: المعرفة قوة.</div>
+                <div class="p-4 bg-[#2d2d2d] rounded">الخاطرة الثانية: التعلم مستمر.</div>
+                <div class="p-4 bg-[#2d2d2d] rounded">الخاطرة الثالثة: الإبداع مهارة.</div>
+            </div>
+        </section>
+        <footer class="mt-16 text-gray-500 text-sm">
+            <p>الإثرائية</p>
+            <p>جميع الحقوق محفوظة لدى موقع د. رباب الشامي © 2026</p>
+        </footer>
     </div>
-
-    <!-- النوافذ التفاعلية -->
-    <div id="m1" class="modal" onclick="closeModal('m1')"><div class="bg-white p-8 rounded-xl w-3/4 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
-        <h2 class="text-2xl font-bold mb-4">كتاب نظريات التعلم</h2>
-        <p class="mb-4">هنا مساحة لعرض الكتاب، وتنزيله، وكتابة نبذة عنه.</p>
-        <button onclick="closeModal('m1')" class="bg-gray-800 text-white px-6 py-2 rounded">إغلاق</button>
-    </div></div>
-
-    <div id="m2" class="modal" onclick="closeModal('m2')"><div class="bg-white p-8 rounded-xl w-3/4 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
-        <h2 class="text-2xl font-bold mb-4">الفيديو التعليمي</h2>
-        <p class="mb-4">مساحة للفيديو والنبذة التحريفية.</p>
-        <button onclick="closeModal('m2')" class="bg-gray-800 text-white px-6 py-2 rounded">إغلاق</button>
-    </div></div>
-
-    <div id="m3" class="modal" onclick="closeModal('m3')"><div class="bg-white p-8 rounded-xl w-3/4 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
-        <h2 class="text-2xl font-bold mb-4">البودكاست الصوتي</h2>
-        <p class="mb-4">مشغل البودكاست والنصوص المرفقة.</p>
-        <button onclick="closeModal('m3')" class="bg-gray-800 text-white px-6 py-2 rounded">إغلاق</button>
-    </div></div>
-
-    <div id="m4" class="modal" onclick="closeModal('m4')"><div class="bg-white p-8 rounded-xl w-3/4 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
-        <h2 class="text-2xl font-bold mb-4">العرض التقديمي</h2>
-        <p class="mb-4">نافذة عرض البوربوينت التفاعلي.</p>
-        <button onclick="closeModal('m4')" class="bg-gray-800 text-white px-6 py-2 rounded">إغلاق</button>
-    </div></div>
-
-    <div id="m5" class="modal" onclick="closeModal('m5')"><div class="bg-white p-8 rounded-xl w-3/4 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
-        <h2 class="text-2xl font-bold mb-4">الخرائط والملحقات</h2>
-        <p class="mb-4">مساحة الملفات والخرائط الذهنية.</p>
-        <button onclick="closeModal('m5')" class="bg-gray-800 text-white px-6 py-2 rounded">إغلاق</button>
-    </div></div>
-
-    <div id="m6" class="modal" onclick="closeModal('m6')"><div class="bg-white p-8 rounded-xl w-3/4 max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
-        <h2 class="text-2xl font-bold mb-4">لعبة التحدي</h2>
-        <p class="mb-4">رابط اللعبة التفاعلي.</p>
-        <button onclick="closeModal('m6')" class="bg-gray-800 text-white px-6 py-2 rounded">إغلاق</button>
-    </div></div>
-
-    <script>
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-    </script>
 </body>
 </html>
