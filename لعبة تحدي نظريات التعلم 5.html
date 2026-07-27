@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 تحدي نظريات التعلم - د. رباب الشامي</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #a78bfa;
+            --primary-dark: #5b21b6;
+            --secondary: #06b6d4;
+            --bg-gradient: linear-gradient(-45deg, #2e1065, #4c1d95, #1e1b4b, #312e81);
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --correct: #10b981;
+            --correct-bg: #d1fae5;
+            --wrong: #ef4444;
+            --wrong-bg: #fee2e2;
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --shadow-game: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(167, 139, 250, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-main);
+            direction: rtl;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Fixed Branding Panel (Right Side) */
+        .fixed-branding {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 16px 22px;
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            max-width: 260px;
+            pointer-events: none;
+        }
+
+        .fixed-branding h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #f3e8ff;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fixed-branding p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .game-wrapper {
+            width: 100%;
+            max-width: 720px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-game);
+            padding: 36px 28px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .fixed-branding {
+                position: static;
+                margin-bottom: 16px;
+                max-width: 100%;
+                text-align: center;
+            }
+            body {
+                flex-direction: column;
+            }
+            .game-wrapper {
+                margin-top: 0;
+            }
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Splash Screen */
+        .loader-box {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .loader-icon {
+            font-size: 4.5rem;
+            animation: float 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0) rotate(-5deg); }
+            to { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Start Screen */
+        .game-badge {
+            background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
+            color: var(--primary-dark);
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+            border: 1px solid #ddd6fe;
+        }
+
+        .game-title {
+            font-size: 2.4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #6d28d9, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+
+        .book-banner {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
+            border: 2px dashed #c4b5fd;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            width: 100%;
+            margin-bottom: 32px;
+            text-align: center;
+            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.04);
+        }
+
+        .book-banner h3 {
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .book-banner p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.4rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.5);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.6);
+        }
+
+        .btn-action:active {
+            transform: translateY(1px);
+        }
+
+        /* HUD Header */
+        .hud-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+            color: #334155;
+        }
+
+        .hud-pill {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            padding: 2px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #10b981, #06b6d4, #7c3aed);
+            border-radius: 8px;
+            transition: width 0.4s ease;
+        }
+
+        .question-card {
+            width: 100%;
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            min-height: 70px;
+            color: var(--text-main);
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border-right: 6px solid var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+        }
+
+        .options-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .option-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 18px 22px;
+            border-radius: var(--radius-md);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .option-card:hover:not(.disabled) {
+            border-color: var(--primary-light);
+            background: #f5f3ff;
+            transform: translateX(-6px);
+            box-shadow: 0 8px 15px -3px rgba(124, 58, 237, 0.12);
+        }
+
+        .option-card.correct {
+            border-color: var(--correct) !important;
+            background: var(--correct-bg) !important;
+            color: #065f46;
+            animation: bounceSoft 0.4s ease;
+        }
+
+        .option-card.wrong {
+            border-color: var(--wrong) !important;
+            background: var(--wrong-bg) !important;
+            color: #991b1b;
+            animation: shake 0.4s ease;
+        }
+
+        .option-card.disabled {
+            pointer-events: none;
+        }
+
+        @keyframes bounceSoft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .explain-box {
+            display: none;
+            width: 100%;
+            margin-top: 18px;
+            background: #fffbeb;
+            border: 2px solid #fde68a;
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            color: #92400e;
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.6;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);
+        }
+
+        /* End Screen */
+        .score-badge-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 24px 0;
+            box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.4);
+            border: 4px solid #ffffff;
+        }
+
+        .score-pct { font-size: 2.8rem; font-weight: 900; }
+        .score-lbl { font-size: 0.9rem; opacity: 0.9; }
+
+        .stats-grid {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            flex: 1;
+            padding: 18px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            background: white;
+            border: 2px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .stat-card.c { border-color: #a7f3d0; background: #ecfdf5; }
+        .stat-card.w { border-color: #fecaca; background: #fef2f2; }
+
+        .stat-val { font-size: 1.8rem; font-weight: 900; }
+        .stat-card.c .stat-val { color: var(--correct); }
+        .stat-card.w .stat-val { color: var(--wrong); }
+
+        canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Right Panel -->
+    <div class="fixed-branding">
+        <h4>📖 كتاب نظريات التعلم</h4>
+        <p>✍🏻 تأليف: د. رباب الشامي</p>
+    </div>
+
+    <div class="game-wrapper">
+        <canvas id="confetti-canvas"></canvas>
+
+        <!-- Splash Screen -->
+        <div id="screen-splash" class="screen active">
+            <div class="loader-box">
+                <div class="loader-icon">🧩</div>
+                <h2 style="margin-top: 20px; color: var(--primary-dark); font-weight: 900;">جاري تحضير التحدي...</h2>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="screen-start" class="screen">
+            <span class="game-badge">🎮 لعبة تعليمية تفاعلية</span>
+            <h1 class="game-title">تحدي نظريات التعلم</h1>
+            <div class="book-banner">
+                <h3>📖 كتاب نظريات التعلم</h3>
+                <p>✍🏻 تأليف: د. رباب الشامي</p>
+            </div>
+            <button id="btn-start" class="btn-action">ابدأ التحدي الآن 🚀</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="screen-quiz" class="screen">
+            <div class="hud-header">
+                <div class="hud-pill">📌 السؤال: <span id="q-num">1</span> / <span id="q-total">20</span></div>
+                <div class="hud-pill">⭐ النقاط: <span id="score">0</span></div>
+            </div>
+            <div class="progress-track">
+                <div id="progress" class="progress-fill"></div>
+            </div>
+            <div id="q-text" class="question-card">نص السؤال...</div>
+            <div id="opt-container" class="options-grid"></div>
+            <div id="explain-box" class="explain-box"></div>
+        </div>
+
+        <!-- End Screen -->
+        <div id="screen-end" class="screen">
+            <h2 style="font-size: 2.2rem; font-weight: 900; color: var(--text-main);">اكتمل التحدي! 🎉</h2>
+            <div class="score-badge-circle">
+                <span id="res-score" class="score-pct">0%</span>
+                <span class="score-lbl">النسبة المئوية</span>
+            </div>
+            <p id="res-msg" style="font-size: 1.25rem; font-weight: 800; margin-bottom: 24px; color: var(--primary-dark);">أداء متميز!</p>
+            <div class="stats-grid">
+                <div class="stat-card c">
+                    <div id="count-c" class="stat-val">0</div>
+                    <div style="font-size: 0.95rem; color: #065f46; font-weight: bold;">إجابات صحيحة</div>
+                </div>
+                <div class="stat-card w">
+                    <div id="count-w" class="stat-val">0</div>
+                    <div style="font-size: 0.95rem; color: #991b1b; font-weight: bold;">إجابات خاطئة</div>
+                </div>
+            </div>
+            <button id="btn-restart" class="btn-action">إعادة التحدي أسئلة جديدة 🔄</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CATEGORIZED QUESTION BANK STRICTLY FROM BOOK ---
+        
+        // Category A: Scenario / Application / Analysis Questions (80%+)
+        const scenarioQuestions = [
+            { q: "في دورة حول إدارة الوقت، سأل المدرب المتدربين عن مشكلاتهم الواقعية ثم ناقشها وطلب منهم إعداد خطط يومية لبيئة عملهم. أي نظرية يطبقها؟", opts: ["نظرية تعليم الكبار (نولز)", "الاشتراط الكلاسيكي (بافلوف)", "الحمل المعرفي (سويلر)", "النمذجة (باندورا)"], c: "نظرية تعليم الكبار (نولز)", e: "تعليم الكبار يرتكز على ربط التعلم بالخبرات السابقة والمشكلات الواقعية المباشرة." },
+            { q: "قام مدرب بتنفيذ نشاط جماعي للمتدربين، ثم ناقشهم فيما حدث واستخلصوا المبادئ ثم طبقوها في نشاط جديد. هذا يمثل دورة التعلم وفق نظرية:", opts: ["التعلم التجريبي (كولب)", "الترميز المزدوج (بايفيو)", "الذكاءات المتعددة (جاردنر)", "التنظيم الذاتي (زيمرمان)"], c: "التعلم التجريبي (كولب)", e: "تتكون دورة كولب من 4 مراحل: التجربة المباشرة -> التأمل -> تكوين المفهوم -> التجريب النشط." },
+            { q: "قام معلم بصياغة هدفه بـ 'ماذا لو استخدمنا المفهوم في مواقف جديدة؟'. هذه الخطوة تمثل أي مرحلة في نموذج 4MAT لبرنيس مكارثي؟", opts: ["المرحلة الرابعة (الابتكار والتوسع)", "المرحلة الأولى (لماذا)", "المرحلة الثانية (ماذا)", "المرحلة الثالثة (كيف)"], c: "المرحلة الرابعة (الابتكار والتوسع)", e: "المرحلة الرابعة في نموذج 4MAT تجيب عن سؤال 'ماذا لو' وتنقل المتعلم إلى الإبداع والتوسع." },
+            { q: "في مادة العلوم، بدأ المعلم بتجربة عمليتها ثم عرض فيديو توضيحي ثم شرح المفهوم بالرسم. المعلم يتدرج بالخبرات وفق نموذج:", opts: ["مخروط الخبرة (إدغار ديل)", "تصنيف بلوم", "التعلم للإتقان", "نموذج أنماط التعلم"], c: "مخروط الخبرة (إدغار ديل)", e: "يتدرج مخروط ديل من الخبرات المباشرة الواقعية في القاع وصولاً للرموز اللفظية في الأعلى." },
+            { q: "يبدأ المعلم درسه بـ 'قصة مشوقة' ثم 'يُعلن الهدف' ثم 'يستدعي المعرفة السابقة'. المعلم يتبع خطوات:", opts: ["الأحداث التعليمية التسعة (غانييه)", "مبادئ التعليم الأولى (ميريل)", "التنظيم الذاتي (زيمرمان)", "الاشتراط الكلاسيكي (بافلوف)"], c: "الأحداث التعليمية التسعة (غانييه)", e: "هذه هي الأحداث التعليمية الأولى التي نظمها غانييه لبناء تجربة تعليمية متسلسلة." },
+            { q: "بدأت دورة تدريبية بعرض مشكلة واقعية تمس المتدربين لتنشيط معرفتهم السابقة ثم شرحها وتطبيقها. ما النظرية المطبقة؟", opts: ["مبادئ التعليم الأولى (ميريل)", "نظرية الترميز المزدوج", "نظرية الحمل المعرفي", "النظرية السلوكية"], c: "مبادئ التعليم الأولى (ميريل)", e: "ينص ميريل على أن التعليم الفعال يدور حول حل مشكلات حقيقية ودمج المعرفة." },
+            { q: "استخدم المعلم 'مخططاً مفاهيمياً تمهيدياً' قبل بدء الدرس لربط المعرفة الجديدة بالقديمة. المخطط التمهيدي هو مثال لـ:", opts: ["المنظم المتقدم (أوزوبل)", "السقالة التعليمية (فيغوتسكي)", "التعزيز السلبي (سكينر)", "المثير الشرطي (بافلوف)"], c: "المنظم المتقدم (أوزوبل)", e: "المنظم المتقدم أداة تمهيدية تقدم قبل الدرس لمساعدة المتعلم على ربط المفاهيم." },
+            { q: "معلم شرح مكونات الخلية بالصوت مع عرض صورة تفاعلية واضحة في نفس الوقت لترسيخ الذاكرة. المعلم يطبق:", opts: ["الترميز المزدوج (بايفيو)", "الاشتراط الكلاسيكي (بافلوف)", "البنائية (بياجيه)", "التعلم للإتقان (بلوم)"], c: "الترميز المزدوج (بايفيو)", e: "تؤكد نظرية بايفيو أن معالجة الصور والنصوص معاً تُنشئ روابط مضاعفة في الذاكرة." },
+            { q: "قام مدرب ببرمجيات الحاسب بتقسيم المهارة لخطوات صغيرة جداً وتدريبهم خطوة بخطوة لتجنب تشتت الطلاب. الهدف من هذا هو:", opts: ["تقليل الحمل المعرفي الزائد (سويلر)", "زيادة التنافس الفردي", "تطبيق التعزيز السلبي", "تنمية الذكاء الحركي"], c: "تقليل الحمل المعرفي الزائد (سويلر)", e: "تقسيم الدرس لمهام صغيرة يقلل العبء على الذاكرة العاملة قصيرة المدى ذات السعة المحدودة." },
+            { q: "طلب معلم الأحياء من الطلاب 'تصميم مشروع توعوي كامل لحماية البيئة'. هذا النشاط يقع في هرم بلوم عند مستوى:", opts: ["الابتكار والإبداع", "التحليل", "التطبيق", "التذكر"], c: "الابتكار والإبداع", e: "إنتاج أو تصميم أفكار ومشروعات جديدة يمثل قمة هرم تصنيف بلوم للأهداف المعرفية." },
+            { q: "إذا أخفق متدرب في تقويم قصير بعد وحدة تعليمية، فقدم له المدرب شرحاً إضافياً وتدريباً بديلاً حتى أتقنها قبل الانتقال للمرحلة التالية. هذه نظرية:", opts: ["التعلم للإتقان (بلوم)", "تعليم الكبار (نولز)", "التعلم الاجتماعي (باندورا)", "أنماط التعلم (دن)"], c: "التعلم للإتقان (بلوم)", e: "ترتكز نظرية بلوم للإتقان على تقديم أنشطة علاجية ووقت كافٍ حتى يستوعب الطالب الوحدة." },
+            { q: "عندما يواجه المتعلم معلومات لا تفسرها خبراته السابقة فيضطر لـ 'تعديل بنيته المعرفية'، تسمى هذه العملية عند بياجيه بـ:", opts: ["المواءمة (Accommodation)", "الاستيعاب (Assimilation)", "الانطفاء", "التعميم"], c: "المواءمة (Accommodation)", e: "المواءمة هي تعديل البنية المعرفية لتتناسب مع الخبرات الجديدة." },
+            { q: "قدم المعلم مساعدة وتوجيهاً كبيراً للطالب في بداية كتابة الفقرة، ثم قلل المساعدة تدريجياً حتى كتب الطالب بمفرده. المساعدة المقللة تدريجياً هي:", opts: ["الدعم التدريجي والسقالات (فيغوتسكي)", "العقاب السلبي (سكينر)", "الحمل المعرفي الجوهري", "المنظم المتقدم (أوزوبل)"], c: "الدعم التدريجي والسقالات (فيغوتسكي)", e: "تُقدم السقالات التعليمية ضمن منطقة النمو القريب (ZPD) وتُقلل تدريجياً حتى الاستقلالية." },
+            { q: "عرض مدرب الإلقاء فقرته النموذجية أمام الحضور، ثم طلب منهم ممارسة نفس طريقة الوقوف والتواصل البصري. التعلم هنا تم عبر:", opts: ["النمذجة والملاحظة (باندورا)", "الاشتراط الكلاسيكي (بافلوف)", "التنظيم الذاتي (زيمرمان)", "التعلم للإتقان (بلوم)"], c: "النمذجة والملاحظة (باندورا)", e: "أوضح باندورا أن المتعلم يستوعب السلوكيات من خلال ملاحظة النماذج وتكرارها." },
+            { q: "متدرب يحدد أهدافه مسبقاً، ويراقب تركيزه أثناء القراءة، ثم يقيم أدائه بعد الانتهاء لمعرفة نقاط التحسين. المتدرب يمر بدورة:", opts: ["التنظيم الذاتي للتعلم (زيمرمان)", "الاشتراط الكلاسيكي (بافلوف)", "الحمل المعرفي", "التعلم التجريبي"], c: "التنظيم الذاتي للتعلم (زيمرمان)", e: "يتكون التنظيم الذاتي من ثلاث مراحل: التخطيط -> مراقبة الأداء -> التقييم والتأمل الذاتي." },
+            { q: "شملت الجلسة التدريبية شرحاً لفظياً، ومخططات بصرية، وتمثيل أدوار حركي لتناسب جميع قدرات المتدربين. المدرب يراعي نظرية:", opts: ["الذكاءات المتعددة (جاردنر)", "الاشتراط الكلاسيكي (بافلوف)", "التعلم ذو المعنى (أوزوبل)", "الحمل المعرفي (سويلر)"], c: "الذكاءات المتعددة (جاردنر)", e: "تؤكد نظرية جاردنر على تنويع أساليب العرض لتخاطب أنماط الذكاء المختلفة لدى الفرد." },
+            { q: "لاحظ معلم أن بعض طلابه يفضلون التعلم في هدوء والبعض في مناقشة جماعية والبعض يفضل الحركة. هذه الفروق تفسرها نظرية:", opts: ["أنماط التعلم (دن ودن)", "تصنيف الأهداف (بلوم)", "الاشتراط الكلاسيكي (بافلوف)", "الاسترجاع في التعلم (روديغر)"], c: "أنماط التعلم (دن ودن)", e: "يوضح نموذج ريتا وكينيث دن تأثر التعلم بالعوامل البيئية والعاطفية والفسيولوجية والاجتماعية." },
+            { q: "قام المعلم بإعفاء الطالب الملتزم من واجب نهاية الأسبوع لتعزيز مشاركته الفعالة. نوع التعزيز هنا هو:", opts: ["تعزيز سلبي (إزالة غير المرغوب)", "تعزيز إيجابي", "عقاب إيجابي", "إطفاء"], c: "تعزيز سلبي (إزالة غير المرغوب)", e: "التعزيز السلبي هو رفع أو إزالة شيء غير مرغوب (كالواجب) لزيادة تكرار السلوك المرغوب." },
+            { q: "تجاهل المعلم الطالب الذي يتحدث بدون إذن تماماً حتى يتوقف عن هذا السلوك لجذب الانتباه. الإجراء يسمى في السلوكية بـ:", opts: ["الإطفاء (Extinction)", "العقاب السلبي", "التعزيز الإيجابي", "التعميم"], c: "الإطفاء (Extinction)", e: "توقف تقديم التعزيز للسلوك يؤدي لإضعافه تدريجياً حتى ينطفئ تماماً." },
+            { q: "بعد شرح الدرس، طلب المدرب من المتدربين إغلاق الكتب وحل اختبار قصير سريع دون نظر للمادة لترسيخ المعلومات. هذا يطبق نظرية:", opts: ["الاسترجاع في التعلم (روديغر)", "البنائية (بياجيه)", "الذكاءات المتعددة (جاردنر)", "أحداث غانييه"], c: "الاسترجاع في التعلم (روديغر)", e: "تؤكد أبحاث روديغر أن التذكر النشط والاسترجاع يقوي الروابط العصبية في الذاكرة بشكل أعمق من القراءة." }
+        ];
+
+        // Category B: Author-Theory Association Questions (Only 1 or 2 sampled per game)
+        const authorQuestions = [
+            { q: "من هو العالم صاحب نظرية 'تعليم الكبار' (Andragogy)؟", opts: ["مالكوم نولز", "ديفيد كولب", "إدغار ديل", "ألبرت باندورا"], c: "مالكوم نولز", e: "مالكوم نولز هو عالم التربية صاحب نظرية تعليم الكبار." },
+            { q: "من هو العالم صاحب نظرية 'التعلم التجريبي'؟", opts: ["ديفيد كولب", "برنيس مكارثي", "جون سويلر", "هنري روديغر"], c: "ديفيد كولب", e: "ديفيد كولب هو واضع نموذج ودورة التعلم التجريبي الأربعة." },
+            { q: "من هو العالم واضع 'نموذج الفورمات للتعلم' (4MAT)؟", opts: ["برنيس مكارثي", "ديفيد ميريل", "بنجامين بلوم", "إيفان بافلوف"], c: "برنيس مكارثي", e: "برنيس مكارثي هي صاحبة نموذج 4MAT للتعلم." },
+            { q: "من هو صاحب نموذج 'مخروط الخبرة'؟", opts: ["إدغار ديل", "جان بياجيه", "روبرت غانييه", "باري زيمرمان"], c: "إدغار ديل", e: "صاحب مخروط الخبرة وتدرج مستوياتها هو العالم إدغار ديل." },
+            { q: "من هو العالم صاحب نظرية 'الأحداث التعليمية التسعة'؟", opts: ["روبرت غانييه", "ديفيد أوزوبل", "آلان بايفيو", "آلبرت باندورا"], c: "روبرت غانييه", e: "روبرت غانييه هو صاحب إطار الأحداث التعليمية التسعة." },
+            { q: "من هو العالم صاحب نظرية 'الذكاءات المتعددة'؟", opts: ["هوارد جاردنر", "ريتا دن", "جون سويلر", "جان بياجيه"], c: "هوارد جاردنر", e: "هوارد جاردنر هو واضع نظرية الذكاءات المتعددة." }
+        ];
+
+        // --- AUDIO SYNTHESIZER ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSfx(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            if (type === 'ok') {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.08);
+                osc.frequency.setValueAtTime(783.99, now + 0.16);
+                osc.frequency.setValueAtTime(1046.50, now + 0.24);
+                
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.frequency.setValueAtTime(280, now);
+                osc.frequency.exponentialRampToValueAtTime(120, now + 0.3);
+                
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        }
+
+        // --- GAME LOGIC ---
+        let currentPool = [];
+        let qIndex = 0;
+        let scoreVal = 0;
+        let countC = 0, countW = 0;
+        let locked = false;
+        let shuffledOptions = [];
+        let correctIndexCurrent = 0;
+
+        const scrSplash = document.getElementById('screen-splash');
+        const scrStart = document.getElementById('screen-start');
+        const scrQuiz = document.getElementById('screen-quiz');
+        const scrEnd = document.getElementById('screen-end');
+
+        setTimeout(() => {
+            scrSplash.classList.remove('active');
+            scrStart.classList.add('active');
+        }, 1800);
+
+        document.getElementById('btn-start').onclick = initGame;
+        document.getElementById('btn-restart').onclick = initGame;
+
+        function initGame() {
+            scoreVal = 0; qIndex = 0; countC = 0; countW = 0;
+            document.getElementById('score').textContent = '0';
+            
+            // BALANCED SAMPLING: 18 Scenario Questions + 2 Author Questions Max
+            const sampledScenarios = [...scenarioQuestions].sort(() => Math.random() - 0.5).slice(0, 18);
+            const sampledAuthors = [...authorQuestions].sort(() => Math.random() - 0.5).slice(0, 2);
+            
+            currentPool = [...sampledScenarios, ...sampledAuthors].sort(() => Math.random() - 0.5);
+
+            scrStart.classList.remove('active');
+            scrEnd.classList.remove('active');
+            scrQuiz.classList.add('active');
+
+            document.getElementById('q-total').textContent = currentPool.length;
+            renderQ();
+        }
+
+        function renderQ() {
+            locked = false;
+            document.getElementById('explain-box').style.display = 'none';
+            const qData = currentPool[qIndex];
+
+            document.getElementById('q-num').textContent = qIndex + 1;
+            document.getElementById('q-text').textContent = qData.q;
+            document.getElementById('progress').style.width = `${(qIndex / currentPool.length) * 100}%`;
+
+            const container = document.getElementById('opt-container');
+            container.innerHTML = '';
+
+            // SHUFFLE OPTIONS RANDOMLY
+            shuffledOptions = [...qData.opts].sort(() => Math.random() - 0.5);
+            correctIndexCurrent = shuffledOptions.indexOf(qData.c);
+
+            shuffledOptions.forEach((txt, idx) => {
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.innerHTML = `<span>${txt}</span> <span style="font-size:1.3rem; opacity: 0.6;">🎯</span>`;
+                card.onclick = () => selectOpt(idx, card);
+                container.appendChild(card);
+            });
+        }
+
+        function selectOpt(idx, cardEl) {
+            if (locked) return;
+            locked = true;
+
+            const qData = currentPool[qIndex];
+            const cards = document.querySelectorAll('.option-card');
+            cards.forEach(c => c.classList.add('disabled'));
+
+            if (idx === correctIndexCurrent) {
+                cardEl.classList.add('correct');
+                playSfx('ok');
+                scoreVal += 10;
+                countC++;
+                document.getElementById('score').textContent = scoreVal;
+                setTimeout(nextQ, 1600);
+            } else {
+                cardEl.classList.add('wrong');
+                cards[correctIndexCurrent].classList.add('correct');
+                playSfx('err');
+                countW++;
+
+                const exp = document.getElementById('explain-box');
+                exp.textContent = "💡 الشرح: " + qData.e;
+                exp.style.display = 'block';
+
+                setTimeout(nextQ, 3200);
+            }
+        }
+
+        function nextQ() {
+            qIndex++;
+            if (qIndex < currentPool.length) {
+                renderQ();
+            } else {
+                finishGame();
+            }
+        }
+
+        function finishGame() {
+            scrQuiz.classList.remove('active');
+            scrEnd.classList.add('active');
+
+            const pct = Math.round((countC / currentPool.length) * 100);
+            document.getElementById('res-score').textContent = `${pct}%`;
+            document.getElementById('count-c').textContent = countC;
+            document.getElementById('count-w').textContent = countW;
+
+            const msg = document.getElementById('res-msg');
+            if (pct >= 90) msg.textContent = "🏆 أداء أسطوري ومتقن جداً!";
+            else if (pct >= 70) msg.textContent = "🌟 أداء متميز ورائع!";
+            else if (pct >= 50) msg.textContent = "👍 نتيجة جيدة، تستطيعين الأفضل!";
+            else msg.textContent = "📚 ننصح بمراجعة الكتاب وإعادة التحدي!";
+
+            if (pct >= 70) popConfetti();
+        }
+
+        function popConfetti() {
+            const cvs = document.getElementById('confetti-canvas');
+            const ctx = cvs.getContext('2d');
+            cvs.width = cvs.parentElement.clientWidth;
+            cvs.height = cvs.parentElement.clientHeight;
+
+            let parts = [];
+            for (let i = 0; i < 60; i++) {
+                parts.push({
+                    x: cvs.width / 2, y: cvs.height / 2,
+                    vx: (Math.random() - 0.5) * 16, vy: (Math.random() - 0.5) * 16,
+                    size: Math.random() * 8 + 4,
+                    color: ['#7c3aed', '#10b981', '#06b6d4', '#f59e0b', '#ec4899'][Math.floor(Math.random() * 5)],
+                    l: 50
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                let alive = false;
+                parts.forEach(p => {
+                    if (p.l > 0) {
+                        alive = true;
+                        p.x += p.vx; p.y += p.vy; p.vy += 0.25; p.l--;
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(p.x, p.y, p.size, p.size);
+                    }
+                });
+                if (alive) requestAnimationFrame(draw);
+            }
+            draw();
+        }
+    </script>
+</body>
+</html>
