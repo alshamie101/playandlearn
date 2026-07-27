@@ -3,698 +3,627 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 تحدي نظريات التعلم - د. رباب الشامي</title>
+    <title>كتاب نظريات التعلم | د. رباب الشامي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #7c3aed;
-            --primary-light: #a78bfa;
-            --primary-dark: #5b21b6;
-            --secondary: #06b6d4;
-            --bg-gradient: linear-gradient(-45deg, #2e1065, #4c1d95, #1e1b4b, #312e81);
-            --card-bg: rgba(255, 255, 255, 0.92);
-            --text-main: #0f172a;
+            --primary-navy: #0f172a;
+            --accent-blue: #1e3a8a;
+            --accent-teal: #0f766e;
+            --gold-accent: #d97706;
+            --gold-light: #fef3c7;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
             --text-muted: #64748b;
-            --correct: #10b981;
-            --correct-bg: #d1fae5;
-            --wrong: #ef4444;
-            --wrong-bg: #fee2e2;
-            --radius-lg: 28px;
-            --radius-md: 18px;
-            --shadow-game: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(167, 139, 250, 0.3);
+            --border-color: #e2e8f0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-subtle: 0 10px 30px rgba(15, 23, 42, 0.08);
+            --shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.15);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Tajawal', 'Cairo', sans-serif;
         }
 
         body {
-            background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            min-height: 100vh;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary-navy);
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-accent);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+            color: white;
+            padding: 90px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(254, 243, 199, 0.15);
+            border: 1px solid rgba(217, 119, 6, 0.4);
+            color: #fef3c7;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero-title span {
+            color: var(--gold-accent);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 35px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-accent), #b45309);
+            color: white;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .book-visual-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            color: var(--text-main);
-            direction: rtl;
+            perspective: 1000px;
+        }
+
+        .book-card-3d {
+            width: 280px;
+            height: 390px;
+            background: linear-gradient(145deg, #1e3a8a, #0f172a);
+            border-radius: 16px;
+            border: 2px solid rgba(217, 119, 6, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
             position: relative;
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s ease;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .book-card-3d:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.03);
         }
 
-        /* Fixed Branding Panel (Right Side) */
-        .fixed-branding {
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 16px 22px;
-            border-radius: 20px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            max-width: 260px;
-            pointer-events: none;
+        .book-card-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
         }
 
-        .fixed-branding h4 {
-            font-size: 1.05rem;
+        .section {
+            padding: 80px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-subtitle {
+            color: var(--gold-accent);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            color: var(--primary-navy);
             font-weight: 800;
-            color: #f3e8ff;
-            margin-bottom: 4px;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .fixed-branding p {
-            font-size: 0.9rem;
-            color: #cbd5e1;
+            gap: 12px;
+            margin-bottom: 12px;
             font-weight: 600;
+            color: var(--text-main);
         }
 
-        .game-wrapper {
-            width: 100%;
-            max-width: 720px;
+        .features-list i {
+            color: var(--accent-teal);
+            font-size: 1.2rem;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .material-card {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-game);
-            padding: 36px 28px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .material-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(30, 58, 138, 0.2);
+        }
+
+        .material-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .icon-game { background: #e0f2fe; color: #0284c7; }
+        .icon-podcast { background: #fef3c7; color: #d97706; }
+        .icon-video { background: #fee2e2; color: #dc2626; }
+        .icon-ppt { background: #ffedd5; color: #ea580c; }
+        .icon-pdf { background: #dcfce7; color: #16a34a; }
+
+        .material-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-navy);
+        }
+
+        .material-desc {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .audio-player-box {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, var(--accent-blue), var(--primary-navy));
+            border-radius: var(--radius-lg);
+            padding: 50px 40px;
+            color: white;
+            text-align: center;
             margin-top: 40px;
         }
 
+        .cta-banner h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-banner p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: var(--primary-navy);
+            color: #94a3b8;
+            padding: 40px 24px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 900px) {
-            .fixed-branding {
-                position: static;
-                margin-bottom: 16px;
-                max-width: 100%;
+            .hero-container, .about-card {
+                grid-template-columns: 1fr;
                 text-align: center;
             }
-            body {
-                flex-direction: column;
+
+            .hero-title {
+                font-size: 2.3rem;
             }
-            .game-wrapper {
-                margin-top: 0;
+
+            .hero-buttons {
+                justify-content: center;
             }
-        }
 
-        .screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+            .book-card-3d {
+                transform: none;
+                margin: 0 auto;
+            }
 
-        .screen.active {
-            display: flex;
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* Splash Screen */
-        .loader-box {
-            text-align: center;
-            padding: 50px 0;
-        }
-
-        .loader-icon {
-            font-size: 4.5rem;
-            animation: float 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes float {
-            from { transform: translateY(0) rotate(-5deg); }
-            to { transform: translateY(-20px) rotate(5deg); }
-        }
-
-        /* Start Screen */
-        .game-badge {
-            background: linear-gradient(135deg, #f3e8ff, #e0e7ff);
-            color: var(--primary-dark);
-            font-weight: 800;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
-            border: 1px solid #ddd6fe;
-        }
-
-        .game-title {
-            font-size: 2.4rem;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #6d28d9, #0284c7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.3;
-        }
-
-        .book-banner {
-            background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);
-            border: 2px dashed #c4b5fd;
-            border-radius: var(--radius-md);
-            padding: 20px;
-            width: 100%;
-            margin-bottom: 32px;
-            text-align: center;
-            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.04);
-        }
-
-        .book-banner h3 {
-            font-size: 1.25rem;
-            color: var(--primary-dark);
-            margin-bottom: 6px;
-        }
-
-        .book-banner p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            font-weight: 700;
-        }
-
-        .btn-action {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 1.4rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.5);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-action:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.6);
-        }
-
-        .btn-action:active {
-            transform: translateY(1px);
-        }
-
-        /* HUD Header */
-        .hud-header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin-bottom: 14px;
-            color: #334155;
-        }
-
-        .hud-pill {
-            background: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #e2e8f0;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 14px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            margin-bottom: 24px;
-            overflow: hidden;
-            padding: 2px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #10b981, #06b6d4, #7c3aed);
-            border-radius: 8px;
-            transition: width 0.4s ease;
-        }
-
-        .question-card {
-            width: 100%;
-            font-size: 1.25rem;
-            font-weight: 800;
-            line-height: 1.6;
-            margin-bottom: 28px;
-            min-height: 70px;
-            color: var(--text-main);
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: var(--radius-md);
-            border-right: 6px solid var(--primary);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
-        }
-
-        .options-grid {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .option-card {
-            background: white;
-            border: 2px solid #e2e8f0;
-            padding: 18px 22px;
-            border-radius: var(--radius-md);
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-        }
-
-        .option-card:hover:not(.disabled) {
-            border-color: var(--primary-light);
-            background: #f5f3ff;
-            transform: translateX(-6px);
-            box-shadow: 0 8px 15px -3px rgba(124, 58, 237, 0.12);
-        }
-
-        .option-card.correct {
-            border-color: var(--correct) !important;
-            background: var(--correct-bg) !important;
-            color: #065f46;
-            animation: bounceSoft 0.4s ease;
-        }
-
-        .option-card.wrong {
-            border-color: var(--wrong) !important;
-            background: var(--wrong-bg) !important;
-            color: #991b1b;
-            animation: shake 0.4s ease;
-        }
-
-        .option-card.disabled {
-            pointer-events: none;
-        }
-
-        @keyframes bounceSoft {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
-        }
-
-        .explain-box {
-            display: none;
-            width: 100%;
-            margin-top: 18px;
-            background: #fffbeb;
-            border: 2px solid #fde68a;
-            border-radius: var(--radius-md);
-            padding: 16px 20px;
-            color: #92400e;
-            font-size: 0.95rem;
-            font-weight: 600;
-            line-height: 1.6;
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.1);
-        }
-
-        /* End Screen */
-        .score-badge-circle {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 24px 0;
-            box-shadow: 0 15px 30px -5px rgba(124, 58, 237, 0.4);
-            border: 4px solid #ffffff;
-        }
-
-        .score-pct { font-size: 2.8rem; font-weight: 900; }
-        .score-lbl { font-size: 0.9rem; opacity: 0.9; }
-
-        .stats-grid {
-            display: flex;
-            gap: 16px;
-            width: 100%;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            flex: 1;
-            padding: 18px;
-            border-radius: var(--radius-md);
-            text-align: center;
-            background: white;
-            border: 2px solid #f1f5f9;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
-        }
-
-        .stat-card.c { border-color: #a7f3d0; background: #ecfdf5; }
-        .stat-card.w { border-color: #fecaca; background: #fef2f2; }
-
-        .stat-val { font-size: 1.8rem; font-weight: 900; }
-        .stat-card.c .stat-val { color: var(--correct); }
-        .stat-card.w .stat-val { color: var(--wrong); }
-
-        canvas {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 99;
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fixed Right Panel -->
-    <div class="fixed-branding">
-        <h4>📖 كتاب نظريات التعلم</h4>
-        <p>✍🏻 تأليف: د. رباب الشامي</p>
-    </div>
-
-    <div class="game-wrapper">
-        <canvas id="confetti-canvas"></canvas>
-
-        <!-- Splash Screen -->
-        <div id="screen-splash" class="screen active">
-            <div class="loader-box">
-                <div class="loader-icon">🧩</div>
-                <h2 style="margin-top: 20px; color: var(--primary-dark); font-weight: 900;">جاري تحضير التحدي...</h2>
-            </div>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-book-open"></i></div>
+                <span>نظريات التعلم</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">عن الكتاب</a></li>
+                <li><a href="#materials">المواد الإثرائية</a></li>
+                <li><a href="#preview">معاينة الكتاب</a></li>
+            </ul>
         </div>
+    </header>
 
-        <!-- Start Screen -->
-        <div id="screen-start" class="screen">
-            <span class="game-badge">🎮 لعبة تعليمية تفاعلية</span>
-            <h1 class="game-title">تحدي نظريات التعلم</h1>
-            <div class="book-banner">
-                <h3>📖 كتاب نظريات التعلم</h3>
-                <p>✍🏻 تأليف: د. رباب الشامي</p>
-            </div>
-            <button id="btn-start" class="btn-action">ابدأ التحدي الآن 🚀</button>
-        </div>
-
-        <!-- Quiz Screen -->
-        <div id="screen-quiz" class="screen">
-            <div class="hud-header">
-                <div class="hud-pill">📌 السؤال: <span id="q-num">1</span> / <span id="q-total">20</span></div>
-                <div class="hud-pill">⭐ النقاط: <span id="score">0</span></div>
-            </div>
-            <div class="progress-track">
-                <div id="progress" class="progress-fill"></div>
-            </div>
-            <div id="q-text" class="question-card">نص السؤال...</div>
-            <div id="opt-container" class="options-grid"></div>
-            <div id="explain-box" class="explain-box"></div>
-        </div>
-
-        <!-- End Screen -->
-        <div id="screen-end" class="screen">
-            <h2 style="font-size: 2.2rem; font-weight: 900; color: var(--text-main);">اكتمل التحدي! 🎉</h2>
-            <div class="score-badge-circle">
-                <span id="res-score" class="score-pct">0%</span>
-                <span class="score-lbl">النسبة المئوية</span>
-            </div>
-            <p id="res-msg" style="font-size: 1.25rem; font-weight: 800; margin-bottom: 24px; color: var(--primary-dark);">أداء متميز!</p>
-            <div class="stats-grid">
-                <div class="stat-card c">
-                    <div id="count-c" class="stat-val">0</div>
-                    <div style="font-size: 0.95rem; color: #065f46; font-weight: bold;">إجابات صحيحة</div>
-                </div>
-                <div class="stat-card w">
-                    <div id="count-w" class="stat-val">0</div>
-                    <div style="font-size: 0.95rem; color: #991b1b; font-weight: bold;">إجابات خاطئة</div>
+    <section class="hero">
+        <div class="hero-container">
+            <div>
+                <span class="hero-badge"><i class="fa-solid fa-star"></i> المصدر المعرفي الشامل</span>
+                <h1 class="hero-title">كتاب <span>نظريات التعلم</span> وتطبيقاتها التربوية</h1>
+                <p class="hero-description">
+                    رحلة علمية ميسرة تبحر في أعمق مفاهيم وتطبيقات نظريات التعلم الحديثة والكلاسيكية، مدعومة بمواد إثرائية تفاعلية، بودكاست، وأنشطة تطبيقية.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#materials" class="btn btn-primary">
+                        <i class="fa-solid fa-layer-group"></i> استكشف المواد الإثرائية
+                    </a>
+                    <a href="play.html" class="btn btn-secondary">
+                        <i class="fa-solid fa-gamepad"></i> العب لعبة نظريات التعلم
+                    </a>
                 </div>
             </div>
-            <button id="btn-restart" class="btn-action">إعادة التحدي أسئلة جديدة 🔄</button>
+            
+            <div class="book-visual-container">
+                <div class="book-card-3d">
+                    <div style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">دليل المعلم والباحث</div>
+                    <div>
+                        <h2 style="font-size: 1.8rem; color: white; margin-top: 10px;">نظريات التعلم</h2>
+                        <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 5px;">تأصيل وتطبيق</p>
+                    </div>
+                    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
+                        <p style="font-size: 0.95rem; font-weight: 700; color: #fef3c7;">د. رباب الشامي</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // --- CATEGORIZED QUESTION BANK STRICTLY FROM BOOK ---
-        
-        // Category A: Scenario / Application / Analysis Questions (80%+)
-        const scenarioQuestions = [
-            { q: "في دورة حول إدارة الوقت، سأل المدرب المتدربين عن مشكلاتهم الواقعية ثم ناقشها وطلب منهم إعداد خطط يومية لبيئة عملهم. أي نظرية يطبقها؟", opts: ["نظرية تعليم الكبار (نولز)", "الاشتراط الكلاسيكي (بافلوف)", "الحمل المعرفي (سويلر)", "النمذجة (باندورا)"], c: "نظرية تعليم الكبار (نولز)", e: "تعليم الكبار يرتكز على ربط التعلم بالخبرات السابقة والمشكلات الواقعية المباشرة." },
-            { q: "قام مدرب بتنفيذ نشاط جماعي للمتدربين، ثم ناقشهم فيما حدث واستخلصوا المبادئ ثم طبقوها في نشاط جديد. هذا يمثل دورة التعلم وفق نظرية:", opts: ["التعلم التجريبي (كولب)", "الترميز المزدوج (بايفيو)", "الذكاءات المتعددة (جاردنر)", "التنظيم الذاتي (زيمرمان)"], c: "التعلم التجريبي (كولب)", e: "تتكون دورة كولب من 4 مراحل: التجربة المباشرة -> التأمل -> تكوين المفهوم -> التجريب النشط." },
-            { q: "قام معلم بصياغة هدفه بـ 'ماذا لو استخدمنا المفهوم في مواقف جديدة؟'. هذه الخطوة تمثل أي مرحلة في نموذج 4MAT لبرنيس مكارثي؟", opts: ["المرحلة الرابعة (الابتكار والتوسع)", "المرحلة الأولى (لماذا)", "المرحلة الثانية (ماذا)", "المرحلة الثالثة (كيف)"], c: "المرحلة الرابعة (الابتكار والتوسع)", e: "المرحلة الرابعة في نموذج 4MAT تجيب عن سؤال 'ماذا لو' وتنقل المتعلم إلى الإبداع والتوسع." },
-            { q: "في مادة العلوم، بدأ المعلم بتجربة عمليتها ثم عرض فيديو توضيحي ثم شرح المفهوم بالرسم. المعلم يتدرج بالخبرات وفق نموذج:", opts: ["مخروط الخبرة (إدغار ديل)", "تصنيف بلوم", "التعلم للإتقان", "نموذج أنماط التعلم"], c: "مخروط الخبرة (إدغار ديل)", e: "يتدرج مخروط ديل من الخبرات المباشرة الواقعية في القاع وصولاً للرموز اللفظية في الأعلى." },
-            { q: "يبدأ المعلم درسه بـ 'قصة مشوقة' ثم 'يُعلن الهدف' ثم 'يستدعي المعرفة السابقة'. المعلم يتبع خطوات:", opts: ["الأحداث التعليمية التسعة (غانييه)", "مبادئ التعليم الأولى (ميريل)", "التنظيم الذاتي (زيمرمان)", "الاشتراط الكلاسيكي (بافلوف)"], c: "الأحداث التعليمية التسعة (غانييه)", e: "هذه هي الأحداث التعليمية الأولى التي نظمها غانييه لبناء تجربة تعليمية متسلسلة." },
-            { q: "بدأت دورة تدريبية بعرض مشكلة واقعية تمس المتدربين لتنشيط معرفتهم السابقة ثم شرحها وتطبيقها. ما النظرية المطبقة؟", opts: ["مبادئ التعليم الأولى (ميريل)", "نظرية الترميز المزدوج", "نظرية الحمل المعرفي", "النظرية السلوكية"], c: "مبادئ التعليم الأولى (ميريل)", e: "ينص ميريل على أن التعليم الفعال يدور حول حل مشكلات حقيقية ودمج المعرفة." },
-            { q: "استخدم المعلم 'مخططاً مفاهيمياً تمهيدياً' قبل بدء الدرس لربط المعرفة الجديدة بالقديمة. المخطط التمهيدي هو مثال لـ:", opts: ["المنظم المتقدم (أوزوبل)", "السقالة التعليمية (فيغوتسكي)", "التعزيز السلبي (سكينر)", "المثير الشرطي (بافلوف)"], c: "المنظم المتقدم (أوزوبل)", e: "المنظم المتقدم أداة تمهيدية تقدم قبل الدرس لمساعدة المتعلم على ربط المفاهيم." },
-            { q: "معلم شرح مكونات الخلية بالصوت مع عرض صورة تفاعلية واضحة في نفس الوقت لترسيخ الذاكرة. المعلم يطبق:", opts: ["الترميز المزدوج (بايفيو)", "الاشتراط الكلاسيكي (بافلوف)", "البنائية (بياجيه)", "التعلم للإتقان (بلوم)"], c: "الترميز المزدوج (بايفيو)", e: "تؤكد نظرية بايفيو أن معالجة الصور والنصوص معاً تُنشئ روابط مضاعفة في الذاكرة." },
-            { q: "قام مدرب ببرمجيات الحاسب بتقسيم المهارة لخطوات صغيرة جداً وتدريبهم خطوة بخطوة لتجنب تشتت الطلاب. الهدف من هذا هو:", opts: ["تقليل الحمل المعرفي الزائد (سويلر)", "زيادة التنافس الفردي", "تطبيق التعزيز السلبي", "تنمية الذكاء الحركي"], c: "تقليل الحمل المعرفي الزائد (سويلر)", e: "تقسيم الدرس لمهام صغيرة يقلل العبء على الذاكرة العاملة قصيرة المدى ذات السعة المحدودة." },
-            { q: "طلب معلم الأحياء من الطلاب 'تصميم مشروع توعوي كامل لحماية البيئة'. هذا النشاط يقع في هرم بلوم عند مستوى:", opts: ["الابتكار والإبداع", "التحليل", "التطبيق", "التذكر"], c: "الابتكار والإبداع", e: "إنتاج أو تصميم أفكار ومشروعات جديدة يمثل قمة هرم تصنيف بلوم للأهداف المعرفية." },
-            { q: "إذا أخفق متدرب في تقويم قصير بعد وحدة تعليمية، فقدم له المدرب شرحاً إضافياً وتدريباً بديلاً حتى أتقنها قبل الانتقال للمرحلة التالية. هذه نظرية:", opts: ["التعلم للإتقان (بلوم)", "تعليم الكبار (نولز)", "التعلم الاجتماعي (باندورا)", "أنماط التعلم (دن)"], c: "التعلم للإتقان (بلوم)", e: "ترتكز نظرية بلوم للإتقان على تقديم أنشطة علاجية ووقت كافٍ حتى يستوعب الطالب الوحدة." },
-            { q: "عندما يواجه المتعلم معلومات لا تفسرها خبراته السابقة فيضطر لـ 'تعديل بنيته المعرفية'، تسمى هذه العملية عند بياجيه بـ:", opts: ["المواءمة (Accommodation)", "الاستيعاب (Assimilation)", "الانطفاء", "التعميم"], c: "المواءمة (Accommodation)", e: "المواءمة هي تعديل البنية المعرفية لتتناسب مع الخبرات الجديدة." },
-            { q: "قدم المعلم مساعدة وتوجيهاً كبيراً للطالب في بداية كتابة الفقرة، ثم قلل المساعدة تدريجياً حتى كتب الطالب بمفرده. المساعدة المقللة تدريجياً هي:", opts: ["الدعم التدريجي والسقالات (فيغوتسكي)", "العقاب السلبي (سكينر)", "الحمل المعرفي الجوهري", "المنظم المتقدم (أوزوبل)"], c: "الدعم التدريجي والسقالات (فيغوتسكي)", e: "تُقدم السقالات التعليمية ضمن منطقة النمو القريب (ZPD) وتُقلل تدريجياً حتى الاستقلالية." },
-            { q: "عرض مدرب الإلقاء فقرته النموذجية أمام الحضور، ثم طلب منهم ممارسة نفس طريقة الوقوف والتواصل البصري. التعلم هنا تم عبر:", opts: ["النمذجة والملاحظة (باندورا)", "الاشتراط الكلاسيكي (بافلوف)", "التنظيم الذاتي (زيمرمان)", "التعلم للإتقان (بلوم)"], c: "النمذجة والملاحظة (باندورا)", e: "أوضح باندورا أن المتعلم يستوعب السلوكيات من خلال ملاحظة النماذج وتكرارها." },
-            { q: "متدرب يحدد أهدافه مسبقاً، ويراقب تركيزه أثناء القراءة، ثم يقيم أدائه بعد الانتهاء لمعرفة نقاط التحسين. المتدرب يمر بدورة:", opts: ["التنظيم الذاتي للتعلم (زيمرمان)", "الاشتراط الكلاسيكي (بافلوف)", "الحمل المعرفي", "التعلم التجريبي"], c: "التنظيم الذاتي للتعلم (زيمرمان)", e: "يتكون التنظيم الذاتي من ثلاث مراحل: التخطيط -> مراقبة الأداء -> التقييم والتأمل الذاتي." },
-            { q: "شملت الجلسة التدريبية شرحاً لفظياً، ومخططات بصرية، وتمثيل أدوار حركي لتناسب جميع قدرات المتدربين. المدرب يراعي نظرية:", opts: ["الذكاءات المتعددة (جاردنر)", "الاشتراط الكلاسيكي (بافلوف)", "التعلم ذو المعنى (أوزوبل)", "الحمل المعرفي (سويلر)"], c: "الذكاءات المتعددة (جاردنر)", e: "تؤكد نظرية جاردنر على تنويع أساليب العرض لتخاطب أنماط الذكاء المختلفة لدى الفرد." },
-            { q: "لاحظ معلم أن بعض طلابه يفضلون التعلم في هدوء والبعض في مناقشة جماعية والبعض يفضل الحركة. هذه الفروق تفسرها نظرية:", opts: ["أنماط التعلم (دن ودن)", "تصنيف الأهداف (بلوم)", "الاشتراط الكلاسيكي (بافلوف)", "الاسترجاع في التعلم (روديغر)"], c: "أنماط التعلم (دن ودن)", e: "يوضح نموذج ريتا وكينيث دن تأثر التعلم بالعوامل البيئية والعاطفية والفسيولوجية والاجتماعية." },
-            { q: "قام المعلم بإعفاء الطالب الملتزم من واجب نهاية الأسبوع لتعزيز مشاركته الفعالة. نوع التعزيز هنا هو:", opts: ["تعزيز سلبي (إزالة غير المرغوب)", "تعزيز إيجابي", "عقاب إيجابي", "إطفاء"], c: "تعزيز سلبي (إزالة غير المرغوب)", e: "التعزيز السلبي هو رفع أو إزالة شيء غير مرغوب (كالواجب) لزيادة تكرار السلوك المرغوب." },
-            { q: "تجاهل المعلم الطالب الذي يتحدث بدون إذن تماماً حتى يتوقف عن هذا السلوك لجذب الانتباه. الإجراء يسمى في السلوكية بـ:", opts: ["الإطفاء (Extinction)", "العقاب السلبي", "التعزيز الإيجابي", "التعميم"], c: "الإطفاء (Extinction)", e: "توقف تقديم التعزيز للسلوك يؤدي لإضعافه تدريجياً حتى ينطفئ تماماً." },
-            { q: "بعد شرح الدرس، طلب المدرب من المتدربين إغلاق الكتب وحل اختبار قصير سريع دون نظر للمادة لترسيخ المعلومات. هذا يطبق نظرية:", opts: ["الاسترجاع في التعلم (روديغر)", "البنائية (بياجيه)", "الذكاءات المتعددة (جاردنر)", "أحداث غانييه"], c: "الاسترجاع في التعلم (روديغر)", e: "تؤكد أبحاث روديغر أن التذكر النشط والاسترجاع يقوي الروابط العصبية في الذاكرة بشكل أعمق من القراءة." }
-        ];
+    <section id="about" class="section">
+        <div class="section-header">
+            <span class="section-subtitle">بطاقة تعريفية</span>
+            <h2 class="section-title">عن هذا الكتاب</h2>
+        </div>
 
-        // Category B: Author-Theory Association Questions (Only 1 or 2 sampled per game)
-        const authorQuestions = [
-            { q: "من هو العالم صاحب نظرية 'تعليم الكبار' (Andragogy)؟", opts: ["مالكوم نولز", "ديفيد كولب", "إدغار ديل", "ألبرت باندورا"], c: "مالكوم نولز", e: "مالكوم نولز هو عالم التربية صاحب نظرية تعليم الكبار." },
-            { q: "من هو العالم صاحب نظرية 'التعلم التجريبي'؟", opts: ["ديفيد كولب", "برنيس مكارثي", "جون سويلر", "هنري روديغر"], c: "ديفيد كولب", e: "ديفيد كولب هو واضع نموذج ودورة التعلم التجريبي الأربعة." },
-            { q: "من هو العالم واضع 'نموذج الفورمات للتعلم' (4MAT)؟", opts: ["برنيس مكارثي", "ديفيد ميريل", "بنجامين بلوم", "إيفان بافلوف"], c: "برنيس مكارثي", e: "برنيس مكارثي هي صاحبة نموذج 4MAT للتعلم." },
-            { q: "من هو صاحب نموذج 'مخروط الخبرة'؟", opts: ["إدغار ديل", "جان بياجيه", "روبرت غانييه", "باري زيمرمان"], c: "إدغار ديل", e: "صاحب مخروط الخبرة وتدرج مستوياتها هو العالم إدغار ديل." },
-            { q: "من هو العالم صاحب نظرية 'الأحداث التعليمية التسعة'؟", opts: ["روبرت غانييه", "ديفيد أوزوبل", "آلان بايفيو", "آلبرت باندورا"], c: "روبرت غانييه", e: "روبرت غانييه هو صاحب إطار الأحداث التعليمية التسعة." },
-            { q: "من هو العالم صاحب نظرية 'الذكاءات المتعددة'؟", opts: ["هوارد جاردنر", "ريتا دن", "جون سويلر", "جان بياجيه"], c: "هوارد جاردنر", e: "هوارد جاردنر هو واضع نظرية الذكاءات المتعددة." }
-        ];
+        <div class="about-card">
+            <div class="about-content">
+                <h3>رؤية تعلُّمية معاصرة</h3>
+                <p>
+                    يسعى هذا الكتاب إلى تقديم صياغة سلسة ورصينة لأهم نظريات التعلم التي أثرت الميدان التربوي والتعليمي. يهدف إلى ربط النظرية بالتطبيق العملي داخل القاعة الدراسية لمساعدة المعلم والباحث على فهم كيفية حدوث التعلم وتوجيهه بفاعلية.
+                </p>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-circle-check"></i> تغطية شاملة للنظريات السلوكية والمعرفية والبنائية.</li>
+                    <li><i class="fa-solid fa-circle-check"></i> تطبيقات تربوية مباشرة لكل نظرية.</li>
+                    <li><i class="fa-solid fa-circle-check"></i> ملحقات تفاعلية وسائطية داعمة للقراءة.</li>
+                </ul>
+            </div>
+            <div style="background: var(--bg-light); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color);">
+                <h4 style="margin-bottom: 15px; color: var(--primary-navy);"><i class="fa-solid fa-user-graduate"></i> الفئات المستهدفة:</h4>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> المعلمون والمعلمات بكافة المراحل.</li>
+                    <li><i class="fa-solid fa-check"></i> طلاب كلية التربية والعلوم الإنسانية.</li>
+                    <li><i class="fa-solid fa-check"></i> الباحثون والمصممون التعليميون.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-        // --- AUDIO SYNTHESIZER ---
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playSfx(type) {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            
-            if (type === 'ok') {
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
+    <section id="materials" class="section" style="background-color: #f1f5f9; max-width: 100%; padding: 80px 24px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header">
+                <span class="section-subtitle">حقيبة الملحقات Digital Hub</span>
+                <h2 class="section-title">المواد الإثرائية التفاعلية</h2>
+            </div>
+
+            <div class="materials-grid">
                 
-                osc.frequency.setValueAtTime(523.25, now);
-                osc.frequency.setValueAtTime(659.25, now + 0.08);
-                osc.frequency.setValueAtTime(783.99, now + 0.16);
-                osc.frequency.setValueAtTime(1046.50, now + 0.24);
-                
-                gain.gain.setValueAtTime(0.25, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-                
-                osc.start(now);
-                osc.stop(now + 0.4);
-            } else {
-                const now = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sawtooth';
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                osc.frequency.setValueAtTime(280, now);
-                osc.frequency.exponentialRampToValueAtTime(120, now + 0.3);
-                
-                gain.gain.setValueAtTime(0.2, now);
-                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-                
-                osc.start(now);
-                osc.stop(now + 0.3);
-            }
-        }
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon icon-game">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="material-title">اللعبة التفاعلية</h3>
+                        <p class="material-desc">
+                            لعبة "نظريات التعلم" الإلكترونية لاختبار معلوماتك وتثبيت المفاهيم بطريقة ممتعة وشيقة.
+                        </p>
+                    </div>
+                    <a href="play.html" class="btn btn-primary" style="text-align: center; justify-content: center;">
+                        <i class="fa-solid fa-play"></i> ابدأ اللعب الآن
+                    </a>
+                </div>
 
-        // --- GAME LOGIC ---
-        let currentPool = [];
-        let qIndex = 0;
-        let scoreVal = 0;
-        let countC = 0, countW = 0;
-        let locked = false;
-        let shuffledOptions = [];
-        let correctIndexCurrent = 0;
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon icon-podcast">
+                            <i class="fa-solid fa-podcast"></i>
+                        </div>
+                        <h3 class="material-title">البودكاست الصوتي</h3>
+                        <p class="material-desc">
+                            حلقة إثرائية مميزة (25 دقيقة) تناقش أهم محاور الكتاب وتسلط الضوء على تطبيقاتها.
+                        </p>
+                        <div class="audio-player-box">
+                            <audio controls>
+                                <source src="podcast.mp3" type="audio/mpeg">
+                                المتصفح لا يدعم مشغل الصوت.
+                            </audio>
+                        </div>
+                    </div>
+                    <a href="podcast.mp3" download class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">
+                        <i class="fa-solid fa-headphones"></i> استماع مباشر
+                    </a>
+                </div>
 
-        const scrSplash = document.getElementById('screen-splash');
-        const scrStart = document.getElementById('screen-start');
-        const scrQuiz = document.getElementById('screen-quiz');
-        const scrEnd = document.getElementById('screen-end');
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon icon-video">
+                            <i class="fa-solid fa-circle-play"></i>
+                        </div>
+                        <h3 class="material-title">الشرح المرئي</h3>
+                        <p class="material-desc">
+                            مقطع فيديو شارح ومبسط يعرض الأفكار الأساسية للكتاب بأسلوب بصري ممتع.
+                        </p>
+                    </div>
+                    <a href="https://youtube.com" target="_blank" class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">
+                        <i class="fa-brands fa-youtube" style="color: red;"></i> مشاهدة عبر YouTube
+                    </a>
+                </div>
 
-        setTimeout(() => {
-            scrSplash.classList.remove('active');
-            scrStart.classList.add('active');
-        }, 1800);
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon icon-ppt">
+                            <i class="fa-solid fa-file-powerpoint"></i>
+                        </div>
+                        <h3 class="material-title">العرض التقديمي</h3>
+                        <p class="material-desc">
+                            شرائح عرض جاهزة (PowerPoint) مخصصة للمعلمين والأكاديميين لاستخدامها في الشرح.
+                        </p>
+                    </div>
+                    <a href="presentation.pptx" download class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">
+                        <i class="fa-solid fa-download"></i> تحميل العرض (PPTX)
+                    </a>
+                </div>
 
-        document.getElementById('btn-start').onclick = initGame;
-        document.getElementById('btn-restart').onclick = initGame;
+                <div class="material-card">
+                    <div>
+                        <div class="material-icon icon-pdf">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <h3 class="material-title">أوراق العمل والأنشطة</h3>
+                        <p class="material-desc">
+                            ملفات PDF تحتوي على تمارين، خرائط مفاهيمية، وأوراق عمل تطبيقية للقرّاء.
+                        </p>
+                    </div>
+                    <a href="worksheets.pdf" target="_blank" class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">
+                        <i class="fa-solid fa-eye"></i> استعراض الملف (PDF)
+                    </a>
+                </div>
 
-        function initGame() {
-            scoreVal = 0; qIndex = 0; countC = 0; countW = 0;
-            document.getElementById('score').textContent = '0';
-            
-            // BALANCED SAMPLING: 18 Scenario Questions + 2 Author Questions Max
-            const sampledScenarios = [...scenarioQuestions].sort(() => Math.random() - 0.5).slice(0, 18);
-            const sampledAuthors = [...authorQuestions].sort(() => Math.random() - 0.5).slice(0, 2);
-            
-            currentPool = [...sampledScenarios, ...sampledAuthors].sort(() => Math.random() - 0.5);
+            </div>
+        </div>
+    </section>
 
-            scrStart.classList.remove('active');
-            scrEnd.classList.remove('active');
-            scrQuiz.classList.add('active');
+    <section id="preview" class="section">
+        <div class="cta-banner">
+            <h2>هل ترغب في اقتناء النسخة الورقية أو معاينتها؟</h2>
+            <p>يمكنك الاطلاع على عينة مجانية من الفصل الأول أو طلب النسخة الأصلية فور توفرها بالمكتبات.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#" class="btn btn-primary"><i class="fa-solid fa-shopping-cart"></i> اطلب الكتاب الآن</a>
+                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-book-open"></i> قراءة عينة مجانية</a>
+            </div>
+        </div>
+    </section>
 
-            document.getElementById('q-total').textContent = currentPool.length;
-            renderQ();
-        }
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 - كتاب نظريات التعلم | د. رباب الشامي</p>
+    </footer>
 
-        function renderQ() {
-            locked = false;
-            document.getElementById('explain-box').style.display = 'none';
-            const qData = currentPool[qIndex];
-
-            document.getElementById('q-num').textContent = qIndex + 1;
-            document.getElementById('q-text').textContent = qData.q;
-            document.getElementById('progress').style.width = `${(qIndex / currentPool.length) * 100}%`;
-
-            const container = document.getElementById('opt-container');
-            container.innerHTML = '';
-
-            // SHUFFLE OPTIONS RANDOMLY
-            shuffledOptions = [...qData.opts].sort(() => Math.random() - 0.5);
-            correctIndexCurrent = shuffledOptions.indexOf(qData.c);
-
-            shuffledOptions.forEach((txt, idx) => {
-                const card = document.createElement('div');
-                card.className = 'option-card';
-                card.innerHTML = `<span>${txt}</span> <span style="font-size:1.3rem; opacity: 0.6;">🎯</span>`;
-                card.onclick = () => selectOpt(idx, card);
-                container.appendChild(card);
-            });
-        }
-
-        function selectOpt(idx, cardEl) {
-            if (locked) return;
-            locked = true;
-
-            const qData = currentPool[qIndex];
-            const cards = document.querySelectorAll('.option-card');
-            cards.forEach(c => c.classList.add('disabled'));
-
-            if (idx === correctIndexCurrent) {
-                cardEl.classList.add('correct');
-                playSfx('ok');
-                scoreVal += 10;
-                countC++;
-                document.getElementById('score').textContent = scoreVal;
-                setTimeout(nextQ, 1600);
-            } else {
-                cardEl.classList.add('wrong');
-                cards[correctIndexCurrent].classList.add('correct');
-                playSfx('err');
-                countW++;
-
-                const exp = document.getElementById('explain-box');
-                exp.textContent = "💡 الشرح: " + qData.e;
-                exp.style.display = 'block';
-
-                setTimeout(nextQ, 3200);
-            }
-        }
-
-        function nextQ() {
-            qIndex++;
-            if (qIndex < currentPool.length) {
-                renderQ();
-            } else {
-                finishGame();
-            }
-        }
-
-        function finishGame() {
-            scrQuiz.classList.remove('active');
-            scrEnd.classList.add('active');
-
-            const pct = Math.round((countC / currentPool.length) * 100);
-            document.getElementById('res-score').textContent = `${pct}%`;
-            document.getElementById('count-c').textContent = countC;
-            document.getElementById('count-w').textContent = countW;
-
-            const msg = document.getElementById('res-msg');
-            if (pct >= 90) msg.textContent = "🏆 أداء أسطوري ومتقن جداً!";
-            else if (pct >= 70) msg.textContent = "🌟 أداء متميز ورائع!";
-            else if (pct >= 50) msg.textContent = "👍 نتيجة جيدة، تستطيعين الأفضل!";
-            else msg.textContent = "📚 ننصح بمراجعة الكتاب وإعادة التحدي!";
-
-            if (pct >= 70) popConfetti();
-        }
-
-        function popConfetti() {
-            const cvs = document.getElementById('confetti-canvas');
-            const ctx = cvs.getContext('2d');
-            cvs.width = cvs.parentElement.clientWidth;
-            cvs.height = cvs.parentElement.clientHeight;
-
-            let parts = [];
-            for (let i = 0; i < 60; i++) {
-                parts.push({
-                    x: cvs.width / 2, y: cvs.height / 2,
-                    vx: (Math.random() - 0.5) * 16, vy: (Math.random() - 0.5) * 16,
-                    size: Math.random() * 8 + 4,
-                    color: ['#7c3aed', '#10b981', '#06b6d4', '#f59e0b', '#ec4899'][Math.floor(Math.random() * 5)],
-                    l: 50
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, cvs.width, cvs.height);
-                let alive = false;
-                parts.forEach(p => {
-                    if (p.l > 0) {
-                        alive = true;
-                        p.x += p.vx; p.y += p.vy; p.vy += 0.25; p.l--;
-                        ctx.fillStyle = p.color;
-                        ctx.fillRect(p.x, p.y, p.size, p.size);
-                    }
-                });
-                if (alive) requestAnimationFrame(draw);
-            }
-            draw();
-        }
-    </script>
 </body>
 </html>
