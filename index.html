@@ -1,28 +1,55 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المكتبة الرقمية الإثرائية والتفاعلية لكتاب نظريات التعلم | د. رباب الشامي</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>المكتبة الرقمية الإثرائية | د. رباب الشامي</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Color Palette matching Dr. Rabab's Book Cover (Sky Blue, Cloud White, Sand Beige) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        navy: { 900: '#0f172a', 800: '#1e293b', 700: '#334155' },
-                        gold: { 500: '#d97706', 600: '#b45309', 100: '#fef3c7' },
-                        teal: { 600: '#0f766e', 700: '#0d9488' }
-                    },
-                    fontFamily: {
-                        sans: ['Tajawal', 'Cairo', 'sans-serif']
+                        skyblue: {
+                            50: '#f0f7fc',
+                            100: '#e0eff9',
+                            200: '#b9def3',
+                            300: '#8dc7ea',
+                            400: '#72b0dd',
+                            500: '#5397cf',
+                            600: '#3e7bb8',
+                            700: '#336396',
+                            800: '#2d537d',
+                            900: '#294768',
+                        },
+                        sand: {
+                            50: '#fcfbf9',
+                            100: '#f7f4ee',
+                            200: '#efeae0',
+                            300: '#e3dad0',
+                            400: '#d1c4b5',
+                            500: '#bdad9d',
+                            600: '#a39080',
+                            700: '#867466',
+                            800: '#6f6055',
+                            900: '#5c5048',
+                        },
+                        cloud: {
+                            white: '#ffffff',
+                            soft: '#f8fafc',
+                        }
                     }
                 }
             }
@@ -31,647 +58,1346 @@
 
     <style>
         body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Cairo', sans-serif;
+            background-color: #efeae0;
+            color: #332d29;
+            transition: background-color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .leaf-shadow-bg {
+            background-image: radial-gradient(circle at 80% 20%, rgba(114, 176, 221, 0.12) 0%, transparent 45%),
+                              radial-gradient(circle at 20% 80%, rgba(227, 218, 208, 0.6) 0%, transparent 55%);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid #e2e8f0;
+        .custom-card {
+            background: #ffffff;
+            border: 1px solid #e3dad0;
+            box-shadow: 0 10px 30px -10px rgba(51, 99, 150, 0.08);
+            border-radius: 1.25rem;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity, max-height;
         }
 
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+        .custom-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px -8px rgba(51, 99, 150, 0.15);
+            border-color: #8dc7ea;
         }
 
-        .dropzone-active {
-            border-color: #d97706 !important;
-            background-color: #fef3c7 !important;
+        /* Word-like Deletion Collapse Animation */
+        .item-deleting {
+            opacity: 0 !important;
+            transform: scale(0.85) translateY(-20px) !important;
+            max-height: 0px !important;
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+            overflow: hidden !important;
         }
 
-        /* Modal Overlay Transition */
-        .modal-overlay {
-            transition: opacity 0.3s ease-in-out;
+        .modal-backdrop {
+            background-color: rgba(41, 71, 104, 0.45);
+            backdrop-filter: blur(8px);
         }
-        .modal-body {
-            transition: transform 0.3s ease-in-out;
+
+        /* Word-like Text Styling & Decoration Classes */
+        .word-align-center { text-align: center !important; }
+        .word-align-right { text-align: right !important; }
+        .word-align-left { text-align: left !important; }
+        .word-align-justify { text-align: justify !important; }
+
+        .word-size-sm { font-size: 0.875rem !important; line-height: 1.6 !important; }
+        .word-size-md { font-size: 1rem !important; line-height: 1.75 !important; }
+        .word-size-lg { font-size: 1.125rem !important; line-height: 1.85 !important; }
+        .word-size-xl { font-size: 1.35rem !important; line-height: 1.95 !important; font-weight: 700 !important; }
+
+        .word-decorated-frame {
+            border-right: 5px solid #5397cf !important;
+            background: linear-gradient(135deg, #f0f7fc 0%, #ffffff 100%) !important;
+            padding: 1.25rem !important;
+            border-radius: 1rem !important;
+            box-shadow: 0 4px 15px -3px rgba(83, 151, 207, 0.12) !important;
+            position: relative;
+        }
+
+        .word-decorated-frame::before {
+            content: '✨ إضاءة أكاديمية';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #5397cf;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #efeae0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8dc7ea;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5397cf;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col leaf-shadow-bg selection:bg-skyblue-200 selection:text-skyblue-900">
 
-    <!-- Navbar Header -->
-    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-gold-500 to-teal-600 flex items-center justify-center text-white text-xl font-extrabold shadow-lg group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-book-bookmark"></i>
+    <!-- ================================================================= -->
+    <!-- WEBSITE 1: VISITOR PORTAL VIEW (Standard Public Route /# or /)     -->
+    <!-- ================================================================= -->
+    <div id="visitor-portal" class="flex flex-col min-h-screen w-full">
+
+        <!-- HEADER SECTION FOR VISITORS -->
+        <header class="bg-cloud-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-sand-200/80 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center justify-center text-skyblue-600">
+                        <span id="site-logo-icon" class="flex items-center justify-center"></span>
+                    </div>
+                    <div>
+                        <h1 id="site-main-title" class="text-lg sm:text-xl font-bold text-sand-900 leading-tight">المكتبة الرقمية الإثرائية</h1>
+                        <p id="site-sub-title" class="text-xs text-skyblue-700 font-semibold">لكتاب نظريات التعلم وتطبيقاتها التربوية</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-lg font-bold leading-tight">المكتبة الرقمية الإثرائية</h1>
-                    <p class="text-xs text-gold-500 font-medium">لكتاب نظريات التعلم | د. رباب الشامي</p>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="openAuthorCVModal()" class="bg-sand-100 hover:bg-sand-200 border border-sand-300 text-sand-800 text-xs sm:text-sm font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-id-card text-skyblue-600"></i>
+                        <span id="author-name-tag">د. رباب الشامي</span>
+                    </button>
+                    
+                    <button onclick="navigateToOwnerStudio()" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white text-xs sm:text-sm font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm shadow-skyblue-500/20">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span>دخول استوديو المالك</span>
+                    </button>
                 </div>
-            </a>
-            
-            <nav class="hidden md:flex items-center gap-6 font-semibold text-sm">
-                <a href="#hub-sections" class="hover:text-gold-500 transition-colors">محتويات المكتبة</a>
-                <a href="#thoughts-section" class="hover:text-gold-500 transition-colors">مساحة الخواطر والذات</a>
-                <button onclick="scrollToBottom()" class="bg-gold-500 hover:bg-gold-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-transform hover:scale-105">
-                    <i class="fa-solid fa-heart-pulse ml-1"></i> الكلمات والخواطر
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Banner -->
-    <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/20 text-gold-100 border border-gold-500/30 text-xs sm:text-sm font-bold mb-6">
-                <i class="fa-solid fa-award text-gold-500"></i> المصدر المعرفي الشامل والمعتمد
-            </span>
-            <h1 class="text-3xl sm:text-5xl font-black leading-tight sm:leading-snug mb-6">
-                المكتبة الرقمية الإثرائية والتفاعلية<br>
-                <span class="text-gold-500">لكتاب نظريات التعلم</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-slate-300 font-medium max-w-3xl mx-auto mb-8 leading-relaxed">
-                مرحباً بكم في الفضاء المعرفي المخصص لبحوث وتطبيقات ومرفقات كتاب "نظريات التعلم". إعداد وتأليف <strong class="text-white font-bold">الدكتورة رباب الشامي</strong>.
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#hub-sections" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-gold-500/30 transition-all hover:-translate-y-0.5 flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group"></i> استعراض أقسام المكتبة
-                </a>
-                <a href="#thoughts-section" class="bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-600 font-bold px-8 py-3.5 rounded-xl backdrop-blur transition-all hover:-translate-y-0.5 flex items-center gap-2">
-                    <i class="fa-solid fa-feather-pointed"></i> مساحة الخواطر والمعرفة
-                </a>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Main Interactive Sections Grid (The 6 Items) -->
-    <main id="hub-sections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        <!-- MAIN VISITOR CONTENT -->
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+            <!-- HERO WELCOME BANNER -->
+            <section class="bg-gradient-to-br from-cloud-white via-sand-50 to-skyblue-50 rounded-3xl p-6 sm:p-10 border border-sand-300 shadow-md relative overflow-hidden">
+                <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-skyblue-200/30 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -right-10 -top-10 w-48 h-48 bg-sand-200/40 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="space-y-4 max-w-2xl text-center md:text-right">
+                        <div class="inline-flex items-center gap-2 bg-cloud-white px-3.5 py-1.5 rounded-full border border-skyblue-200 shadow-sm text-skyblue-800 text-xs font-bold">
+                            <i class="fa-solid fa-certificate text-skyblue-500"></i>
+                            <span>منظومة إثرائية تفاعلية موثوقة</span>
+                        </div>
+
+                        <h2 id="hero-heading" class="text-2xl sm:text-4xl font-black text-sand-900 leading-tight">
+                            أهلاً بكم في المنصة الإثرائية الشاملة لنظريات التعلم
+                        </h2>
+
+                        <p id="hero-desc" class="text-sm sm:text-base text-sand-800 leading-relaxed font-medium">
+                            مساحة أكاديمية رقمية متكاملة تقدم أحدث الموارد، التطبيقات العملية، العروض التفاعلية، والخرائط الذهنية لدعم الباحثين، المعلمين، والطلاب.
+                        </p>
+
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
+                            <a href="#resources-grid" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl transition shadow-md shadow-skyblue-500/20 flex items-center gap-2">
+                                <i class="fa-solid fa-shapes"></i>
+                                <span>تصفح الحقيبة الإثرائية</span>
+                            </a>
+                            <button onclick="openAuthorCVModal()" class="bg-cloud-white hover:bg-sand-100 text-sand-900 border border-sand-300 font-bold text-xs sm:text-sm px-5 py-3 rounded-xl transition shadow-sm flex items-center gap-2">
+                                <i class="fa-solid fa-graduation-cap text-skyblue-600"></i>
+                                <span>السيرة الذاتية للمؤلفة</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AUTHOR CARD FEATURE WITH PERSONAL PHOTO SUPPORT -->
+                    <div class="w-full md:w-80 bg-cloud-white rounded-2xl p-5 border border-sand-300 shadow-md text-center space-y-3 relative group">
+                        <div id="hero-author-photo-container" class="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-skyblue-400 to-skyblue-600 flex items-center justify-center text-cloud-white text-3xl shadow-lg shadow-skyblue-400/30 ring-4 ring-cloud-white overflow-hidden">
+                            <!-- Populated via JS -->
+                        </div>
+                        <div>
+                            <h3 id="hero-author-name" class="font-bold text-lg text-sand-900">د. رباب الشامي</h3>
+                            <p id="hero-author-role" class="text-xs text-skyblue-700 font-semibold mt-0.5">أستاذ المناهج وتكنولوجيا التعليم</p>
+                        </div>
+                        <p class="text-xs text-sand-700 leading-relaxed bg-sand-50 p-2.5 rounded-xl border border-sand-200">
+                            مؤلفة كتاب "نظريات التعلم وتطبيقاتها التربوية" ومصممة الحقيبة الإثرائية التفاعلية.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: INTERACTIVE HUBS & SECTIONS -->
+            <section id="resources-grid" class="space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 border-b border-sand-300 pb-3">
+                    <div>
+                        <h3 id="section-resources-title" class="text-xl sm:text-2xl font-bold text-sand-900 flex items-center gap-2">
+                            <i class="fa-solid fa-cubes text-skyblue-600"></i> الحقيبة الرقمية الإثرائية
+                        </h3>
+                        <p class="text-xs sm:text-sm text-sand-700 font-medium">استعرض الأقسام والصفحات الإثرائية الملحقة بالكتاب</p>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC HUBS GRID FOR VISITORS -->
+                <div id="visitor-hubs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300">
+                    <!-- Rendered dynamically -->
+                </div>
+            </section>
+
+            <!-- SECTION: AUTHOR THOUGHTS & ARTICLES -->
+            <section class="space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 border-b border-sand-300 pb-3">
+                    <div>
+                        <h3 id="thoughts-section-title" class="text-xl sm:text-2xl font-bold text-sand-900 flex items-center gap-2">
+                            <i id="thoughts-section-icon" class="fa-solid fa-feather-pointed text-skyblue-600"></i>
+                            <span id="thoughts-title-text">خواطر ومقالات تربوية</span>
+                        </h3>
+                        <p id="thoughts-section-sub" class="text-xs sm:text-sm text-sand-700 font-medium">إضاءات في المعرفة، الذات، والصحة النفسية للمعلم والمتعلم</p>
+                    </div>
+                </div>
+
+                <div id="visitor-thoughts-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-300">
+                    <!-- Rendered dynamically -->
+                </div>
+            </section>
+
+            <!-- SECTION: VISITOR COMMENTS & FEEDBACK -->
+            <section class="bg-cloud-white rounded-3xl p-6 sm:p-8 border border-sand-300 shadow-sm space-y-6">
+                <div class="border-b border-sand-200 pb-3">
+                    <h3 id="comments-section-title" class="text-lg sm:text-xl font-bold text-sand-900 flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-skyblue-600"></i> آراء وانطباعات الباحثين والزوار
+                    </h3>
+                    <p class="text-xs text-sand-700 font-medium">شاركي انطباعكِ أو استفساركِ الأكاديمي حول الكتاب والحقيبة</p>
+                </div>
+
+                <form onsubmit="handleCommentSubmit(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-sand-800 mb-1">الاسم الكريم / الصفة:</label>
+                            <input type="text" id="comment-author" required placeholder="مثال: أ. أحمد الغامدي - باحث دكتوراه" class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900 focus:outline-none focus:border-skyblue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-sand-800 mb-1">البريد أو التخصص (اختياري):</label>
+                            <input type="text" id="comment-role" placeholder="مثال: مناهج وطرق تدريس" class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900 focus:outline-none focus:border-skyblue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-sand-800 mb-1">الرأي أو الانطباع العلمي:</label>
+                        <textarea id="comment-text" required rows="3" placeholder="اكتب تعليقك أو انطباعك حول محتوى المكتبة الرقمية..." class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900 focus:outline-none focus:border-skyblue-500"></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-sm flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>إرسال التعليق</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="comments-list" class="space-y-3 pt-2">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- VISITOR FOOTER -->
+        <footer class="bg-cloud-white border-t border-sand-300 py-6 mt-12 text-center text-xs text-sand-700">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p id="site-footer-rights" class="font-bold">جميع الحقوق محفوظة لموقع الدكتورة رباب الشامي © 2026</p>
+                <div class="flex items-center gap-4 text-skyblue-700">
+                    <a href="#resources-grid" class="hover:underline">المحتويات الإثرائية</a>
+                    <span>•</span>
+                    <button onclick="openAuthorCVModal()" class="hover:underline">السيرة الذاتية</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- WEBSITE 2: OWNER CONTROL STUDIO VIEW (Dedicated Route /#admin)    -->
+    <!-- ================================================================= -->
+    <div id="owner-studio-portal" class="min-h-screen w-full hidden bg-sand-100/70 flex flex-col">
         
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-slate-900 mb-3">محتويات المكتبة التفاعلية</h2>
-            <p class="text-slate-600 font-medium">اضغط على الأزرار التفاعلية أدناه لفتح الصفحة الخاصة بكل قسم واستعراض المحتوى والتحميل</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- Item 1: كتاب نظريات التعلم -->
-            <!-- لتغيير أو تعديل عنوان هذا القسم، يمكنك تعديل النص بين العلامات بسهولة -->
-            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-gold-500">
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-gold-100 text-gold-600 flex items-center justify-center text-2xl font-bold mb-5">
-                        <i class="fa-solid fa-book"></i>
+        <!-- TOP OWNER WORKSPACE TOOLBAR -->
+        <header class="bg-gradient-to-r from-skyblue-900 via-skyblue-800 to-skyblue-900 text-cloud-white py-3 px-4 sm:px-8 shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-400 text-skyblue-900 font-bold flex items-center justify-center text-lg shadow-sm">
+                        <i class="fa-solid fa-sliders"></i>
                     </div>
-                    <span class="text-xs font-bold text-gold-600 tracking-wider">القسم الأول</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">١- كتاب نظريات التعلم</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        صفحة الكتاب الرئيسي تحتوي على غلاف الكتاب، والنبذة الشاملة، وخيار استعراض وتنزيل أو إفلات ملف الكتاب PDF.
-                    </p>
-                </div>
-                <button onclick="openModal('modal-book')" class="w-full bg-slate-900 hover:bg-gold-500 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-folder-open"></i> فتح صفحة الكتاب
-                </button>
-            </div>
-
-            <!-- Item 2: الفيديو التعليمي الملحق -->
-            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-red-500">
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl font-bold mb-5">
-                        <i class="fa-solid fa-video"></i>
-                    </div>
-                    <span class="text-xs font-bold text-red-600 tracking-wider">القسم الثاني</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٢- الفيديو التعليمي الملحق</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        الشرح الشارح والشارح البصري الملحق بالمتعة والتطبيقات. يتضمن مشغل فيديو ونبذة عن المحتوى.
-                    </p>
-                </div>
-                <button onclick="openModal('modal-video')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-circle-play"></i> فتح صفحة الفيديو
-                </button>
-            </div>
-
-            <!-- Item 3: بودكاست ملخص -->
-            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-amber-500">
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold mb-5">
-                        <i class="fa-solid fa-podcast"></i>
-                    </div>
-                    <span class="text-xs font-bold text-amber-600 tracking-wider">القسم الثالث</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٣- البودكاست الصوتي والمرئي</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        ملخص ممتع وصوتي لمحتوى كتاب نظريات التعلم، مع نبذة مختصرة ومشغل صوتي وفيديو بودكاست مباشر.
-                    </p>
-                </div>
-                <button onclick="openModal('modal-podcast')" class="w-full bg-slate-900 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-headphones"></i> فتح صفحة البودكاست
-                </button>
-            </div>
-
-            <!-- Item 4: العرض التقديمي -->
-            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-orange-500">
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl font-bold mb-5">
-                        <i class="fa-solid fa-file-powerpoint"></i>
-                    </div>
-                    <span class="text-xs font-bold text-orange-600 tracking-wider">القسم الرابع</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٤- العرض التقديمي (PowerPoint)</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        شرائح العرض التفاعلية المخصصة للشرح والمحاضرات، متاحة للعرض المباشر والتحميل السريع.
-                    </p>
-                </div>
-                <button onclick="openModal('modal-ppt')" class="w-full bg-slate-900 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-desktop"></i> فتح العرض التقديمي
-                </button>
-            </div>
-
-            <!-- Item 5: الخرائط والصور والملحقات -->
-            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-teal-600">
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-2xl font-bold mb-5">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                    </div>
-                    <span class="text-xs font-bold text-teal-700 tracking-wider">القسم الخامس</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٥- الخرائط والملحقات الإثرائية</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        مجموعة الخرائط الذهنية، الصور الشارحة، وأوراق العمل بصيغة PDF للتحميل والمعاينة المباشرة.
-                    </p>
-                </div>
-                <button onclick="openModal('modal-maps')" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-map"></i> فتح الخرائط والملحقات
-                </button>
-            </div>
-
-            <!-- Item 6: لعبة التحدي -->
-            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-purple-600">
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl font-bold mb-5">
-                        <i class="fa-solid fa-gamepad"></i>
-                    </div>
-                    <span class="text-xs font-bold text-purple-600 tracking-wider">القسم السادس</span>
-                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٦- لعبة التحدي (اختبر فهمك)</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        اللعبة التفاعلية الإلكترونية لتطبيق المفاهيم واختبار المعلومات بأسلوب شيق وممتع.
-                    </p>
-                </div>
-                <button onclick="openModal('modal-game')" class="w-full bg-slate-900 hover:bg-purple-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
-                    <i class="fa-solid fa-trophy"></i> دخول لعبة التحدي
-                </button>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Section 7: Free Reflections & Thoughts Space (مساحة الخواطر والكلمات) -->
-    <section id="thoughts-section" class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-800 pb-8">
-                <div>
-                    <span class="text-gold-500 font-bold text-sm">مساحة حرّة مخصصة</span>
-                    <h2 class="text-3xl font-black mt-1">خواطر وكلمات في المعرفة والذات والصحة النفسية</h2>
-                    <p class="text-slate-400 text-sm mt-2">من كتابات وإلهامات الدكتورة رباب الشامي - يمكنكِ إضافة خواطر جديدة مباشرة وحفظها هنا</p>
-                </div>
-                <button onclick="toggleThoughtInput()" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-3 rounded-xl transition-transform hover:scale-105 flex items-center gap-2 self-start md:self-auto shadow-lg">
-                    <i class="fa-solid fa-plus-circle"></i> إضافة خاطرة / كلمة جديدة
-                </button>
-            </div>
-
-            <!-- Interactive Add Thought Form (Hidden by default, shown on click) -->
-            <div id="thought-form-container" class="hidden mb-10 bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                <h3 class="text-lg font-bold text-gold-500 mb-4"><i class="fa-solid fa-pen-nib ml-2"></i> كِتابة خاطرة جديدة:</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input type="text" id="thought-title" placeholder="عنوان الخاطرة أو الكلمة..." class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500">
-                    <select id="thought-tag" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-300 focus:outline-none focus:border-gold-500">
-                        <option value="عن المعرفة والتعلم">🧠 عن المعرفة والتعلم</option>
-                        <option value="عن الصحة النفسية">🌿 عن الصحة النفسية</option>
-                        <option value="عن الذات والحياة">✨ عن الذات والحياة</option>
-                    </select>
-                </div>
-                <textarea id="thought-content" rows="4" placeholder="اكتبي نص الخاطرة أو الفكرة هنا..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 mb-4"></textarea>
-                <div class="flex justify-end gap-3">
-                    <button onclick="toggleThoughtInput()" class="px-5 py-2 rounded-xl text-slate-400 hover:text-white text-sm font-semibold">إلغاء</button>
-                    <button onclick="saveNewThought()" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-2 rounded-xl text-sm transition-colors">نشر الخاطرة</button>
-                </div>
-            </div>
-
-            <!-- Dynamic Thoughts Grid -->
-            <div id="thoughts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Example Default Cards -->
-                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">
                     <div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 mb-4">🧠 عن المعرفة والتعلم</span>
-                        <h3 class="text-lg font-bold text-white mb-2">جوهر التعلم الحقيقي</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            "التعلم ليس مجرد تحصيل للمعلومات، بل هو رحلة إعادة اكتشاف للذات وللكون، وتحويل المعرفة النظرية إلى أثر طيب في السلوك والفكر."
+                        <h2 class="font-extrabold text-sm sm:text-base flex items-center gap-2">
+                            <span>مركز التحكم واستوديو المالك لموقع د. رباب الشامي</span>
+                            <span class="bg-emerald-400 text-skyblue-950 text-[10px] px-2 py-0.5 rounded-full font-bold">وضع التحرير الشامل نَشِط</span>
+                        </h2>
+                        <p class="text-[11px] text-skyblue-200">تحرير مرئي 100% بدون شفرات أو كود - التحكم المطلق بصلاحيات التحميل والاستماع</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="copyLink('visitor')" class="bg-cloud-white/10 hover:bg-cloud-white/20 text-cloud-white border border-cloud-white/30 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-link text-emerald-300"></i>
+                        <span>نسخ رابط الزوار</span>
+                    </button>
+                    <button onclick="copyLink('owner')" class="bg-cloud-white/10 hover:bg-cloud-white/20 text-cloud-white border border-cloud-white/30 text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-key text-amber-300"></i>
+                        <span>نسخ رابط المالك الخاص</span>
+                    </button>
+                    <button onclick="navigateToVisitorPortal()" class="bg-emerald-500 hover:bg-emerald-600 text-cloud-white text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-md transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>معاينة الموقع كـ زائر</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- OWNER WORKSPACE CONTENT CONTAINER -->
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            
+            <!-- STUDIO TABS & QUICK CONTROLS -->
+            <div class="bg-cloud-white rounded-3xl p-6 border border-sand-300 shadow-md space-y-6">
+                
+                <div class="flex flex-wrap items-center justify-between border-b border-sand-200 pb-4 gap-3">
+                    <div>
+                        <h3 class="text-lg font-bold text-skyblue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-skyblue-600"></i> طاولة التحكم الشامل في أرجاء الموقع
+                        </h3>
+                        <p class="text-xs text-sand-700">عدّلي كافة النصوص، الأيقونات، روابط الفيديوهات، العروض، والصلاحيات مع الحفظ الفوري.</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <button onclick="openAddHubModal()" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-md flex items-center gap-2">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            <span>إضافة قسم / صفحة جديدة</span>
+                        </button>
+                        <button onclick="openNewThoughtModal()" class="bg-sand-200 hover:bg-sand-300 text-sand-900 text-xs font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>إضافة خاطرة / مقال</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: STRICT DOWNLOAD & STREAMING PERMISSIONS CONTROLLER -->
+                <div class="bg-gradient-to-r from-skyblue-50 via-cloud-white to-skyblue-50 p-5 rounded-2xl border-2 border-skyblue-300 space-y-4 shadow-sm">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <div class="text-skyblue-900 font-extrabold text-sm sm:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-skyblue-600 text-lg"></i>
+                            <span>🌟 التحكّم المطلق بصلاحيات التنزيل والاستماع للزوار والطلاب</span>
+                        </div>
+                        <span class="text-xs font-bold bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-300">
+                            🔒 التنزيل مغلق تلقائياً إلا بإرادتكِ
+                        </span>
+                    </div>
+                    <p class="text-xs text-sand-800 font-medium leading-relaxed">
+                        حددي بدقة ما إذا كان يحق للزوار والطلاب تنزيل وتحميل المستندات والمواد أو الاقتصار على المشاهدة والقراءة والاستماع المباشر فقط:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                        <div class="bg-cloud-white p-4 rounded-xl border border-skyblue-200 space-y-2 shadow-sm">
+                            <label class="block font-bold text-sand-900 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-video text-skyblue-600"></i> صلاحية الفيديو المرئي:
+                            </label>
+                            <select id="cfg-allow-video-dl" onchange="autoSavePermissions()" class="w-full bg-sand-50 border border-sand-300 rounded-lg p-2.5 text-xs font-bold text-skyblue-900 focus:outline-none focus:border-skyblue-600">
+                                <option value="false">🔒 مشاهدة مباشرة فقط (حظر وتحديد التنزيل)</option>
+                                <option value="true">🔓 متاح للمشاهدة والتحميل المباشر</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-cloud-white p-4 rounded-xl border border-skyblue-200 space-y-2 shadow-sm">
+                            <label class="block font-bold text-sand-900 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-podcast text-skyblue-600"></i> صلاحية البودكاست الصوتي:
+                            </label>
+                            <select id="cfg-allow-podcast-dl" onchange="autoSavePermissions()" class="w-full bg-sand-50 border border-sand-300 rounded-lg p-2.5 text-xs font-bold text-skyblue-900 focus:outline-none focus:border-skyblue-600">
+                                <option value="false">🎧 استماع مباشر فقط (إخفاء خيارات حفظ الصوت)</option>
+                                <option value="true">🔓 متاح للاستماع وتحميل الملف الصوتي</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-cloud-white p-4 rounded-xl border border-skyblue-200 space-y-2 shadow-sm">
+                            <label class="block font-bold text-sand-900 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-pdf text-skyblue-600"></i> صلاحية الكتب وPPT والسيرة:
+                            </label>
+                            <select id="cfg-allow-files-dl" onchange="autoSavePermissions()" class="w-full bg-sand-50 border border-sand-300 rounded-lg p-2.5 text-xs font-bold text-skyblue-900 focus:outline-none focus:border-skyblue-600">
+                                <option value="false">📖 معاينة وقراءة على الشاشة فقط (إخفاء أزرار التحميل)</option>
+                                <option value="true">🔓 متاحة للتحميل والتنزيل المباشر</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: EDITABLE SITE SETTINGS FORM -->
+                <form onsubmit="saveSiteConfigFromStudio(event)" class="space-y-6 text-xs sm:text-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- LEFT COLUMN CONFIG -->
+                        <div class="bg-sand-50 p-4 rounded-2xl border border-sand-200 space-y-3">
+                            <h4 class="font-bold text-skyblue-800 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-heading"></i> عناوين الهيدر والشعار بالرأس:
+                            </h4>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">العنوان الرئيسي أعلى الموقع:</label>
+                                <input type="text" id="studio-site-main-title" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">العنوان الفرعي أسفل الهيدر:</label>
+                                <input type="text" id="studio-site-sub-title" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">اسم شارة السيرة (الهيدر):</label>
+                                <input type="text" id="studio-author-name-tag" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">رمز أيقونة الشعار الرئيسي:</label>
+                                <input type="text" id="studio-site-logo-icon" placeholder="head-lightbulb أو fa-lightbulb" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN CONFIG -->
+                        <div class="bg-sand-50 p-4 rounded-2xl border border-sand-200 space-y-3">
+                            <h4 class="font-bold text-skyblue-800 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-photo-film"></i> روابط الوسائط والمرئيات:
+                            </h4>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">رابط الشرح المرئي (YouTube Embed):</label>
+                                <input type="text" id="studio-video-url" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">رابط الصوت للبودكاست المباشر (MP3 Audio):</label>
+                                <input type="text" id="studio-podcast-url" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-sand-800 mb-1">نوع خط الموقع:</label>
+                                    <select id="studio-font-family" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                                        <option value="Cairo">خط القاهرة (Cairo)</option>
+                                        <option value="Tajawal">خط تجوال (Tajawal)</option>
+                                        <option value="Almarai">خط المراعي (Almarai)</option>
+                                        <option value="Readex Pro">خط ريديكس (Readex)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-sand-800 mb-1">لون خط العناوين:</label>
+                                    <select id="studio-title-color" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                                        <option value="#2e251d">ترابي دافئ غميق</option>
+                                        <option value="#336396">أزرق سماوي أكاديمي</option>
+                                        <option value="#294768">أزرق كحلي ناعم</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-sand-800 mb-1">جملة الحقوق أسفل الموقع:</label>
+                                <input type="text" id="studio-site-footer-rights" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2.5 text-xs text-sand-900">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end pt-2">
+                        <button type="submit" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>حفظ كافة الإعدادات والوسائط فوراً</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- HUBS WORKSPACE SECTION IN STUDIO -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center border-b border-sand-300 pb-2">
+                    <h3 class="text-lg font-bold text-sand-900 flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-skyblue-600"></i> إدارة وتعديل وتنسيق أقسام الحقيبة الرقمية
+                    </h3>
+                    <span class="text-xs text-sand-600 font-medium">استخدمي أزرار الأسهم لتقديم أو تأخير الأقسام، أو زر القلم لتغيير المسمى</span>
+                </div>
+
+                <div id="owner-hubs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- THOUGHTS WORKSPACE SECTION IN STUDIO -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center border-b border-sand-300 pb-2">
+                    <h3 class="text-lg font-bold text-sand-900 flex items-center gap-2">
+                        <i class="fa-solid fa-feather-pointed text-skyblue-600"></i> إدارة وتعديل الخواطر والمقالات
+                    </h3>
+                </div>
+
+                <div id="owner-thoughts-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Rendered dynamically -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- MODALS & POPUPS SYSTEM                                            -->
+    <!-- ================================================================= -->
+    <!-- MODAL: AUTHOR CV & ATTACHMENTS (FULLY EDITABLE WITH CANVA IMAGES & PROFILE PHOTO) -->
+    <div id="author-cv-modal" class="fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-cloud-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-sand-300 space-y-6">
+            <div class="flex justify-between items-center border-b border-sand-200 pb-4">
+                <div class="flex items-center gap-3">
+                    <div id="modal-author-photo-slot" class="w-14 h-14 rounded-full bg-skyblue-100 border-2 border-skyblue-300 text-skyblue-700 flex items-center justify-center text-2xl font-bold overflow-hidden shadow-sm">
+                        <!-- Profile Image or Icon -->
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-sand-900">السيرة الذاتية والأكاديمية</h3>
+                        <p class="text-xs text-skyblue-700 font-semibold">د. رباب الشامي</p>
+                    </div>
+                </div>
+                <button onclick="closeAuthorCVModal()" class="text-sand-500 hover:text-sand-800 text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6 text-xs sm:text-sm text-sand-800 leading-relaxed">
+                <!-- OWNER PROFILE PHOTO UPLOAD OPTION -->
+                <div id="profile-photo-owner-control" class="hidden bg-skyblue-50 p-3.5 rounded-2xl border border-skyblue-200 flex flex-wrap items-center justify-between gap-2">
+                    <span class="font-bold text-xs text-skyblue-900 flex items-center gap-2">
+                        <i class="fa-solid fa-camera text-skyblue-600"></i> الصورة الشخصية للمؤلفة (تظهر في الرئيسية والسيرة):
+                    </span>
+                    <input type="file" id="profile-photo-file-input" onchange="handleProfilePhotoUpload(event)" class="hidden" accept="image/*">
+                    <div class="flex gap-2">
+                        <button type="button" onclick="document.getElementById('profile-photo-file-input').click()" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition shadow-sm">
+                            <i class="fa-solid fa-upload ml-1"></i> تحميل / تغيير الصورة الشخصية
+                        </button>
+                        <button type="button" onclick="removeProfilePhoto()" class="bg-red-100 hover:bg-red-200 text-red-700 font-bold text-xs px-2.5 py-1.5 rounded-xl transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-sand-50 p-4 rounded-2xl border border-sand-200 space-y-2 relative">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-skyblue-800 flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-user-check"></i> التعريف الموجز والسيرة
+                        </h4>
+                        <button id="edit-cv-bio-btn" onclick="openWordEditorForCVBio()" class="text-skyblue-600 hover:text-skyblue-800 text-xs font-bold hidden bg-cloud-white px-3 py-1.5 rounded-xl border border-skyblue-200 shadow-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-word text-blue-600"></i>
+                            <span>تنسيق وتحرير النص (وورد)</span>
+                        </button>
+                    </div>
+                    <div id="cv-bio-container" class="transition-all duration-300">
+                        <p id="cv-bio-text">
+                            أستاذ المناهج وتكنولوجيا التعليم، مهتمة بتحديث الاستراتيجيات التربوية وتصميم البيئات الرقمية الداعمة للتعلم والبحث العلمي.
                         </p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
-                        <span>د. رباب الشامي</span>
-                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
+                </div>
+
+                <!-- OTHER ATTACHMENTS (PDF / WORD) -->
+                <div class="space-y-3 pt-2">
+                    <h4 class="font-bold text-sand-900 flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-file-arrow-down text-skyblue-600"></i> الملفات والمستندات المرفقة (PDF / Word)
+                    </h4>
+                    <div id="cv-attachments-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Dynamic Attachments -->
                     </div>
                 </div>
 
-                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">
+                <div id="cv-owner-upload-zone" class="bg-sand-100/60 p-4 rounded-2xl border-2 border-dashed border-skyblue-300 text-center space-y-2 hidden">
+                    <p class="font-bold text-xs text-skyblue-800">إضافة صفحة تصميم من (كانفا Canva) أو مستند سيرة جديد (خاص بالمالك):</p>
+                    <input type="file" id="cv-file-input" onchange="handleCVFileUpload(event)" class="hidden" accept=".pdf,.doc,.docx,image/*">
+                    <button type="button" onclick="document.getElementById('cv-file-input').click()" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-sm">
+                        <i class="fa-solid fa-upload ml-1"></i> رفع تصاميم كانفا (صور) أو مستندات (PDF / Word)
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-3 border-t border-sand-200">
+                <button onclick="closeAuthorCVModal()" class="bg-sand-200 text-sand-800 font-bold text-xs px-5 py-2.5 rounded-xl">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DYNAMIC HUB MODAL -->
+    <div id="hub-modal" class="fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-cloud-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-sand-300 space-y-6">
+            <div class="flex justify-between items-center border-b border-sand-200 pb-4">
+                <div class="flex items-center gap-3">
+                    <div id="hub-modal-icon-bg" class="w-10 h-10 rounded-xl bg-skyblue-100 text-skyblue-700 flex items-center justify-center text-xl font-bold">
+                        <i id="hub-modal-icon" class="fa-solid fa-folder-open"></i>
+                    </div>
                     <div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-500/10 text-teal-400 mb-4">🌿 عن الصحة النفسية</span>
-                        <h3 class="text-lg font-bold text-white mb-2">سلام النفس والمعلم</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            "إن الصحة النفسية للمعلم والمتعلم هي الركيزة الأولى لأي عملية تعليمية ناجحة، فالنفس المطمئنة هي الأقدر على العطاء والاستيعاب."
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
-                        <span>د. رباب الشامي</span>
-                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
+                        <h3 id="hub-modal-title" class="text-lg font-bold text-sand-900">عنوان القسم</h3>
+                        <p id="hub-modal-subtitle" class="text-xs text-skyblue-700 font-semibold">المكتبة الرقمية الإثرائية</p>
                     </div>
                 </div>
+                <button onclick="closeHubModal()" class="text-sand-500 hover:text-sand-800 text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
-                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">
+            <div id="hub-modal-body" class="space-y-4">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="flex justify-between items-center pt-4 border-t border-sand-200">
+                <span class="text-xs text-sand-600 font-medium">المكتبة الرقمية الإثرائية | د. رباب الشامي</span>
+                <button onclick="closeHubModal()" class="bg-sand-200 hover:bg-sand-300 text-sand-800 font-bold text-xs px-5 py-2.5 rounded-xl transition">إغلاق النافذة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD NEW HUB -->
+    <div id="add-hub-modal" class="fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-cloud-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-sand-300 space-y-5">
+            <div class="flex justify-between items-center border-b border-sand-200 pb-3">
+                <h3 class="text-lg font-bold text-skyblue-900 flex items-center gap-2">
+                    <i class="fa-solid fa-folder-plus text-skyblue-600"></i> إضافة قسم / صفحة إثرائية جديدة
+                </h3>
+                <button onclick="closeAddHubModal()" class="text-sand-500 hover:text-sand-800 text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleAddNewHub(event)" class="space-y-4 text-xs sm:text-sm">
+                <div>
+                    <label class="block font-bold mb-1">عنوان القسم / الصفحة الجديدة:</label>
+                    <input type="text" id="new-hub-title" required placeholder="مثال: ورش العمل التطبيقية والمشروعات" class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block font-bold mb-1">وصف مختصر للقسم:</label>
+                    <textarea id="new-hub-desc" required rows="2" placeholder="وصف موجز للمادة العلمية..." class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs"></textarea>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-400 mb-4">✨ عن الذات والحياة</span>
-                        <h3 class="text-lg font-bold text-white mb-2">خطوات نحو الأثر</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            "كل فكرة نغرسها بصدق اليوم، تثمر غداً في عقول طلابنا وباحثينا. الاستثمار في العقول هو الاستثمار الخالد."
-                        </p>
+                        <label class="block font-bold mb-1">اسم الشارة (مثال: القسم السابع):</label>
+                        <input type="text" id="new-hub-badge" placeholder="القسم السابع" class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs">
                     </div>
-                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
-                        <span>د. رباب الشامي</span>
-                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-400 text-center py-8 px-4 text-sm border-t border-slate-800">
-        <p>جميع الحقوق محفوظة © 2026 - المكتبة الرقمية لكتاب نظريات التعلم | د. رباب الشامي</p>
-    </footer>
-
-    <!-- ==================== MODALS / SUB-PAGES SYSTEM ==================== -->
-
-    <!-- MODAL 1: كتاب نظريات التعلم -->
-    <div id="modal-book" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
-            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-book text-gold-500 text-2xl"></i>
-                    <h3 class="text-xl font-bold">١- كتاب نظريات التعلم وتطبيقاتها التربوية</h3>
-                </div>
-                <button onclick="closeModal('modal-book')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
-            </div>
-            
-            <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8">
-                <!-- Book Cover Preview -->
-                <div class="md:col-span-5 flex flex-col items-center">
-                    <div class="w-full max-w-[240px] h-[340px] bg-gradient-to-br from-slate-900 to-teal-900 rounded-2xl p-6 text-white text-center flex flex-col justify-between border-2 border-gold-500 shadow-xl relative">
-                        <span class="text-xs text-gold-500 font-bold">دليل المعلم والباحث</span>
-                        <div>
-                            <h4 class="text-2xl font-black mb-2">نظريات التعلم</h4>
-                            <p class="text-xs text-slate-300">تأصيل وتطبيق تربوي</p>
-                        </div>
-                        <div class="border-t border-slate-700 pt-3">
-                            <p class="text-sm font-bold text-gold-100">د. رباب الشامي</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Book Details and Dropzone -->
-                <div class="md:col-span-7 flex flex-col justify-between">
                     <div>
-                        <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-align-right text-gold-500 ml-2"></i> نبذة عن الكتاب:</h4>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                            يقدم هذا الكتاب صياغة علمية ميسرة ورصينة لأهم نظريات التعلم وتطبيقاتها العملية في الميدان التربوي. يهدف لإعانة المعلمين والباحثين على فهم واستيعاب آليات التعلم وتوجيهها بفاعلية.
-                        </p>
-
-                        <!-- Interactive File Dropzone for Uploading/Replacing Book PDF -->
-                        <div class="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center hover:border-gold-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'book-file-info')">
-                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-gold-500 mb-2"></i>
-                            <p class="text-sm font-bold text-slate-700 mb-1">اسحب ملف الكتاب (PDF) وأسقطه هنا أو اضغط للرفع</p>
-                            <p class="text-xs text-slate-400">يمكنك رفع نسختك لربطها وتنزيلها لاحقاً</p>
-                            <input type="file" class="hidden" id="book-input" onchange="handleFileSelect(event, 'book-file-info')">
-                            <div id="book-file-info" class="mt-3 text-xs font-bold text-teal-700"></div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap gap-3 mt-6">
-                        <a href="#" download class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">
-                            <i class="fa-solid fa-download"></i> تنزيل ملف الكتاب (PDF)
-                        </a>
-                        <button onclick="closeModal('modal-book')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm">إغلاق الصفحة</button>
+                        <label class="block font-bold mb-1">رمز الأيقونة (مثال: fa-flask / fa-star):</label>
+                        <input type="text" id="new-hub-icon" placeholder="fa-shapes" class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs">
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 2: الفيديو التعليمي -->
-    <div id="modal-video" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
-            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-video text-red-500 text-2xl"></i>
-                    <h3 class="text-xl font-bold">٢- الفيديو التعليمي الملحق</h3>
-                </div>
-                <button onclick="closeModal('modal-video')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
-            </div>
-            
-            <div class="p-6 sm:p-8 space-y-6">
                 <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-circle-info text-red-500 ml-2"></i> نبذة عن الفيديو الشارح:</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        عُرض بأسلوب بصري وممتع يلخص محاور الكتاب ويشرح التطبيقات العملية لنظريات التعلم داخل القاعة الدراسية.
-                    </p>
+                    <label class="block font-bold mb-1">المحتوى المقالي والتفاعلي للقسم:</label>
+                    <textarea id="new-hub-content" rows="4" placeholder="اكتبي التفاصيل التي ستظهر عند فتح الصفحة..." class="w-full bg-sand-50 border border-sand-300 rounded-xl p-2.5 text-xs"></textarea>
                 </div>
 
-                <!-- Embedded Video Player Placeholder / Frame -->
-                <div class="aspect-video bg-slate-900 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center relative group">
-                    <video controls class="w-full h-full object-cover">
-                        <source src="video.mp4" type="video/mp4">
-                        متصفحك لا يدعم مشغل الفيديو مباشر.
-                    </video>
+                <div class="flex justify-end gap-3 pt-3 border-t border-sand-200">
+                    <button type="button" onclick="closeAddHubModal()" class="bg-sand-200 text-sand-800 font-bold px-4 py-2 rounded-xl">إلغاء</button>
+                    <button type="submit" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold px-6 py-2 rounded-xl shadow-md">
+                        <i class="fa-solid fa-plus ml-1"></i> إنشاء القسم المخصص
+                    </button>
                 </div>
+            </form>
+        </div>
+    </div>
 
-                <!-- Dropzone for Video -->
-                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-red-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'video-file-info')">
-                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-upload ml-1"></i> تحميل/إفلات فيديو جديد للربط داخل الصفحة</p>
-                    <div id="video-file-info" class="mt-1 text-xs text-teal-700"></div>
-                </div>
-
-                <div class="flex justify-between items-center pt-4 border-t border-slate-200">
-                    <a href="https://youtube.com" target="_blank" class="text-red-600 font-bold text-sm hover:underline flex items-center gap-2">
-                        <i class="fa-brands fa-youtube text-lg"></i> مشاهدة مباشرة عبر يوتيوب
-                    </a>
-                    <button onclick="closeModal('modal-video')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>
-                </div>
+    <!-- CUSTOM CONFIRMATION MODAL -->
+    <div id="custom-confirm-modal" class="fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-cloud-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-sand-300 space-y-4 text-center">
+            <div class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xl mx-auto">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h4 id="confirm-modal-title" class="font-bold text-sand-900 text-base">تأكيد الحذف وتقصير المسافة</h4>
+            <p id="confirm-modal-msg" class="text-xs text-sand-700 leading-relaxed">هل أنتِ متأكدة من حذف هذا العنصر؟ سيتم إغلاق المساحة الفارغة فوراً كنسخ Word.</p>
+            <div class="flex justify-center gap-3 pt-2">
+                <button id="confirm-cancel-btn" class="bg-sand-200 hover:bg-sand-300 text-sand-800 font-bold text-xs px-4 py-2 rounded-xl">إلغاء</button>
+                <button id="confirm-ok-btn" class="bg-red-500 hover:bg-red-600 text-cloud-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md">نعم، احذف واغلق المسافة</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 3: البودكاست -->
-    <div id="modal-podcast" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
-            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-podcast text-amber-500 text-2xl"></i>
-                    <h3 class="text-xl font-bold">٣- البودكاست الصوتي والمرئي</h3>
-                </div>
-                <button onclick="closeModal('modal-podcast')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
-            </div>
-            
-            <div class="p-6 sm:p-8 space-y-6">
-                <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-align-right text-amber-500 ml-2"></i> نبذة عن حلقة البودكاست:</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        حلقة إثرائية مميزة تناقش وتلخص زبدة كتاب نظريات التعلم، مصممة للاستماع السريع أثناء التنقل أو الاستمتاع بمشاهدتها مرئياً.
-                    </p>
-                </div>
-
-                <!-- Audio Player -->
-                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm">
-                    <h5 class="text-sm font-bold text-amber-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-headphones text-amber-600"></i> البودكاست الصوتي:</h5>
-                    <audio controls class="w-full h-10">
-                        <source src="podcast.mp3" type="audio/mpeg">
-                        المتصفح لا يدعم مشغل الصوت.
-                    </audio>
-                </div>
-
-                <!-- Video Podcast -->
-                <div class="bg-slate-900 rounded-2xl p-4 text-center text-white">
-                    <h5 class="text-sm font-bold text-amber-400 mb-2 flex items-center justify-center gap-2"><i class="fa-solid fa-tv"></i> البودكاست المرئي:</h5>
-                    <div class="aspect-video bg-slate-800 rounded-xl flex items-center justify-center">
-                        <p class="text-slate-400 text-xs">مشغل البودكاست المرئي جاهز للعرض مباشرة</p>
-                    </div>
-                </div>
-
-                <!-- Dropzone for Podcast -->
-                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-amber-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'podcast-file-info')">
-                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> تحميل أو إفلات تسجيل بودكاست صوتي/مرئي جديد</p>
-                    <div id="podcast-file-info" class="mt-1 text-xs text-teal-700"></div>
-                </div>
-
-                <div class="flex justify-end gap-3 pt-2">
-                    <button onclick="closeModal('modal-podcast')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 4: العرض التقديمي (PowerPoint) -->
-    <div id="modal-ppt" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
-            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-file-powerpoint text-orange-500 text-2xl"></i>
-                    <h3 class="text-xl font-bold">٤- العرض التقديمي (PowerPoint)</h3>
-                </div>
-                <button onclick="closeModal('modal-ppt')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
-            </div>
-            
-            <div class="p-6 sm:p-8 space-y-6">
-                <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-desktop text-orange-500 ml-2"></i> عن ملف العرض التقديمي:</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        شرائح عرض جاهزة ومصممة بأسلوب احترافي مخصص للمعلمين والأكاديميين لاستخدامها المباشر في الشرح والمحاضرات.
-                    </p>
-                </div>
-
-                <div class="border border-slate-200 rounded-2xl p-8 bg-slate-50 text-center">
-                    <i class="fa-solid fa-file-powerpoint text-6xl text-orange-500 mb-4"></i>
-                    <h5 class="text-base font-bold text-slate-800">عرض شرائح كتاب نظريات التعلم.pptx</h5>
-                    <p class="text-xs text-slate-500 mt-1">جاهز للمعاينة والتحميل المباشر</p>
-                </div>
-
-                <!-- Dropzone for PPT -->
-                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-orange-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'ppt-file-info')">
-                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-file-arrow-up ml-1"></i> افلت أو حمل ملف عرض تقديم جديد (PPTX)</p>
-                    <div id="ppt-file-info" class="mt-1 text-xs text-teal-700"></div>
-                </div>
-
-                <div class="flex justify-between items-center pt-2">
-                    <a href="#" download class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">
-                        <i class="fa-solid fa-download"></i> تحميل العرض (PPTX)
-                    </a>
-                    <button onclick="closeModal('modal-ppt')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm">إغلاق</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 5: الخرائط والملحقات -->
-    <div id="modal-maps" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
-            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-map-location-dot text-teal-500 text-2xl"></i>
-                    <h3 class="text-xl font-bold">٥- الخرائط والصور والملحقات الإثرائية</h3>
-                </div>
-                <button onclick="closeModal('modal-maps')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
-            </div>
-            
-            <div class="p-6 sm:p-8 space-y-6">
-                <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-folder-open text-teal-600 ml-2"></i> حقيبة الملحقات والخرائط الذهنية:</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        تتضمن هذه الصفحة ملفات PDF، صور توضيحية عالية الجودة، وأوراق عمل إثرائية داعمة لكتاب نظريات التعلم.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="border border-slate-200 rounded-xl p-4 flex items-center gap-4 bg-slate-50">
-                        <i class="fa-solid fa-file-pdf text-3xl text-red-500"></i>
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-800">خرائط المفاهيم الذهنية.pdf</h5>
-                            <a href="#" download class="text-xs text-teal-600 hover:underline font-semibold">استعراض وتحميل</a>
-                        </div>
-                    </div>
-                    <div class="border border-slate-200 rounded-xl p-4 flex items-center gap-4 bg-slate-50">
-                        <i class="fa-solid fa-file-image text-3xl text-blue-500"></i>
-                        <div>
-                            <h5 class="text-sm font-bold text-slate-800">انفوجرافيك النظرية البنائية.png</h5>
-                            <a href="#" download class="text-xs text-teal-600 hover:underline font-semibold">استعراض وتحميل</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dropzone for PDFs/Images -->
-                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-teal-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'maps-file-info')">
-                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> اسحب وأسقط أي ملف PDF أو صورة لإضافتها للملحقات</p>
-                    <div id="maps-file-info" class="mt-1 text-xs text-teal-700"></div>
-                </div>
-
-                <div class="flex justify-end pt-2">
-                    <button onclick="closeModal('modal-maps')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 6: لعبة التحدي -->
-    <div id="modal-game" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
-            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-gamepad text-purple-500 text-2xl"></i>
-                    <h3 class="text-xl font-bold">٦- لعبة التحدي (اختبر فهمك)</h3>
-                </div>
-                <button onclick="closeModal('modal-game')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
-            </div>
-            
-            <div class="p-6 sm:p-8 space-y-6 text-center">
-                <div class="max-w-2xl mx-auto">
-                    <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-4">
-                        <i class="fa-solid fa-trophy"></i>
-                    </div>
-                    <h4 class="text-2xl font-black text-slate-900 mb-2">طريقة وطبيعة اللعبة</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                        لعبة إلكترونية تفاعلية تحتوي على أسئلة ومواقف تربوية ممتعة تهدف لقياس وتثبيت المفاهيم التي وردت في كتاب نظريات التعلم بأسلوب التحدي والمكافآت.
-                    </p>
-
-                    <a href="play.html" class="inline-flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg px-10 py-4 rounded-2xl shadow-xl transition-transform hover:scale-105 mb-4">
-                        <i class="fa-solid fa-play"></i> انقر هنا لفتح وبدء اللعبة المباشرة
-                    </a>
-                </div>
-
-                <div class="pt-4 border-t border-slate-200 flex justify-center">
-                    <button onclick="closeModal('modal-game')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-2 rounded-xl text-sm">العودة للمكتبة</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript Interactive Logic -->
     <script>
-        // Modal Handlers
-        function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+        // --- GLOBAL STATE MANAGEMENT ---
+        let isOwnerMode = false;
+        const OWNER_PASS = "1234";
+        let confirmActionCallback = null;
+
+        const defaultHubsList = [
+            { id: 1, badge: "القسم الأول", icon: "fa-book-open", title: "١. كتاب نظريات التعلم (PDF)", desc: "تصفح النسخة الرقمية، الفهارس التفاعلية، وقراءة العينات الإثرائية المباشرة من فصول الكتاب.", btnIcon: "fa-eye", btnTxt: "قراءة واستعراض الكتاب" },
+            { id: 2, badge: "القسم الثاني", icon: "fa-circle-play", title: "٢. الشرح المرئي والفيديو", desc: "محاضرات مرئية تفاعلية تتضمن تطبيقات النظريات السلوكية، المعرفية، والبنائية مع خياري العرض المباشر واليوتيوب.", btnIcon: "fa-play", btnTxt: "مشاهدة الفيديو التعليمي" },
+            { id: 3, badge: "القسم الثالث", icon: "fa-podcast", title: "٣. البودكاست الصوتي الإثرائي", desc: "حلقات صوتية تحليليّة تناقش أحدث القضايا التربوية وتطبيقات نظريات التعلم بالصوت المباشر والناطق العربي.", btnIcon: "fa-headphones", btnTxt: "استماع وقراءة الحلقات" },
+            { id: 4, badge: "القسم الرابع", icon: "fa-file-powerpoint", title: "٤. العروض التقديمية (PowerPoint)", desc: "شرائح عرض احترافية جاهزة للشرح والتنقل التفاعلي ومخصصة للمعلمين والأكاديميين.", btnIcon: "fa-desktop", btnTxt: "معاينة الشرائح التفاعلية" },
+            { id: 5, badge: "القسم الخامس", icon: "fa-sitemap", title: "٥. الخرائط المفهومية والذهنية", desc: "مخططات بصرية عالية الجودة تلخص معالم النظريات، المفاهيم، والعلاقات بين العلماء.", btnIcon: "fa-diagram-project", btnTxt: "استعراض معرض الخرائط" },
+            { id: 6, badge: "القسم السادس", icon: "fa-gamepad", title: "٦. لعبة تحدي نظريات التعلم", desc: "تطبيق تفاعلي يختبر حصيلتك العلمية والمواقف التربوية مع احتساب النقاط والنتيجة الحية.", btnIcon: "fa-trophy", btnTxt: "بدء تحدي نظريات التعلم" }
+        ];
+
+        const defaultSiteContent = {
+            selectedFont: "Cairo",
+            selectedTitleColor: "#2e251d",
+            siteMainTitle: "المكتبة الرقمية الإثرائية",
+            siteSubTitle: "لكتاب نظريات التعلم وتطبيقاتها التربوية",
+            authorNameTag: "د. رباب الشامي",
+            authorPhoto: "", // Base64 or Image URL for Dr. Rabab's Personal Photo
+            siteLogoIcon: "head-lightbulb",
+            heroAuthorName: "د. رباب الشامي",
+            heroAuthorRole: "أستاذ المناهج والتربية",
+            heroHeading: "أهلاً بكم في المنصة الإثرائية الشاملة لنظريات التعلم",
+            heroDesc: "مساحة أكاديمية رقمية متكاملة تقدم أحدث الموارد، التطبيقات العملية، العروض التفاعلية، والخرائط الذهنية لدعم الباحثين والمعلمين.",
+            thoughtsSectionTitle: "خواطر ومقالات تربوية",
+            thoughtsSectionSub: "إضاءات في المعرفة، الذات، والصحة النفسية للمعلم والمتعلم",
+            thoughtsSectionIcon: "fa-feather-pointed",
+            cvBio: "أستاذ المناهج وتكنولوجيا التعليم، مهتمة بتحديث الاستراتيجيات التربوية وتصميم البيئات الرقمية الداعمة للتعلم والبحث العلمي.",
+            siteFooterRights: "جميع الحقوق محفوظة لموقع الدكتورة رباب الشامي © 2026",
+            videoUrl: "https://www.youtube.com/embed/PSkA9Zsf8S4",
+            podcastUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
+            
+            allowVideoDownload: false,
+            allowPodcastDownload: false,
+            allowFilesDownload: false
+        };
+
+        const defaultCVAttachments = [
+            { id: 1, name: "السيرة الذاتية الشاملة.pdf", type: "PDF", size: "1.2 MB", url: "" },
+            { id: 2, name: "تصميم السيرة الأكاديمية - كانفا.png", type: "صورة", size: "850 KB", url: "https://placehold.co/800x1100/e0eff9/2d537d?text=تصميم+السيرة+الذاتية+من+كانفا+(Canva)" }
+        ];
+
+        const defaultCVAttachments = [
+            { id: 1, name: "السيرة الذاتية الشاملة.pdf", type: "PDF", size: "1.2 MB" },
+            { id: 2, name: "الملخص التنفيذي للأبحاث.docx", type: "Word", size: "450 KB" }
+        ];
+
+        // --- LOCAL STORAGE ACCESSORS ---
+        function getStoredSiteContent() {
+            const data = localStorage.getItem('rabab_site_content');
+            return data ? JSON.parse(data) : defaultSiteContent;
         }
 
-        function closeModal(id) {
-            document.getElementById(id).classList.add('hidden');
-            document.body.style.overflow = 'auto';
+        function setStoredSiteContent(data) {
+            localStorage.setItem('rabab_site_content', JSON.stringify(data));
         }
 
-        function scrollToBottom() {
-            document.getElementById('thoughts-section').scrollIntoView({ behavior: 'smooth' });
+        function getStoredThoughts() {
+            const data = localStorage.getItem('rabab_site_thoughts');
+            return data ? JSON.parse(data) : defaultThoughts;
         }
 
-        // Toggle Thought Form
-        function toggleThoughtInput() {
-            const form = document.getElementById('thought-form-container');
-            form.classList.toggle('hidden');
+        function setStoredThoughts(data) {
+            localStorage.setItem('rabab_site_thoughts', JSON.stringify(data));
         }
 
-        // Save New Thought to Screen & LocalStorage
-        function saveNewThought() {
-            const title = document.getElementById('thought-title').value.trim();
-            const tag = document.getElementById('thought-tag').value;
-            const content = document.getElementById('thought-content').value.trim();
+        function getStoredHubs() {
+            const data = localStorage.getItem('rabab_site_hubs');
+            return data ? JSON.parse(data) : defaultHubsList;
+        }
 
-            if (!title || !content) {
-                alert('لطفاً اكتبي العنوان ونص الخاطرة قبل النشر.');
+        function setStoredHubs(data) {
+            localStorage.setItem('rabab_site_hubs', JSON.stringify(data));
+        }
+
+        function getStoredCV() {
+            const data = localStorage.getItem('rabab_site_cv');
+            return data ? JSON.parse(data) : defaultCVAttachments;
+        }
+
+        function setStoredCV(data) {
+            localStorage.setItem('rabab_site_cv', JSON.stringify(data));
+        }
+
+        // --- ROUTING ENGINE (#admin VS VISITOR PORTAL) ---
+        function handleRoute() {
+            const hash = window.location.hash;
+            const visitorPortal = document.getElementById('visitor-portal');
+            const ownerStudio = document.getElementById('owner-studio-portal');
+
+            if (hash === '#admin' || hash === '#owner') {
+                if (!isOwnerMode) {
+                    openOwnerLoginModal();
+                } else {
+                    visitorPortal.classList.add('hidden');
+                    ownerStudio.classList.remove('hidden');
+                    populateStudioFields();
+                    renderAllStudioContent();
+                }
+            } else {
+                visitorPortal.classList.remove('hidden');
+                ownerStudio.classList.add('hidden');
+                applySiteContentUI();
+            }
+        }
+
+        function navigateToOwnerStudio() {
+            if (!isOwnerMode) {
+                openOwnerLoginModal();
+            } else {
+                window.location.hash = '#admin';
+    <!-- WORD TEXT EDITOR MODAL FOR FINE CONTROL -->
+    <div id="word-editor-modal" class="fixed inset-0 modal-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-cloud-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-sand-300 space-y-5">
+            <div class="flex justify-between items-center border-b border-sand-200 pb-3">
+                <h3 class="text-base sm:text-lg font-bold text-skyblue-900 flex items-center gap-2">
+                    <i class="fa-solid fa-file-word text-blue-600 text-xl"></i>
+                    <span>محرر نصوص وورد الرقمي (توسيط، تكبير، زخرفة)</span>
+                </h3>
+                <button onclick="closeWordEditorModal()" class="text-sand-500 hover:text-sand-800 text-xl font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- WORD TOOLBAR CONTROLS -->
+            <div class="bg-sand-50 p-3.5 rounded-2xl border border-sand-200 space-y-3">
+                <p class="text-xs font-bold text-skyblue-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders text-skyblue-600"></i> شريط أدوات التنسيق السريع:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div>
+                        <label class="block text-[11px] font-bold text-sand-800 mb-1">محاذاة النص:</label>
+                        <select id="we-align-select" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2 font-bold text-sand-900">
+                            <option value="right">➡️ محاذاة لليمين</option>
+                            <option value="center">↔️ توسيط النص بالمنتصف</option>
+                            <option value="left">⬅️ محاذاة لليسار</option>
+                            <option value="justify">📄 ضبط أطراف الفقرة</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-sand-800 mb-1">حجم الخط:</label>
+                        <select id="we-size-select" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2 font-bold text-sand-900">
+                            <option value="sm">خط عادي (صغير)</option>
+                            <option value="md" selected>خط متوسط (قياسي)</option>
+                            <option value="lg">خط كبير (بارز)</option>
+                            <option value="xl">خط ضخم عريض (عنوان)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-sand-800 mb-1">زخرفة وإطار الفقرة:</label>
+                        <select id="we-frame-select" class="w-full bg-cloud-white border border-sand-300 rounded-xl p-2 font-bold text-sand-900">
+                            <option value="none">بدون إطار (نص ناعم)</option>
+                            <option value="decorated">✨ إطار إثرائي مزخرف</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-sand-800 mb-1">محتوى النص:</label>
+                <textarea id="we-content-input" rows="5" class="w-full bg-sand-50 border border-sand-300 rounded-2xl p-3 text-xs text-sand-900 focus:outline-none focus:border-skyblue-600" placeholder="اكتبي النص هنا..."></textarea>
+            </div>
+
+            <div class="flex justify-end gap-3 pt-2 border-t border-sand-200">
+                <button type="button" onclick="closeWordEditorModal()" class="bg-sand-200 text-sand-800 font-bold text-xs px-4 py-2.5 rounded-xl">إلغاء</button>
+                <button type="button" onclick="saveWordEditorContent()" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white font-bold text-xs px-6 py-2.5 rounded-xl shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>حفظ وتطبيق التنسيق</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentWordTargetType = null; // 'cv_bio', 'thought', 'hub'
+        let currentWordTargetId = null;
+
+        function applySiteContentUI() {
+            const c = getStoredSiteContent();
+            // Render Bio with Word formatting
+            renderFormattedCVBio(c);
+            if (c.selectedFont) {
+                document.body.style.fontFamily = `'${c.selectedFont}', sans-serif`;
+            }
+            if (c.selectedTitleColor) {
+                const titleElements = document.querySelectorAll('#site-main-title, #hero-heading, #section-resources-title, #thoughts-section-title, #comments-section-title');
+                titleElements.forEach(el => el.style.color = c.selectedTitleColor);
+            }
+
+        function renderFormattedCVBio(c) {
+            const bioTextEl = document.getElementById('cv-bio-text');
+            const bioContainer = document.getElementById('cv-bio-container');
+            if (!bioTextEl || !bioContainer) return;
+
+            const text = c.cvBio || defaultSiteContent.cvBio;
+            const align = c.cvBioAlign || 'right';
+            const size = c.cvBioSize || 'md';
+            const frame = c.cvBioFrame || 'none';
+
+            bioTextEl.innerText = text;
+            
+            // Apply formatting classes
+            bioContainer.className = `transition-all duration-300 word-align-${align} word-size-${size} ${frame === 'decorated' ? 'word-decorated-frame mt-3' : ''}`;
+        }
+
+        function openWordEditorForCVBio() {
+            const c = getStoredSiteContent();
+            currentWordTargetType = 'cv_bio';
+            currentWordTargetId = null;
+
+            document.getElementById('we-content-input').value = c.cvBio || defaultSiteContent.cvBio;
+            document.getElementById('we-align-select').value = c.cvBioAlign || 'right';
+            document.getElementById('we-size-select').value = c.cvBioSize || 'md';
+            document.getElementById('we-frame-select').value = c.cvBioFrame || 'none';
+
+            document.getElementById('word-editor-modal').classList.remove('hidden');
+        }
+
+        function closeWordEditorModal() {
+            document.getElementById('word-editor-modal').classList.add('hidden');
+        }
+
+        function saveWordEditorContent() {
+            const text = document.getElementById('we-content-input').value;
+            const align = document.getElementById('we-align-select').value;
+            const size = document.getElementById('we-size-select').value;
+            const frame = document.getElementById('we-frame-select').value;
+
+            if (currentWordTargetType === 'cv_bio') {
+                const c = getStoredSiteContent();
+                c.cvBio = text;
+                c.cvBioAlign = align;
+                c.cvBioSize = size;
+                c.cvBioFrame = frame;
+                setStoredSiteContent(c);
+                renderFormattedCVBio(c);
+                showToast("تم حفظ وتنسيق السيرة الذاتية بنجاح كصفحة وورد!");
+            }
+
+            closeWordEditorModal();
+        }
+
+            setTxt('thoughts-title-text', c.thoughtsSectionTitle || "خواطر ومقالات تربوية");
+            setTxt('thoughts-section-sub', c.thoughtsSectionSub || "إضاءات في المعرفة، الذات، والصحة النفسية للمعلم والمتعلم");
+            const thIcon = document.getElementById('thoughts-section-icon');
+            if (thIcon) thIcon.className = `fa-solid ${c.thoughtsSectionIcon || 'fa-feather-pointed'} text-skyblue-600`;
+
+            setTxt('cv-bio-text', c.cvBio || defaultSiteContent.cvBio);
+            setTxt('site-footer-rights', c.siteFooterRights);
+
+            renderVisitorHubs();
+            renderVisitorThoughts();
+            renderCVAttachments();
+        }
+
+        // --- RENDER VISITOR HUBS & THOUGHTS ---
+        function handleProfilePhotoUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const current = getStoredSiteContent();
+                current.authorPhoto = evt.target.result;
+                setStoredSiteContent(current);
+                applySiteContentUI();
+                showToast("تم تحديث وحفظ صورتكِ الشخصية بنجاح!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeProfilePhoto() {
+            showCustomConfirm("هل أنتِ متأكدة من إزالة الصورة الشخصية؟", function() {
+                const current = getStoredSiteContent();
+                current.authorPhoto = "";
+                setStoredSiteContent(current);
+                applySiteContentUI();
+                showToast("تمت إزالة الصورة الشخصية.");
+            });
+        }
+
+        function renderCVAttachments() {
+            const attachmentsContainer = document.getElementById('cv-attachments-list');
+            const canvaGalleryContainer = document.getElementById('cv-canva-gallery');
+            if (!attachmentsContainer || !canvaGalleryContainer) return;
+
+            const list = getStoredCV();
+            const siteConfig = getStoredSiteContent();
+            const allowDL = siteConfig.allowFilesDownload === true || isOwnerMode;
+
+            const documentFiles = list.filter(item => item.type !== 'صورة');
+            const canvaImages = list.filter(item => item.type === 'صورة');
+
+            // 1. RENDER CANVA VISUAL GALLERY
+            if (canvaImages.length === 0) {
+                canvaGalleryContainer.innerHTML = `
+                    <div class="col-span-full bg-sand-50 p-4 rounded-xl border border-dashed border-sand-300 text-center text-xs text-sand-600">
+                        لا توجد تصاميم صور أو صفحة كانفا مضافة حالياً.
+                    </div>
+                `;
+            } else {
+                canvaGalleryContainer.innerHTML = canvaImages.map(img => `
+                    <div class="bg-cloud-white p-2.5 rounded-2xl border border-sand-300 shadow-sm space-y-2 group">
+                        <div class="aspect-[3/4] w-full rounded-xl overflow-hidden bg-sand-100 border border-sand-200 relative">
+                            <img src="${img.url || 'https://placehold.co/800x1100/e0eff9/2d537d?text=تصميم+Canva'}" alt="${img.name}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-skyblue-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <a href="${img.url || '#'}" target="_blank" class="bg-cloud-white text-skyblue-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow">
+                                    <i class="fa-solid fa-expand ml-1"></i> تكبير التصميم
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs px-1">
+                            <span class="font-bold text-sand-900 truncate max-w-[160px]">${img.name}</span>
+                            ${isOwnerMode ? `
+                                <button onclick="deleteCVAttachment(${img.id})" class="text-red-500 hover:text-red-700 font-bold p-1">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // 2. RENDER DOCUMENTS (PDF / WORD)
+            attachmentsContainer.innerHTML = documentFiles.map(item => `
+                <div id="cv-item-${item.id}" class="bg-cloud-white p-3 rounded-xl border border-sand-300 flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid ${item.type === 'PDF' ? 'fa-file-pdf text-red-500' : 'fa-file-word text-blue-500'} text-xl"></i>
+                        <div>
+                            <p class="font-bold text-xs text-sand-900">${item.name}</p>
+                            <p class="text-[10px] text-sand-600">${item.size} • ${item.type}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        ${allowDL ? `
+                            <button onclick="downloadFileDemo('${item.name}')" class="bg-skyblue-100 hover:bg-skyblue-200 text-skyblue-800 text-xs font-bold px-2.5 py-1.5 rounded-lg transition" title="تحميل الملف">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                        ` : `
+                            <span class="bg-sand-100 text-sand-800 text-[10px] font-bold px-2.5 py-1 rounded-md border border-sand-200 flex items-center gap-1">
+                                <i class="fa-solid fa-eye text-skyblue-600"></i> للمعاينة فقط
+                            </span>
+                        `}
+                        ${isOwnerMode ? `
+                            <button onclick="deleteCVAttachment(${item.id})" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-2 py-1.5 rounded-lg transition" title="حذف الملف">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function handleCVFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const list = getStoredCV();
+            let fileType = 'صورة';
+            if (file.name.endsWith('.pdf')) fileType = 'PDF';
+            else if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) fileType = 'Word';
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                list.push({
+                    id: Date.now(),
+                    name: file.name,
+                    type: fileType,
+                    size: (file.size / 1024).toFixed(0) + " KB",
+                    url: evt.target.result
+                });
+                setStoredCV(list);
+                renderCVAttachments();
+                showToast("تمت إضافة المرفق/تصميم كانفا بنجاح لسيرة الدكتورة رباب!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleOwnerLoginSubmit(e) {
+            e.preventDefault();
+            const pass = document.getElementById('owner-pass-input').value;
+            if (pass === OWNER_PASS) {
+                isOwnerMode = true;
+                closeOwnerLoginModal();
+                document.getElementById('cv-owner-upload-zone').classList.remove('hidden');
+                document.getElementById('profile-photo-owner-control').classList.remove('hidden');
+                document.getElementById('edit-cv-bio-btn').classList.remove('hidden');
+                window.location.hash = '#admin';
+                showToast("مرحباً بكِ د. رباب الشامي! تم فتح استوديو المالك بنجاح.");
+            } else {
+                showToast("رمز المرور غير صحيح!");
+            }
+        }
+
+        function editCVBio() {
+            const current = getStoredSiteContent();
+            const newBio = prompt("تعديل نص السيرة الذاتية والتعريف الموجز:", current.cvBio || defaultSiteContent.cvBio);
+            if (newBio !== null) {
+                current.cvBio = newBio;
+                setStoredSiteContent(current);
+                applySiteContentUI();
+                showToast("تم تحديث السيرة الذاتية بنجاح!");
+            }
+        }
+
+        function renderCVAttachments() {
+            const container = document.getElementById('cv-attachments-list');
+            if (!container) return;
+            const list = getStoredCV();
+            const siteConfig = getStoredSiteContent();
+            const allowDL = siteConfig.allowFilesDownload === true || isOwnerMode;
+
+            container.innerHTML = list.map(item => `
+                <div id="cv-item-${item.id}" class="bg-cloud-white p-3 rounded-xl border border-sand-300 flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid ${item.type === 'PDF' ? 'fa-file-pdf text-red-500' : (item.type === 'Word' ? 'fa-file-word text-blue-500' : 'fa-file-image text-emerald-500')} text-xl"></i>
+                        <div>
+                            <p class="font-bold text-xs text-sand-900">${item.name}</p>
+                            <p class="text-[10px] text-sand-600">${item.size} • ${item.type}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        ${allowDL ? `
+                            <button onclick="downloadFileDemo('${item.name}')" class="bg-skyblue-100 hover:bg-skyblue-200 text-skyblue-800 text-xs font-bold px-2.5 py-1.5 rounded-lg transition" title="تحميل الملف">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                        ` : `
+                            <span class="bg-sand-100 text-sand-800 text-[10px] font-bold px-2.5 py-1 rounded-md border border-sand-200 flex items-center gap-1">
+                                <i class="fa-solid fa-eye text-skyblue-600"></i> للمعاينة فقط
+                            </span>
+                        `}
+                        ${isOwnerMode ? `
+                            <button onclick="deleteCVAttachment(${item.id})" class="bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold px-2 py-1.5 rounded-lg transition" title="حذف الملف">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteCVAttachment(id) {
+            showCustomConfirm("هل أنتِ متأكدة من حذف هذا المستند من السيرة الذاتية؟", function() {
+                let list = getStoredCV().filter(i => i.id !== id);
+                setStoredCV(list);
+                renderCVAttachments();
+                showToast("تم حذف المستند بنجاح.");
+            });
+        }
+
+        function handleCVFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const list = getStoredCV();
+            let fileType = 'صورة';
+            if (file.name.endsWith('.pdf')) fileType = 'PDF';
+            else if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) fileType = 'Word';
+
+            list.push({
+                id: Date.now(),
+                name: file.name,
+                type: fileType,
+                size: (file.size / 1024).toFixed(0) + " KB"
+            });
+            setStoredCV(list);
+            renderCVAttachments();
+            showToast("تمت إضافة المستند الجديد لسيرة الدكتورة رباب بنجاح!");
+        }
+
+        function openAuthorCVModal() {
+            document.getElementById('author-cv-modal').classList.remove('hidden');
+        }
+
+        function closeAuthorCVModal() {
+            document.getElementById('author-cv-modal').classList.add('hidden');
+        }
+
+        // --- PODCAST TTS AUDIO ---
+        function playPodcastTTS() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const epTitle = document.getElementById('podcast-episode-title')?.innerText || "بودكاست كتاب نظريات التعلم للدكتورة رباب الشامي";
+                const utterance = new SpeechSynthesisUtterance(epTitle + " . نرحب بكم في هذه الحلقة الإثرائية التحليلية لنظريات التعلم وتطبيقاتها التربوية.");
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+                showToast("جارٍ تشغيل الصوت الناطق باللغة العربية...");
+            }
+        }
+
+        function stopPodcastTTS() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            const audio = document.getElementById('real-podcast-audio');
+            if (audio) audio.pause();
+            showToast("تم إيقاف الصوت.");
+        }
+
+        // --- OPEN HUB MODAL WITH ENFORCED PERMISSIONS ---
+        function openHubModal(hubId) {
+            const modal = document.getElementById('hub-modal');
+            const titleEl = document.getElementById('hub-modal-title');
+            const iconEl = document.getElementById('hub-modal-icon');
+            const bodyEl = document.getElementById('hub-modal-body');
+
+            const hubsList = getStoredHubs();
+            const foundHub = hubsList.find(h => h.id === hubId);
+            const siteConfig = getStoredSiteContent();
+
+            const allowVideoDL = siteConfig.allowVideoDownload === true || isOwnerMode;
+            const allowPodcastDL = siteConfig.allowPodcastDownload === true || isOwnerMode;
+            const allowFilesDL = siteConfig.allowFilesDownload === true || isOwnerMode;
+
+            let videoSrc = siteConfig.videoUrl || "https://www.youtube.com/embed/PSkA9Zsf8S4";
+            let rawYoutubeWatchUrl = videoSrc.replace('/embed/', '/watch?v=');
+
+            const standardHubsContent = {
+                1: `
+                    <div class="space-y-4 text-xs sm:text-sm text-sand-800">
+                        <div class="bg-sand-50 p-4 rounded-2xl border border-sand-200">
+                            <h4 class="font-bold text-skyblue-800 text-sm mb-1">عن الكتاب:</h4>
+                            <p class="leading-relaxed">مرجع أكاديمي شامل يستعرض المبادئ والنظريات الكبرى للتعلم (السلوكية، المعرفية، البنائية، والاجتماعية) مع ربطها بالتطبيقات الصفية الحديثة.</p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${allowFilesDL ? `
+                                <button onclick="downloadFileDemo('كتاب_نظريات_التعلم_د_رباب_الشامي.pdf')" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white p-3 rounded-xl font-bold transition flex items-center justify-center gap-2 shadow-sm">
+                                    <i class="fa-solid fa-file-pdf text-lg"></i>
+                                    <span>تحميل الكتاب كاملاً (PDF)</span>
+                                </button>
+                            ` : `
+                                <div class="bg-sand-100 border border-sand-300 p-3 rounded-xl font-bold text-sand-800 flex items-center justify-center gap-2 text-center">
+                                    <i class="fa-solid fa-book-open text-skyblue-600 text-lg"></i>
+                                    <span>الكتاب متاح للقراءة والاستعراض المباشر فقط 📖</span>
+                                </div>
+                            `}
+                            <button onclick="downloadFileDemo('فهرس_وعينات_الكتاب.pdf')" class="bg-sand-200 hover:bg-sand-300 text-sand-900 p-3 rounded-xl font-bold transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-bookmark text-skyblue-600"></i>
+                                <span>تصفح فهرس الفصول</span>
+                            </button>
+                        </div>
+                    </div>
+                `,
+                2: `
+                    <div class="space-y-4 text-xs sm:text-sm text-sand-800">
+                        <div class="bg-sand-50 p-4 rounded-2xl border border-sand-300 space-y-3">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-bold text-sand-900 text-sm">المحاضرة المرئية التفاعلية: الشرح البصري لنظريات التعلم</h4>
+                                <span class="bg-skyblue-100 text-skyblue-800 text-[11px] font-bold px-2.5 py-1 rounded-full">
+                                    ${allowVideoDL ? 'مشاهدة وتحميل HD' : 'مشاهدة مباشرة فقط 👁️'}
+                                </span>
+                            </div>
+                            
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 bg-cloud-white p-2.5 rounded-xl border border-sand-200 text-xs font-bold">
+                                <span class="text-sand-700">خيارات المشاهدة المرنة:</span>
+                                <a href="${rawYoutubeWatchUrl}" target="_blank" rel="noopener noreferrer" class="bg-red-500 hover:bg-red-600 text-cloud-white px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-brands fa-youtube text-base"></i>
+                                    <span>فتح المقطع في يوتيوب المباشر</span>
+                                </a>
+                            </div>
+
+                            <div class="aspect-video w-full rounded-2xl overflow-hidden border border-sand-300 shadow-md bg-black">
+                                <iframe id="main-video-iframe" class="w-full h-full" src="${videoSrc}" title="نظريات التعلم وتطبيقاتها التربوية - د. رباب الشامي" playsinline allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                3: `
+                    <div class="space-y-4 text-xs sm:text-sm text-sand-800">
+                        <div class="bg-skyblue-50 p-5 rounded-2xl border border-skyblue-200 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-bold text-skyblue-900 text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-podcast text-skyblue-600 text-base"></i>
+                                    <span id="podcast-episode-title">الحلقة الأولى: كيف نتعلم في العصر الرقمي؟</span>
+                                </h4>
+                                <span class="text-xs font-bold text-skyblue-700 bg-cloud-white px-2.5 py-1 rounded-full border border-skyblue-200">
+                                    ${allowPodcastDL ? 'صوتي + تنزيل' : 'استماع مباشر فقط 🎧'}
+                                </span>
+                            </div>
+                            
+                            <div class="bg-cloud-white p-4 rounded-xl border border-skyblue-200 shadow-sm space-y-3">
+                                <audio id="real-podcast-audio" class="w-full" controls playsinline ${allowPodcastDL ? '' : 'controlsList="nodownload"'} preload="metadata">
+                                    <source src="${siteConfig.podcastUrl || 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3'}" type="audio/mpeg">
+                                    متصفحك لا يدعم مشغل الصوت المباشر.
+                                </audio>
+                                
+                                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold pt-1">
+                                    <button onclick="playPodcastTTS()" class="bg-skyblue-600 hover:bg-skyblue-700 text-cloud-white px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                                        <i class="fa-solid fa-volume-high"></i>
+                                        <span>الاستماع للصوت التعليقي (الناطق الصوتي)</span>
+                                    </button>
+                                    <button onclick="stopPodcastTTS()" class="bg-sand-200 hover:bg-sand-300 text-sand-800 px-3 py-2 rounded-xl transition">
+                                        <i class="fa-solid fa-stop"></i> إيقاف الصوت
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+
+            if (foundHub) {
+                titleEl.innerText = foundHub.title;
+                iconEl.className = `fa-solid ${foundHub.icon || 'fa-folder-open'}`;
+                
+                if (standardHubsContent[hubId]) {
+                    bodyEl.innerHTML = standardHubsContent[hubId];
+                } else {
+                    bodyEl.innerHTML = `
+                        <div class="space-y-4 text-xs sm:text-sm text-sand-800">
+                            <div class="bg-sand-50 p-5 rounded-2xl border border-sand-200 space-y-3">
+                                <h4 class="font-bold text-skyblue-900 text-base">${foundHub.title}</h4>
+                                <p class="leading-relaxed font-medium">${foundHub.customContent || foundHub.desc}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeHubModal() {
+            stopPodcastTTS();
+            document.getElementById('hub-modal').classList.add('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-skyblue-800 text-cloud-white px-4 py-3 rounded-2xl shadow-xl z-50 text-xs font-bold flex items-center gap-2 transition-all duration-300';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> <span>${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function downloadFileDemo(fileName, content) {
+            const siteConfig = getStoredSiteContent();
+            if (siteConfig.allowFilesDownload !== true && !isOwnerMode) {
+                showToast("التحميل مغلَق من قِبل المالك. الملف متاح للمعاينة والقراءة المباشرة فقط.");
                 return;
             }
+            const fileText = content || `المكتبة الرقمية الإثرائية - كتاب نظريات التعلم وتطبيقاتها التربوية\nإعداد: د. رباب الشامي\n\nاسم الملف: ${fileName}\nتم التنزيل بنجاح.`;
+            const blob = new Blob([fileText], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast(`تم بدء تنزيل الملف: ${fileName}`);
+        }
 
-            const thoughtsGrid = document.getElementById('thoughts-grid');
-            
-            const card = document.createElement('div');
-            card.className = "bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between";
-            card.innerHTML = `
-                <div>
-                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gold-500/10 text-gold-400 mb-4">${tag}</span>
-                    <h3 class="text-lg font-bold text-white mb-2">${title}</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">${content}</p>
+        function handleCommentSubmit(e) {
+            e.preventDefault();
+            const author = document.getElementById('comment-author').value;
+            const text = document.getElementById('comment-text').value;
+            if (!author || !text) return;
+
+            const list = document.getElementById('comments-list');
+            const commentEl = document.createElement('div');
+            commentEl.className = 'bg-sand-50 p-3 rounded-xl border border-sand-200 text-xs space-y-1';
+            commentEl.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="font-bold text-skyblue-800">${author}</span>
+                    <span class="text-[10px] text-sand-500">الآن</span>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
-                    <span>د. رباب الشامي</span>
-                    <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
-                </div>
+                <p class="text-sand-800 font-medium">${text}</p>
             `;
-
-            thoughtsGrid.prepend(card);
-
-            // Reset inputs
-            document.getElementById('thought-title').value = '';
-            document.getElementById('thought-content').value = '';
-            toggleThoughtInput();
+            list.prepend(commentEl);
+            document.getElementById('comment-author').value = '';
+            document.getElementById('comment-text').value = '';
+            showToast("شكراً لك! تم نشر تعليقك بنجاح.");
         }
 
-        // File Drag and Drop Handlers
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.currentTarget.classList.add('dropzone-active');
-        }
+        // LISTEN TO ROUTE CHANGES
+        window.addEventListener('hashchange', handleRoute);
 
-        function handleDragLeave(e) {
-            e.currentTarget.classList.remove('dropzone-active');
-        }
-
-        function handleDrop(e, outputId) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('dropzone-active');
-            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                const fileName = e.dataTransfer.files[0].name;
-                document.getElementById(outputId).innerText = "تم إفلات الملف بنجاح: " + fileName;
-            }
-        }
-
-        function handleFileSelect(e, outputId) {
-            if (e.target.files && e.target.files[0]) {
-                const fileName = e.target.files[0].name;
-                document.getElementById(outputId).innerText = "تم اختيار الملف: " + fileName;
-            }
-        }
+        window.onload = function() {
+            handleRoute();
+        };
     </script>
 </body>
 </html>
