@@ -1,2 +1,677 @@
-<head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>كتاب نظريات التعلم | د. رباب الشامي</title>    <title>المكتبة الرقمية الإثرائية والتفاعلية لكتاب نظريات التعلم | د. رباب الشامي</title>    <!-- Fonts -->    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">    <!-- FontAwesome Icons -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">        <style>        :root {            --primary-navy: #0f172a;            --accent-blue: #1e3a8a;            --accent-teal: #0f766e;            --gold-accent: #d97706;            --gold-light: #fef3c7;            --bg-light: #f8fafc;            --card-bg: #ffffff;            --text-main: #1e293b;            --text-muted: #64748b;            --border-color: #e2e8f0;            --radius-lg: 20px;            --radius-md: 12px;            --shadow-subtle: 0 10px 30px rgba(15, 23, 42, 0.08);            --shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.15);        }        * {            box-sizing: border-box;            margin: 0;            padding: 0;            font-family: 'Tajawal', 'Cairo', sans-serif;    <!-- Tailwind CSS -->    <script src="https://cdn.tailwindcss.com"></script>    <script>        tailwind.config = {            theme: {                extend: {                    colors: {                        navy: { 900: '#0f172a', 800: '#1e293b', 700: '#334155' },                        gold: { 500: '#d97706', 600: '#b45309', 100: '#fef3c7' },                        teal: { 600: '#0f766e', 700: '#0d9488' }                    },                    fontFamily: {                        sans: ['Tajawal', 'Cairo', 'sans-serif']                    }                }            }        }    </script>    <style>        body {            background-color: var(--bg-light);            color: var(--text-main);            line-height: 1.7;            overflow-x: hidden;            background-color: #f8fafc;            color: #1e293b;            font-family: 'Tajawal', 'Cairo', sans-serif;            scroll-behavior: smooth;        }        header {        .glass-card {            background: rgba(255, 255, 255, 0.95);            backdrop-filter: blur(10px);            position: sticky;            top: 0;            z-index: 1000;            border-bottom: 1px solid var(--border-color);            padding: 15px 0;        }        .nav-container {            max-width: 1200px;            margin: 0 auto;            padding: 0 24px;            display: flex;            justify-content: space-between;            align-items: center;        }        .logo {            display: flex;            align-items: center;            gap: 12px;            text-decoration: none;            color: var(--primary-navy);            font-weight: 800;            font-size: 1.4rem;        }        .logo-icon {            width: 42px;            height: 42px;            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));            color: white;            border-radius: 10px;            display: flex;            align-items: center;            justify-content: center;            font-size: 1.2rem;        }        .nav-links {            display: flex;            gap: 25px;            list-style: none;        }        .nav-links a {            text-decoration: none;            color: var(--text-main);            font-weight: 600;            transition: color 0.3s ease;        }        .nav-links a:hover {            color: var(--gold-accent);        }        .hero {            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);            color: white;            padding: 90px 24px;            position: relative;            overflow: hidden;        }        .hero::before {            content: '';            position: absolute;            top: -50%;            right: -10%;            width: 500px;            height: 500px;            background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, transparent 70%);            border-radius: 50%;        }        .hero-container {            max-width: 1200px;            margin: 0 auto;            display: grid;            grid-template-columns: 1.2fr 0.8fr;            gap: 60px;            align-items: center;        }        .hero-badge {            display: inline-flex;            align-items: center;            gap: 8px;            background: rgba(254, 243, 199, 0.15);            border: 1px solid rgba(217, 119, 6, 0.4);            color: #fef3c7;            padding: 6px 16px;            border-radius: 30px;            font-size: 0.95rem;            font-weight: 600;            margin-bottom: 20px;        }        .hero-title {            font-size: 3.2rem;            font-weight: 800;            line-height: 1.25;            margin-bottom: 20px;            color: #ffffff;        }        .hero-title span {            color: var(--gold-accent);        }        .hero-description {            font-size: 1.2rem;            color: #cbd5e1;            margin-bottom: 35px;            max-width: 600px;        }        .hero-buttons {            display: flex;            gap: 15px;            flex-wrap: wrap;        }        .btn {            padding: 14px 28px;            border-radius: 12px;            font-weight: 700;            font-size: 1rem;            text-decoration: none;            display: inline-flex;            align-items: center;            gap: 10px;            transition: all 0.3s ease;            cursor: pointer;            border: none;        }        .btn-primary {            background: linear-gradient(135deg, var(--gold-accent), #b45309);            color: white;            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);        }        .btn-primary:hover {            transform: translateY(-3px);            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6);        }        .btn-secondary {            background: rgba(255, 255, 255, 0.1);            color: white;            border: 1px solid rgba(255, 255, 255, 0.2);            backdrop-filter: blur(5px);        }        .btn-secondary:hover {            background: rgba(255, 255, 255, 0.2);            transform: translateY(-3px);        }        .book-visual-container {            display: flex;            justify-content: center;            align-items: center;            perspective: 1000px;            border: 1px solid #e2e8f0;        }        .book-card-3d {            width: 280px;            height: 390px;            background: linear-gradient(145deg, #1e3a8a, #0f172a);            border-radius: 16px;            border: 2px solid rgba(217, 119, 6, 0.5);            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);            padding: 30px;            display: flex;            flex-direction: column;            justify-content: space-between;            text-align: center;            position: relative;            transform: rotateY(-10deg) rotateX(5deg);            transition: transform 0.5s ease;        .card-hover {            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);        }        .book-card-3d:hover {            transform: rotateY(0deg) rotateX(0deg) scale(1.03);        .card-hover:hover {            transform: translateY(-8px);            box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.12);        }        .book-card-3d::before {            content: '';            position: absolute;            top: 0;            right: 0;            bottom: 0;            width: 12px;            background: rgba(255, 255, 255, 0.1);            border-top-right-radius: 16px;            border-bottom-right-radius: 16px;        .dropzone-active {            border-color: #d97706 !important;            background-color: #fef3c7 !important;        }        .section {            padding: 80px 24px;            max-width: 1200px;            margin: 0 auto;        /* Modal Overlay Transition */        .modal-overlay {            transition: opacity 0.3s ease-in-out;        }        .section-header {            text-align: center;            margin-bottom: 50px;        .modal-body {            transition: transform 0.3s ease-in-out;        }    </style></head><body class="min-h-screen flex flex-col justify-between">    <!-- Navbar Header -->    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">            <a href="#" class="flex items-center gap-3 group">                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-gold-500 to-teal-600 flex items-center justify-center text-white text-xl font-extrabold shadow-lg group-hover:scale-105 transition-transform">                    <i class="fa-solid fa-book-bookmark"></i>                </div>                <div>                    <h1 class="text-lg font-bold leading-tight">المكتبة الرقمية الإثرائية</h1>                    <p class="text-xs text-gold-500 font-medium">لكتاب نظريات التعلم | د. رباب الشامي</p>                </div>            </a>                        <nav class="hidden md:flex items-center gap-6 font-semibold text-sm">                <a href="#hub-sections" class="hover:text-gold-500 transition-colors">محتويات المكتبة</a>                <a href="#thoughts-section" class="hover:text-gold-500 transition-colors">مساحة الخواطر والذات</a>                <button onclick="scrollToBottom()" class="bg-gold-500 hover:bg-gold-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-transform hover:scale-105">                    <i class="fa-solid fa-heart-pulse ml-1"></i> الكلمات والخواطر                </button>            </nav>        </div>    </header>        .section-subtitle {            color: var(--gold-accent);            font-weight: 700;            font-size: 1rem;            letter-spacing: 1px;            margin-bottom: 8px;            display: block;        }    <!-- Hero Banner -->    <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:16px_16px]"></div>        <div class="max-w-5xl mx-auto text-center relative z-10">            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/20 text-gold-100 border border-gold-500/30 text-xs sm:text-sm font-bold mb-6">                <i class="fa-solid fa-award text-gold-500"></i> المصدر المعرفي الشامل والمعتمد            </span>            <h1 class="text-3xl sm:text-5xl font-black leading-tight sm:leading-snug mb-6">                المكتبة الرقمية الإثرائية والتفاعلية<br>                <span class="text-gold-500">لكتاب نظريات التعلم</span>            </h1>            <p class="text-lg sm:text-xl text-slate-300 font-medium max-w-3xl mx-auto mb-8 leading-relaxed">                مرحباً بكم في الفضاء المعرفي المخصص لبحوث وتطبيقات ومرفقات كتاب "نظريات التعلم". إعداد وتأليف <strong class="text-white font-bold">الدكتورة رباب الشامي</strong>.            </p>            <div class="flex flex-wrap justify-center gap-4">                <a href="#hub-sections" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-gold-500/30 transition-all hover:-translate-y-0.5 flex items-center gap-2">                    <i class="fa-solid fa-layer-group"></i> استعراض أقسام المكتبة                </a>                <a href="#thoughts-section" class="bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-600 font-bold px-8 py-3.5 rounded-xl backdrop-blur transition-all hover:-translate-y-0.5 flex items-center gap-2">                    <i class="fa-solid fa-feather-pointed"></i> مساحة الخواطر والمعرفة                </a>            </div>        </div>    </section>        .section-title {            font-size: 2.3rem;            color: var(--primary-navy);            font-weight: 800;        }    <!-- Main Interactive Sections Grid (The 6 Items) -->    <main id="hub-sections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">                <div class="text-center mb-12">            <h2 class="text-3xl font-extrabold text-slate-900 mb-3">محتويات المكتبة التفاعلية</h2>            <p class="text-slate-600 font-medium">اضغط على الأزرار التفاعلية أدناه لفتح الصفحة الخاصة بكل قسم واستعراض المحتوى والتحميل</p>        </div>        .about-card {            background: var(--card-bg);            border-radius: var(--radius-lg);            padding: 40px;            box-shadow: var(--shadow-subtle);            border: 1px solid var(--border-color);            display: grid;            grid-template-columns: 1fr 1fr;            gap: 40px;            align-items: center;        }        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">        .about-content h3 {            font-size: 1.8rem;            color: var(--accent-blue);            margin-bottom: 15px;        }            <!-- Item 1: كتاب نظريات التعلم -->            <!-- لتغيير أو تعديل عنوان هذا القسم، يمكنك تعديل النص بين العلامات بسهولة -->            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-gold-500">                <div>                    <div class="w-14 h-14 rounded-2xl bg-gold-100 text-gold-600 flex items-center justify-center text-2xl font-bold mb-5">                        <i class="fa-solid fa-book"></i>                    </div>                    <span class="text-xs font-bold text-gold-600 tracking-wider">القسم الأول</span>                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">١- كتاب نظريات التعلم</h3>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        صفحة الكتاب الرئيسي تحتوي على غلاف الكتاب، والنبذة الشاملة، وخيار استعراض وتنزيل أو إفلات ملف الكتاب PDF.                    </p>                </div>                <button onclick="openModal('modal-book')" class="w-full bg-slate-900 hover:bg-gold-500 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">                    <i class="fa-solid fa-folder-open"></i> فتح صفحة الكتاب                </button>            </div>        .about-content p {            color: var(--text-muted);            font-size: 1.1rem;            margin-bottom: 20px;        }            <!-- Item 2: الفيديو التعليمي الملحق -->            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-red-500">                <div>                    <div class="w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl font-bold mb-5">                        <i class="fa-solid fa-video"></i>                    </div>                    <span class="text-xs font-bold text-red-600 tracking-wider">القسم الثاني</span>                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٢- الفيديو التعليمي الملحق</h3>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        الشرح الشارح والشارح البصري الملحق بالمتعة والتطبيقات. يتضمن مشغل فيديو ونبذة عن المحتوى.                    </p>                </div>                <button onclick="openModal('modal-video')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">                    <i class="fa-solid fa-circle-play"></i> فتح صفحة الفيديو                </button>            </div>        .features-list {            list-style: none;        }            <!-- Item 3: بودكاست ملخص -->            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-amber-500">                <div>                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold mb-5">                        <i class="fa-solid fa-podcast"></i>                    </div>                    <span class="text-xs font-bold text-amber-600 tracking-wider">القسم الثالث</span>                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٣- البودكاست الصوتي والمرئي</h3>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        ملخص ممتع وصوتي لمحتوى كتاب نظريات التعلم، مع نبذة مختصرة ومشغل صوتي وفيديو بودكاست مباشر.                    </p>                </div>                <button onclick="openModal('modal-podcast')" class="w-full bg-slate-900 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">                    <i class="fa-solid fa-headphones"></i> فتح صفحة البودكاست                </button>            </div>        .features-list li {            display: flex;            align-items: center;            gap: 12px;            margin-bottom: 12px;            font-weight: 600;            color: var(--text-main);        }            <!-- Item 4: العرض التقديمي -->            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-orange-500">                <div>                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl font-bold mb-5">                        <i class="fa-solid fa-file-powerpoint"></i>                    </div>                    <span class="text-xs font-bold text-orange-600 tracking-wider">القسم الرابع</span>                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٤- العرض التقديمي (PowerPoint)</h3>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        شرائح العرض التفاعلية المخصصة للشرح والمحاضرات، متاحة للعرض المباشر والتحميل السريع.                    </p>                </div>                <button onclick="openModal('modal-ppt')" class="w-full bg-slate-900 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">                    <i class="fa-solid fa-desktop"></i> فتح العرض التقديمي                </button>            </div>        .features-list i {            color: var(--accent-teal);            font-size: 1.2rem;        }            <!-- Item 5: الخرائط والصور والملحقات -->            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-teal-600">                <div>                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-2xl font-bold mb-5">                        <i class="fa-solid fa-map-location-dot"></i>                    </div>                    <span class="text-xs font-bold text-teal-700 tracking-wider">القسم الخامس</span>                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٥- الخرائط والملحقات الإثرائية</h3>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        مجموعة الخرائط الذهنية، الصور الشارحة، وأوراق العمل بصيغة PDF للتحميل والمعاينة المباشرة.                    </p>                </div>                <button onclick="openModal('modal-maps')" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">                    <i class="fa-solid fa-map"></i> فتح الخرائط والملحقات                </button>            </div>        .materials-grid {            display: grid;            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));            gap: 30px;        }            <!-- Item 6: لعبة التحدي -->            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-purple-600">                <div>                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl font-bold mb-5">                        <i class="fa-solid fa-gamepad"></i>                    </div>                    <span class="text-xs font-bold text-purple-600 tracking-wider">القسم السادس</span>                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٦- لعبة التحدي (اختبر فهمك)</h3>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        اللعبة التفاعلية الإلكترونية لتطبيق المفاهيم واختبار المعلومات بأسلوب شيق وممتع.                    </p>                </div>                <button onclick="openModal('modal-game')" class="w-full bg-slate-900 hover:bg-purple-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">                    <i class="fa-solid fa-trophy"></i> دخول لعبة التحدي                </button>            </div>        .material-card {            background: var(--card-bg);            border-radius: var(--radius-lg);            padding: 30px;            box-shadow: var(--shadow-subtle);            border: 1px solid var(--border-color);            transition: all 0.3s ease;            display: flex;            flex-direction: column;            justify-content: space-between;        }        </div>    </main>    <!-- Section 7: Free Reflections & Thoughts Space (مساحة الخواطر والكلمات) -->    <section id="thoughts-section" class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative">        <div class="max-w-6xl mx-auto">            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-800 pb-8">                <div>                    <span class="text-gold-500 font-bold text-sm">مساحة حرّة مخصصة</span>                    <h2 class="text-3xl font-black mt-1">خواطر وكلمات في المعرفة والذات والصحة النفسية</h2>                    <p class="text-slate-400 text-sm mt-2">من كتابات وإلهامات الدكتورة رباب الشامي - يمكنكِ إضافة خواطر جديدة مباشرة وحفظها هنا</p>                </div>                <button onclick="toggleThoughtInput()" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-3 rounded-xl transition-transform hover:scale-105 flex items-center gap-2 self-start md:self-auto shadow-lg">                    <i class="fa-solid fa-plus-circle"></i> إضافة خاطرة / كلمة جديدة                </button>            </div>        .material-card:hover {            transform: translateY(-8px);            box-shadow: var(--shadow-hover);            border-color: rgba(30, 58, 138, 0.2);        }            <!-- Interactive Add Thought Form (Hidden by default, shown on click) -->            <div id="thought-form-container" class="hidden mb-10 bg-slate-800 p-6 rounded-2xl border border-slate-700">                <h3 class="text-lg font-bold text-gold-500 mb-4"><i class="fa-solid fa-pen-nib ml-2"></i> كِتابة خاطرة جديدة:</h3>                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">                    <input type="text" id="thought-title" placeholder="عنوان الخاطرة أو الكلمة..." class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500">                    <select id="thought-tag" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-300 focus:outline-none focus:border-gold-500">                        <option value="عن المعرفة والتعلم">🧠 عن المعرفة والتعلم</option>                        <option value="عن الصحة النفسية">🌿 عن الصحة النفسية</option>                        <option value="عن الذات والحياة">✨ عن الذات والحياة</option>                    </select>                </div>                <textarea id="thought-content" rows="4" placeholder="اكتبي نص الخاطرة أو الفكرة هنا..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 mb-4"></textarea>                <div class="flex justify-end gap-3">                    <button onclick="toggleThoughtInput()" class="px-5 py-2 rounded-xl text-slate-400 hover:text-white text-sm font-semibold">إلغاء</button>                    <button onclick="saveNewThought()" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-2 rounded-xl text-sm transition-colors">نشر الخاطرة</button>                </div>            </div>        .material-icon {            width: 60px;            height: 60px;            border-radius: 14px;            display: flex;            align-items: center;            justify-content: center;            font-size: 1.6rem;            margin-bottom: 20px;        }            <!-- Dynamic Thoughts Grid -->            <div id="thoughts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">                <!-- Example Default Cards -->                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">                    <div>                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 mb-4">🧠 عن المعرفة والتعلم</span>                        <h3 class="text-lg font-bold text-white mb-2">جوهر التعلم الحقيقي</h3>                        <p class="text-slate-300 text-sm leading-relaxed">                            "التعلم ليس مجرد تحصيل للمعلومات، بل هو رحلة إعادة اكتشاف للذات وللكون، وتحويل المعرفة النظرية إلى أثر طيب في السلوك والفكر."                        </p>                    </div>                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">                        <span>د. رباب الشامي</span>                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>                    </div>                </div>        .icon-game { background: #e0f2fe; color: #0284c7; }        .icon-podcast { background: #fef3c7; color: #d97706; }        .icon-video { background: #fee2e2; color: #dc2626; }        .icon-ppt { background: #ffedd5; color: #ea580c; }        .icon-pdf { background: #dcfce7; color: #16a34a; }        .material-title {            font-size: 1.4rem;            font-weight: 700;            margin-bottom: 10px;            color: var(--primary-navy);        }                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">                    <div>                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-500/10 text-teal-400 mb-4">🌿 عن الصحة النفسية</span>                        <h3 class="text-lg font-bold text-white mb-2">سلام النفس والمعلم</h3>                        <p class="text-slate-300 text-sm leading-relaxed">                            "إن الصحة النفسية للمعلم والمتعلم هي الركيزة الأولى لأي عملية تعليمية ناجحة، فالنفس المطمئنة هي الأقدر على العطاء والاستيعاب."                        </p>                    </div>                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">                        <span>د. رباب الشامي</span>                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>                    </div>                </div>        .material-desc {            color: var(--text-muted);            font-size: 0.98rem;            margin-bottom: 25px;            flex-grow: 1;        }                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">                    <div>                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-400 mb-4">✨ عن الذات والحياة</span>                        <h3 class="text-lg font-bold text-white mb-2">خطوات نحو الأثر</h3>                        <p class="text-slate-300 text-sm leading-relaxed">                            "كل فكرة نغرسها بصدق اليوم، تثمر غداً في عقول طلابنا وباحثينا. الاستثمار في العقول هو الاستثمار الخالد."                        </p>                    </div>                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">                        <span>د. رباب الشامي</span>                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>                    </div>                </div>            </div>        </div>    </section>        .audio-player-box {            background: #f1f5f9;            padding: 12px;            border-radius: 10px;            margin-bottom: 15px;        }    <!-- Footer -->    <footer class="bg-slate-950 text-slate-400 text-center py-8 px-4 text-sm border-t border-slate-800">        <p>جميع الحقوق محفوظة © 2026 - المكتبة الرقمية لكتاب نظريات التعلم | د. رباب الشامي</p>    </footer>        audio {            width: 100%;            height: 40px;        }    <!-- ==================== MODALS / SUB-PAGES SYSTEM ==================== -->        .cta-banner {            background: linear-gradient(135deg, var(--accent-blue), var(--primary-navy));            border-radius: var(--radius-lg);            padding: 50px 40px;            color: white;            text-align: center;            margin-top: 40px;        }    <!-- MODAL 1: كتاب نظريات التعلم -->    <div id="modal-book" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">                <div class="flex items-center gap-3">                    <i class="fa-solid fa-book text-gold-500 text-2xl"></i>                    <h3 class="text-xl font-bold">١- كتاب نظريات التعلم وتطبيقاتها التربوية</h3>                </div>                <button onclick="closeModal('modal-book')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>            </div>                        <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8">                <!-- Book Cover Preview -->                <div class="md:col-span-5 flex flex-col items-center">                    <div class="w-full max-w-[240px] h-[340px] bg-gradient-to-br from-slate-900 to-teal-900 rounded-2xl p-6 text-white text-center flex flex-col justify-between border-2 border-gold-500 shadow-xl relative">                        <span class="text-xs text-gold-500 font-bold">دليل المعلم والباحث</span>                        <div>                            <h4 class="text-2xl font-black mb-2">نظريات التعلم</h4>                            <p class="text-xs text-slate-300">تأصيل وتطبيق تربوي</p>                        </div>                        <div class="border-t border-slate-700 pt-3">                            <p class="text-sm font-bold text-gold-100">د. رباب الشامي</p>                        </div>                    </div>                </div>        .cta-banner h2 {            font-size: 2.2rem;            margin-bottom: 15px;        }                <!-- Book Details and Dropzone -->                <div class="md:col-span-7 flex flex-col justify-between">                    <div>                        <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-align-right text-gold-500 ml-2"></i> نبذة عن الكتاب:</h4>                        <p class="text-slate-600 text-sm leading-relaxed mb-6">                            يقدم هذا الكتاب صياغة علمية ميسرة ورصينة لأهم نظريات التعلم وتطبيقاتها العملية في الميدان التربوي. يهدف لإعانة المعلمين والباحثين على فهم واستيعاب آليات التعلم وتوجيهها بفاعلية.                        </p>        .cta-banner p {            color: #cbd5e1;            font-size: 1.1rem;            margin-bottom: 30px;            max-width: 600px;            margin-left: auto;            margin-right: auto;        }                        <!-- Interactive File Dropzone for Uploading/Replacing Book PDF -->                        <div class="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center hover:border-gold-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'book-file-info')">                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-gold-500 mb-2"></i>                            <p class="text-sm font-bold text-slate-700 mb-1">اسحب ملف الكتاب (PDF) وأسقطه هنا أو اضغط للرفع</p>                            <p class="text-xs text-slate-400">يمكنك رفع نسختك لربطها وتنزيلها لاحقاً</p>                            <input type="file" class="hidden" id="book-input" onchange="handleFileSelect(event, 'book-file-info')">                            <div id="book-file-info" class="mt-3 text-xs font-bold text-teal-700"></div>                        </div>                    </div>        footer {            background: var(--primary-navy);            color: #94a3b8;            padding: 40px 24px 20px;            border-top: 1px solid rgba(255, 255, 255, 0.1);            text-align: center;        }                    <div class="flex flex-wrap gap-3 mt-6">                        <a href="#" download class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">                            <i class="fa-solid fa-download"></i> تنزيل ملف الكتاب (PDF)                        </a>                        <button onclick="closeModal('modal-book')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm">إغلاق الصفحة</button>                    </div>                </div>            </div>        </div>    </div>    <!-- MODAL 2: الفيديو التعليمي -->    <div id="modal-video" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">                <div class="flex items-center gap-3">                    <i class="fa-solid fa-video text-red-500 text-2xl"></i>                    <h3 class="text-xl font-bold">٢- الفيديو التعليمي الملحق</h3>                </div>                <button onclick="closeModal('modal-video')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>            </div>                        <div class="p-6 sm:p-8 space-y-6">                <div>                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-circle-info text-red-500 ml-2"></i> نبذة عن الفيديو الشارح:</h4>                    <p class="text-slate-600 text-sm leading-relaxed">                        عُرض بأسلوب بصري وممتع يلخص محاور الكتاب ويشرح التطبيقات العملية لنظريات التعلم داخل القاعة الدراسية.                    </p>                </div>        footer p {            font-size: 0.95rem;        }                <!-- Embedded Video Player Placeholder / Frame -->                <div class="aspect-video bg-slate-900 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center relative group">                    <video controls class="w-full h-full object-cover">                        <source src="video.mp4" type="video/mp4">                        متصفحك لا يدعم مشغل الفيديو مباشر.                    </video>                </div>        @media (max-width: 900px) {            .hero-container, .about-card {                grid-template-columns: 1fr;                text-align: center;            }                <!-- Dropzone for Video -->                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-red-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'video-file-info')">                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-upload ml-1"></i> تحميل/إفلات فيديو جديد للربط داخل الصفحة</p>                    <div id="video-file-info" class="mt-1 text-xs text-teal-700"></div>                </div>            .hero-title {                font-size: 2.3rem;            }                <div class="flex justify-between items-center pt-4 border-t border-slate-200">                    <a href="https://youtube.com" target="_blank" class="text-red-600 font-bold text-sm hover:underline flex items-center gap-2">                        <i class="fa-brands fa-youtube text-lg"></i> مشاهدة مباشرة عبر يوتيوب                    </a>                    <button onclick="closeModal('modal-video')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>                </div>            </div>        </div>    </div>    <!-- MODAL 3: البودكاست -->    <div id="modal-podcast" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">                <div class="flex items-center gap-3">                    <i class="fa-solid fa-podcast text-amber-500 text-2xl"></i>                    <h3 class="text-xl font-bold">٣- البودكاست الصوتي والمرئي</h3>                </div>                <button onclick="closeModal('modal-podcast')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>            </div>                        <div class="p-6 sm:p-8 space-y-6">                <div>                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-align-right text-amber-500 ml-2"></i> نبذة عن حلقة البودكاست:</h4>                    <p class="text-slate-600 text-sm leading-relaxed">                        حلقة إثرائية مميزة تناقش وتلخص زبدة كتاب نظريات التعلم، مصممة للاستماع السريع أثناء التنقل أو الاستمتاع بمشاهدتها مرئياً.                    </p>                </div>            .hero-buttons {                justify-content: center;            }                <!-- Audio Player -->                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm">                    <h5 class="text-sm font-bold text-amber-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-headphones text-amber-600"></i> البودكاست الصوتي:</h5>                    <audio controls class="w-full h-10">                        <source src="podcast.mp3" type="audio/mpeg">                        المتصفح لا يدعم مشغل الصوت.                    </audio>                </div>            .book-card-3d {                transform: none;                margin: 0 auto;            }                <!-- Video Podcast -->                <div class="bg-slate-900 rounded-2xl p-4 text-center text-white">                    <h5 class="text-sm font-bold text-amber-400 mb-2 flex items-center justify-center gap-2"><i class="fa-solid fa-tv"></i> البودكاست المرئي:</h5>                    <div class="aspect-video bg-slate-800 rounded-xl flex items-center justify-center">                        <p class="text-slate-400 text-xs">مشغل البودكاست المرئي جاهز للعرض مباشرة</p>                    </div>                </div>            .nav-links {                display: none;            }        }    </style></head><body>                <!-- Dropzone for Podcast -->                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-amber-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'podcast-file-info')">                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> تحميل أو إفلات تسجيل بودكاست صوتي/مرئي جديد</p>                    <div id="podcast-file-info" class="mt-1 text-xs text-teal-700"></div>                </div>    <header>        <div class="nav-container">            <a href="#" class="logo">                <div class="logo-icon"><i class="fa-solid fa-book-open"></i></div>                <span>نظريات التعلم</span>            </a>            <ul class="nav-links">                <li><a href="#about">عن الكتاب</a></li>                <li><a href="#materials">المواد الإثرائية</a></li>                <li><a href="#preview">معاينة الكتاب</a></li>            </ul>                <div class="flex justify-end gap-3 pt-2">                    <button onclick="closeModal('modal-podcast')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>                </div>            </div>        </div>    </header>    <section class="hero">        <div class="hero-container">            <div>                <span class="hero-badge"><i class="fa-solid fa-star"></i> المصدر المعرفي الشامل</span>                <h1 class="hero-title">كتاب <span>نظريات التعلم</span> وتطبيقاتها التربوية</h1>                <p class="hero-description">                    رحلة علمية ميسرة تبحر في أعمق مفاهيم وتطبيقات نظريات التعلم الحديثة والكلاسيكية، مدعومة بمواد إثرائية تفاعلية، بودكاست، وأنشطة تطبيقية.                </p>                <div class="hero-buttons">                    <a href="#materials" class="btn btn-primary">                        <i class="fa-solid fa-layer-group"></i> استكشف المواد الإثرائية                    </a>                    <a href="play.html" class="btn btn-secondary">                        <i class="fa-solid fa-gamepad"></i> العب لعبة نظريات التعلم                    </a>    </div>    <!-- MODAL 4: العرض التقديمي (PowerPoint) -->    <div id="modal-ppt" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">                <div class="flex items-center gap-3">                    <i class="fa-solid fa-file-powerpoint text-orange-500 text-2xl"></i>                    <h3 class="text-xl font-bold">٤- العرض التقديمي (PowerPoint)</h3>                </div>                <button onclick="closeModal('modal-ppt')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>            </div>            <div class="book-visual-container">                <div class="book-card-3d">                    <div style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">دليل المعلم والباحث</div>                    <div>                        <h2 style="font-size: 1.8rem; color: white; margin-top: 10px;">نظريات التعلم</h2>                        <p style="font-size: 0.85rem; color: #cbd5e1; margin-top: 5px;">تأصيل وتطبيق</p>                    </div>                    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">                        <p style="font-size: 0.95rem; font-weight: 700; color: #fef3c7;">د. رباب الشامي</p>                    </div>            <div class="p-6 sm:p-8 space-y-6">                <div>                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-desktop text-orange-500 ml-2"></i> عن ملف العرض التقديمي:</h4>                    <p class="text-slate-600 text-sm leading-relaxed">                        شرائح عرض جاهزة ومصممة بأسلوب احترافي مخصص للمعلمين والأكاديميين لاستخدامها المباشر في الشرح والمحاضرات.                    </p>                </div>            </div>        </div>    </section>    <section id="about" class="section">        <div class="section-header">            <span class="section-subtitle">بطاقة تعريفية</span>            <h2 class="section-title">عن هذا الكتاب</h2>        </div>                <div class="border border-slate-200 rounded-2xl p-8 bg-slate-50 text-center">                    <i class="fa-solid fa-file-powerpoint text-6xl text-orange-500 mb-4"></i>                    <h5 class="text-base font-bold text-slate-800">عرض شرائح كتاب نظريات التعلم.pptx</h5>                    <p class="text-xs text-slate-500 mt-1">جاهز للمعاينة والتحميل المباشر</p>                </div>        <div class="about-card">            <div class="about-content">                <h3>رؤية تعلُّمية معاصرة</h3>                <p>                    يسعى هذا الكتاب إلى تقديم صياغة سلسة ورصينة لأهم نظريات التعلم التي أثرت الميدان التربوي والتعليمي. يهدف إلى ربط النظرية بالتطبيق العملي داخل القاعة الدراسية لمساعدة المعلم والباحث على فهم كيفية حدوث التعلم وتوجيهه بفاعلية.                </p>                <ul class="features-list">                    <li><i class="fa-solid fa-circle-check"></i> تغطية شاملة للنظريات السلوكية والمعرفية والبنائية.</li>                    <li><i class="fa-solid fa-circle-check"></i> تطبيقات تربوية مباشرة لكل نظرية.</li>                    <li><i class="fa-solid fa-circle-check"></i> ملحقات تفاعلية وسائطية داعمة للقراءة.</li>                </ul>            </div>            <div style="background: var(--bg-light); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color);">                <h4 style="margin-bottom: 15px; color: var(--primary-navy);"><i class="fa-solid fa-user-graduate"></i> الفئات المستهدفة:</h4>                <ul class="features-list">                    <li><i class="fa-solid fa-check"></i> المعلمون والمعلمات بكافة المراحل.</li>                    <li><i class="fa-solid fa-check"></i> طلاب كلية التربية والعلوم الإنسانية.</li>                    <li><i class="fa-solid fa-check"></i> الباحثون والمصممون التعليميون.</li>                </ul>                <!-- Dropzone for PPT -->                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-orange-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'ppt-file-info')">                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-file-arrow-up ml-1"></i> افلت أو حمل ملف عرض تقديم جديد (PPTX)</p>                    <div id="ppt-file-info" class="mt-1 text-xs text-teal-700"></div>                </div>                <div class="flex justify-between items-center pt-2">                    <a href="#" download class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">                        <i class="fa-solid fa-download"></i> تحميل العرض (PPTX)                    </a>                    <button onclick="closeModal('modal-ppt')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm">إغلاق</button>                </div>            </div>        </div>    </section>    <section id="materials" class="section" style="background-color: #f1f5f9; max-width: 100%; padding: 80px 24px;">        <div style="max-width: 1200px; margin: 0 auto;">            <div class="section-header">                <span class="section-subtitle">حقيبة الملحقات Digital Hub</span>                <h2 class="section-title">المواد الإثرائية التفاعلية</h2>    </div>    <!-- MODAL 5: الخرائط والملحقات -->    <div id="modal-maps" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">                <div class="flex items-center gap-3">                    <i class="fa-solid fa-map-location-dot text-teal-500 text-2xl"></i>                    <h3 class="text-xl font-bold">٥- الخرائط والصور والملحقات الإثرائية</h3>                </div>                <button onclick="closeModal('modal-maps')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>            </div>            <div class="materials-grid">                                <div class="material-card">                    <div>                        <div class="material-icon icon-game">                            <i class="fa-solid fa-gamepad"></i>                        </div>                        <h3 class="material-title">اللعبة التفاعلية</h3>                        <p class="material-desc">                            لعبة "نظريات التعلم" الإلكترونية لاختبار معلوماتك وتثبيت المفاهيم بطريقة ممتعة وشيقة.                        </p>                    </div>                    <a href="play.html" class="btn btn-primary" style="text-align: center; justify-content: center;">                        <i class="fa-solid fa-play"></i> ابدأ اللعب الآن                    </a>                        <div class="p-6 sm:p-8 space-y-6">                <div>                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-folder-open text-teal-600 ml-2"></i> حقيبة الملحقات والخرائط الذهنية:</h4>                    <p class="text-slate-600 text-sm leading-relaxed">                        تتضمن هذه الصفحة ملفات PDF، صور توضيحية عالية الجودة، وأوراق عمل إثرائية داعمة لكتاب نظريات التعلم.                    </p>                </div>                <div class="material-card">                    <div>                        <div class="material-icon icon-podcast">                            <i class="fa-solid fa-podcast"></i>                        </div>                        <h3 class="material-title">البودكاست الصوتي</h3>                        <p class="material-desc">                            حلقة إثرائية مميزة (25 دقيقة) تناقش أهم محاور الكتاب وتسلط الضوء على تطبيقاتها.                        </p>                        <div class="audio-player-box">                            <audio controls>                                <source src="podcast.mp3" type="audio/mpeg">                                المتصفح لا يدعم مشغل الصوت.                            </audio>                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">                    <div class="border border-slate-200 rounded-xl p-4 flex items-center gap-4 bg-slate-50">                        <i class="fa-solid fa-file-pdf text-3xl text-red-500"></i>                        <div>                            <h5 class="text-sm font-bold text-slate-800">خرائط المفاهيم الذهنية.pdf</h5>                            <a href="#" download class="text-xs text-teal-600 hover:underline font-semibold">استعراض وتحميل</a>                        </div>                    </div>                    <a href="podcast.mp3" download class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">                        <i class="fa-solid fa-headphones"></i> استماع مباشر                    </a>                </div>                <div class="material-card">                    <div>                        <div class="material-icon icon-video">                            <i class="fa-solid fa-circle-play"></i>                    <div class="border border-slate-200 rounded-xl p-4 flex items-center gap-4 bg-slate-50">                        <i class="fa-solid fa-file-image text-3xl text-blue-500"></i>                        <div>                            <h5 class="text-sm font-bold text-slate-800">انفوجرافيك النظرية البنائية.png</h5>                            <a href="#" download class="text-xs text-teal-600 hover:underline font-semibold">استعراض وتحميل</a>                        </div>                        <h3 class="material-title">الشرح المرئي</h3>                        <p class="material-desc">                            مقطع فيديو شارح ومبسط يعرض الأفكار الأساسية للكتاب بأسلوب بصري ممتع.                        </p>                    </div>                    <a href="https://youtube.com" target="_blank" class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">                        <i class="fa-brands fa-youtube" style="color: red;"></i> مشاهدة عبر YouTube                    </a>                </div>                <div class="material-card">                    <div>                        <div class="material-icon icon-ppt">                            <i class="fa-solid fa-file-powerpoint"></i>                        </div>                        <h3 class="material-title">العرض التقديمي</h3>                        <p class="material-desc">                            شرائح عرض جاهزة (PowerPoint) مخصصة للمعلمين والأكاديميين لاستخدامها في الشرح.                        </p>                    </div>                    <a href="presentation.pptx" download class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">                        <i class="fa-solid fa-download"></i> تحميل العرض (PPTX)                    </a>                <!-- Dropzone for PDFs/Images -->                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-teal-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'maps-file-info')">                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> اسحب وأسقط أي ملف PDF أو صورة لإضافتها للملحقات</p>                    <div id="maps-file-info" class="mt-1 text-xs text-teal-700"></div>                </div>                <div class="material-card">                    <div>                        <div class="material-icon icon-pdf">                            <i class="fa-solid fa-file-pdf"></i>                        </div>                        <h3 class="material-title">أوراق العمل والأنشطة</h3>                        <p class="material-desc">                            ملفات PDF تحتوي على تمارين، خرائط مفاهيمية، وأوراق عمل تطبيقية للقرّاء.                        </p>                <div class="flex justify-end pt-2">                    <button onclick="closeModal('modal-maps')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>                </div>            </div>        </div>    </div>    <!-- MODAL 6: لعبة التحدي -->    <div id="modal-game" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">                <div class="flex items-center gap-3">                    <i class="fa-solid fa-gamepad text-purple-500 text-2xl"></i>                    <h3 class="text-xl font-bold">٦- لعبة التحدي (اختبر فهمك)</h3>                </div>                <button onclick="closeModal('modal-game')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>            </div>                        <div class="p-6 sm:p-8 space-y-6 text-center">                <div class="max-w-2xl mx-auto">                    <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-4">                        <i class="fa-solid fa-trophy"></i>                    </div>                    <a href="worksheets.pdf" target="_blank" class="btn btn-secondary" style="color: var(--primary-navy); border-color: var(--border-color); justify-content: center;">                        <i class="fa-solid fa-eye"></i> استعراض الملف (PDF)                    <h4 class="text-2xl font-black text-slate-900 mb-2">طريقة وطبيعة اللعبة</h4>                    <p class="text-slate-600 text-sm leading-relaxed mb-6">                        لعبة إلكترونية تفاعلية تحتوي على أسئلة ومواقف تربوية ممتعة تهدف لقياس وتثبيت المفاهيم التي وردت في كتاب نظريات التعلم بأسلوب التحدي والمكافآت.                    </p>                    <a href="play.html" class="inline-flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg px-10 py-4 rounded-2xl shadow-xl transition-transform hover:scale-105 mb-4">                        <i class="fa-solid fa-play"></i> انقر هنا لفتح وبدء اللعبة المباشرة                    </a>                </div>                <div class="pt-4 border-t border-slate-200 flex justify-center">                    <button onclick="closeModal('modal-game')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-2 rounded-xl text-sm">العودة للمكتبة</button>                </div>            </div>        </div>    </section>    </div>    <section id="preview" class="section">        <div class="cta-banner">            <h2>هل ترغب في اقتناء النسخة الورقية أو معاينتها؟</h2>            <p>يمكنك الاطلاع على عينة مجانية من الفصل الأول أو طلب النسخة الأصلية فور توفرها بالمكتبات.</p>            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">                <a href="#" class="btn btn-primary"><i class="fa-solid fa-shopping-cart"></i> اطلب الكتاب الآن</a>                <a href="#" class="btn btn-secondary"><i class="fa-solid fa-book-open"></i> قراءة عينة مجانية</a>            </div>        </div>    </section>    <!-- JavaScript Interactive Logic -->    <script>        // Modal Handlers        function openModal(id) {            document.getElementById(id).classList.remove('hidden');            document.body.style.overflow = 'hidden';        }    <footer>        <p>جميع الحقوق محفوظة © 2026 - كتاب نظريات التعلم | د. رباب الشامي</p>    </footer>        function closeModal(id) {            document.getElementById(id).classList.add('hidden');            document.body.style.overflow = 'auto';        }        function scrollToBottom() {            document.getElementById('thoughts-section').scrollIntoView({ behavior: 'smooth' });        }        // Toggle Thought Form        function toggleThoughtInput() {            const form = document.getElementById('thought-form-container');            form.classList.toggle('hidden');        }        // Save New Thought to Screen & LocalStorage        function saveNewThought() {            const title = document.getElementById('thought-title').value.trim();            const tag = document.getElementById('thought-tag').value;            const content = document.getElementById('thought-content').value.trim();            if (!title || !content) {                alert('لطفاً اكتبي العنوان ونص الخاطرة قبل النشر.');                return;            }            const thoughtsGrid = document.getElementById('thoughts-grid');                        const card = document.createElement('div');            card.className = "bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between";            card.innerHTML = `                <div>                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gold-500/10 text-gold-400 mb-4">${tag}</span>                    <h3 class="text-lg font-bold text-white mb-2">${title}</h3>                    <p class="text-slate-300 text-sm leading-relaxed">${content}</p>                </div>                <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">                    <span>د. رباب الشامي</span>                    <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>                </div>            `;            thoughtsGrid.prepend(card);            // Reset inputs            document.getElementById('thought-title').value = '';            document.getElementById('thought-content').value = '';            toggleThoughtInput();        }        // File Drag and Drop Handlers        function handleDragOver(e) {            e.preventDefault();            e.currentTarget.classList.add('dropzone-active');        }        function handleDragLeave(e) {            e.currentTarget.classList.remove('dropzone-active');        }        function handleDrop(e, outputId) {            e.preventDefault();            e.currentTarget.classList.remove('dropzone-active');            if (e.dataTransfer.files && e.dataTransfer.files[0]) {                const fileName = e.dataTransfer.files[0].name;                document.getElementById(outputId).innerText = "تم إفلات الملف بنجاح: " + fileName;            }        }        function handleFileSelect(e, outputId) {            if (e.target.files && e.target.files[0]) {                const fileName = e.target.files[0].name;                document.getElementById(outputId).innerText = "تم اختيار الملف: " + fileName;            }        }    </script></body></html>
-0 commit commentsComments0 (0)Lock conversationCommentSubscribeYou're not receiving notifications from this thread
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة الرقمية الإثرائية والتفاعلية لكتاب نظريات التعلم | د. رباب الشامي</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 900: '#0f172a', 800: '#1e293b', 700: '#334155' },
+                        gold: { 500: '#d97706', 600: '#b45309', 100: '#fef3c7' },
+                        teal: { 600: '#0f766e', 700: '#0d9488' }
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+        }
+
+        .dropzone-active {
+            border-color: #d97706 !important;
+            background-color: #fef3c7 !important;
+        }
+
+        /* Modal Overlay Transition */
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-body {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar Header -->
+    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur text-white border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-gold-500 to-teal-600 flex items-center justify-center text-white text-xl font-extrabold shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold leading-tight">المكتبة الرقمية الإثرائية</h1>
+                    <p class="text-xs text-gold-500 font-medium">لكتاب نظريات التعلم | د. رباب الشامي</p>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-6 font-semibold text-sm">
+                <a href="#hub-sections" class="hover:text-gold-500 transition-colors">محتويات المكتبة</a>
+                <a href="#thoughts-section" class="hover:text-gold-500 transition-colors">مساحة الخواطر والذات</a>
+                <button onclick="scrollToBottom()" class="bg-gold-500 hover:bg-gold-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition-transform hover:scale-105">
+                    <i class="fa-solid fa-heart-pulse ml-1"></i> الكلمات والخواطر
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-teal-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/20 text-gold-100 border border-gold-500/30 text-xs sm:text-sm font-bold mb-6">
+                <i class="fa-solid fa-award text-gold-500"></i> المصدر المعرفي الشامل والمعتمد
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black leading-tight sm:leading-snug mb-6">
+                المكتبة الرقمية الإثرائية والتفاعلية<br>
+                <span class="text-gold-500">لكتاب نظريات التعلم</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-300 font-medium max-w-3xl mx-auto mb-8 leading-relaxed">
+                مرحباً بكم في الفضاء المعرفي المخصص لبحوث وتطبيقات ومرفقات كتاب "نظريات التعلم". إعداد وتأليف <strong class="text-white font-bold">الدكتورة رباب الشامي</strong>.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#hub-sections" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-gold-500/30 transition-all hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group"></i> استعراض أقسام المكتبة
+                </a>
+                <a href="#thoughts-section" class="bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-600 font-bold px-8 py-3.5 rounded-xl backdrop-blur transition-all hover:-translate-y-0.5 flex items-center gap-2">
+                    <i class="fa-solid fa-feather-pointed"></i> مساحة الخواطر والمعرفة
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Interactive Sections Grid (The 6 Items) -->
+    <main id="hub-sections" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-3">محتويات المكتبة التفاعلية</h2>
+            <p class="text-slate-600 font-medium">اضغط على الأزرار التفاعلية أدناه لفتح الصفحة الخاصة بكل قسم واستعراض المحتوى والتحميل</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Item 1: كتاب نظريات التعلم -->
+            <!-- لتغيير أو تعديل عنوان هذا القسم، يمكنك تعديل النص بين العلامات بسهولة -->
+            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-gold-500">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-gold-100 text-gold-600 flex items-center justify-center text-2xl font-bold mb-5">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <span class="text-xs font-bold text-gold-600 tracking-wider">القسم الأول</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">١- كتاب نظريات التعلم</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        صفحة الكتاب الرئيسي تحتوي على غلاف الكتاب، والنبذة الشاملة، وخيار استعراض وتنزيل أو إفلات ملف الكتاب PDF.
+                    </p>
+                </div>
+                <button onclick="openModal('modal-book')" class="w-full bg-slate-900 hover:bg-gold-500 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-folder-open"></i> فتح صفحة الكتاب
+                </button>
+            </div>
+
+            <!-- Item 2: الفيديو التعليمي الملحق -->
+            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-red-500">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl font-bold mb-5">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <span class="text-xs font-bold text-red-600 tracking-wider">القسم الثاني</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٢- الفيديو التعليمي الملحق</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        الشرح الشارح والشارح البصري الملحق بالمتعة والتطبيقات. يتضمن مشغل فيديو ونبذة عن المحتوى.
+                    </p>
+                </div>
+                <button onclick="openModal('modal-video')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-circle-play"></i> فتح صفحة الفيديو
+                </button>
+            </div>
+
+            <!-- Item 3: بودكاست ملخص -->
+            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-amber-500">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold mb-5">
+                        <i class="fa-solid fa-podcast"></i>
+                    </div>
+                    <span class="text-xs font-bold text-amber-600 tracking-wider">القسم الثالث</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٣- البودكاست الصوتي والمرئي</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        ملخص ممتع وصوتي لمحتوى كتاب نظريات التعلم، مع نبذة مختصرة ومشغل صوتي وفيديو بودكاست مباشر.
+                    </p>
+                </div>
+                <button onclick="openModal('modal-podcast')" class="w-full bg-slate-900 hover:bg-amber-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-headphones"></i> فتح صفحة البودكاست
+                </button>
+            </div>
+
+            <!-- Item 4: العرض التقديمي -->
+            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-orange-500">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl font-bold mb-5">
+                        <i class="fa-solid fa-file-powerpoint"></i>
+                    </div>
+                    <span class="text-xs font-bold text-orange-600 tracking-wider">القسم الرابع</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٤- العرض التقديمي (PowerPoint)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        شرائح العرض التفاعلية المخصصة للشرح والمحاضرات، متاحة للعرض المباشر والتحميل السريع.
+                    </p>
+                </div>
+                <button onclick="openModal('modal-ppt')" class="w-full bg-slate-900 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-desktop"></i> فتح العرض التقديمي
+                </button>
+            </div>
+
+            <!-- Item 5: الخرائط والصور والملحقات -->
+            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-teal-600">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-2xl font-bold mb-5">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <span class="text-xs font-bold text-teal-700 tracking-wider">القسم الخامس</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٥- الخرائط والملحقات الإثرائية</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        مجموعة الخرائط الذهنية، الصور الشارحة، وأوراق العمل بصيغة PDF للتحميل والمعاينة المباشرة.
+                    </p>
+                </div>
+                <button onclick="openModal('modal-maps')" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-map"></i> فتح الخرائط والملحقات
+                </button>
+            </div>
+
+            <!-- Item 6: لعبة التحدي -->
+            <div class="glass-card rounded-2xl p-6 card-hover flex flex-col justify-between border-t-4 border-purple-600">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl font-bold mb-5">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <span class="text-xs font-bold text-purple-600 tracking-wider">القسم السادس</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3">٦- لعبة التحدي (اختبر فهمك)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        اللعبة التفاعلية الإلكترونية لتطبيق المفاهيم واختبار المعلومات بأسلوب شيق وممتع.
+                    </p>
+                </div>
+                <button onclick="openModal('modal-game')" class="w-full bg-slate-900 hover:bg-purple-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-trophy"></i> دخول لعبة التحدي
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Section 7: Free Reflections & Thoughts Space (مساحة الخواطر والكلمات) -->
+    <section id="thoughts-section" class="bg-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-slate-800 pb-8">
+                <div>
+                    <span class="text-gold-500 font-bold text-sm">مساحة حرّة مخصصة</span>
+                    <h2 class="text-3xl font-black mt-1">خواطر وكلمات في المعرفة والذات والصحة النفسية</h2>
+                    <p class="text-slate-400 text-sm mt-2">من كتابات وإلهامات الدكتورة رباب الشامي - يمكنكِ إضافة خواطر جديدة مباشرة وحفظها هنا</p>
+                </div>
+                <button onclick="toggleThoughtInput()" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-3 rounded-xl transition-transform hover:scale-105 flex items-center gap-2 self-start md:self-auto shadow-lg">
+                    <i class="fa-solid fa-plus-circle"></i> إضافة خاطرة / كلمة جديدة
+                </button>
+            </div>
+
+            <!-- Interactive Add Thought Form (Hidden by default, shown on click) -->
+            <div id="thought-form-container" class="hidden mb-10 bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <h3 class="text-lg font-bold text-gold-500 mb-4"><i class="fa-solid fa-pen-nib ml-2"></i> كِتابة خاطرة جديدة:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <input type="text" id="thought-title" placeholder="عنوان الخاطرة أو الكلمة..." class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500">
+                    <select id="thought-tag" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-300 focus:outline-none focus:border-gold-500">
+                        <option value="عن المعرفة والتعلم">🧠 عن المعرفة والتعلم</option>
+                        <option value="عن الصحة النفسية">🌿 عن الصحة النفسية</option>
+                        <option value="عن الذات والحياة">✨ عن الذات والحياة</option>
+                    </select>
+                </div>
+                <textarea id="thought-content" rows="4" placeholder="اكتبي نص الخاطرة أو الفكرة هنا..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500 mb-4"></textarea>
+                <div class="flex justify-end gap-3">
+                    <button onclick="toggleThoughtInput()" class="px-5 py-2 rounded-xl text-slate-400 hover:text-white text-sm font-semibold">إلغاء</button>
+                    <button onclick="saveNewThought()" class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-2 rounded-xl text-sm transition-colors">نشر الخاطرة</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Thoughts Grid -->
+            <div id="thoughts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Example Default Cards -->
+                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 mb-4">🧠 عن المعرفة والتعلم</span>
+                        <h3 class="text-lg font-bold text-white mb-2">جوهر التعلم الحقيقي</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            "التعلم ليس مجرد تحصيل للمعلومات، بل هو رحلة إعادة اكتشاف للذات وللكون، وتحويل المعرفة النظرية إلى أثر طيب في السلوك والفكر."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
+                        <span>د. رباب الشامي</span>
+                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-teal-500/10 text-teal-400 mb-4">🌿 عن الصحة النفسية</span>
+                        <h3 class="text-lg font-bold text-white mb-2">سلام النفس والمعلم</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            "إن الصحة النفسية للمعلم والمتعلم هي الركيزة الأولى لأي عملية تعليمية ناجحة، فالنفس المطمئنة هي الأقدر على العطاء والاستيعاب."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
+                        <span>د. رباب الشامي</span>
+                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-400 mb-4">✨ عن الذات والحياة</span>
+                        <h3 class="text-lg font-bold text-white mb-2">خطوات نحو الأثر</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            "كل فكرة نغرسها بصدق اليوم، تثمر غداً في عقول طلابنا وباحثينا. الاستثمار في العقول هو الاستثمار الخالد."
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
+                        <span>د. رباب الشامي</span>
+                        <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 text-center py-8 px-4 text-sm border-t border-slate-800">
+        <p>جميع الحقوق محفوظة © 2026 - المكتبة الرقمية لكتاب نظريات التعلم | د. رباب الشامي</p>
+    </footer>
+
+    <!-- ==================== MODALS / SUB-PAGES SYSTEM ==================== -->
+
+    <!-- MODAL 1: كتاب نظريات التعلم -->
+    <div id="modal-book" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-book text-gold-500 text-2xl"></i>
+                    <h3 class="text-xl font-bold">١- كتاب نظريات التعلم وتطبيقاتها التربوية</h3>
+                </div>
+                <button onclick="closeModal('modal-book')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
+            </div>
+            
+            <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+                <!-- Book Cover Preview -->
+                <div class="md:col-span-5 flex flex-col items-center">
+                    <div class="w-full max-w-[240px] h-[340px] bg-gradient-to-br from-slate-900 to-teal-900 rounded-2xl p-6 text-white text-center flex flex-col justify-between border-2 border-gold-500 shadow-xl relative">
+                        <span class="text-xs text-gold-500 font-bold">دليل المعلم والباحث</span>
+                        <div>
+                            <h4 class="text-2xl font-black mb-2">نظريات التعلم</h4>
+                            <p class="text-xs text-slate-300">تأصيل وتطبيق تربوي</p>
+                        </div>
+                        <div class="border-t border-slate-700 pt-3">
+                            <p class="text-sm font-bold text-gold-100">د. رباب الشامي</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Details and Dropzone -->
+                <div class="md:col-span-7 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-align-right text-gold-500 ml-2"></i> نبذة عن الكتاب:</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            يقدم هذا الكتاب صياغة علمية ميسرة ورصينة لأهم نظريات التعلم وتطبيقاتها العملية في الميدان التربوي. يهدف لإعانة المعلمين والباحثين على فهم واستيعاب آليات التعلم وتوجيهها بفاعلية.
+                        </p>
+
+                        <!-- Interactive File Dropzone for Uploading/Replacing Book PDF -->
+                        <div class="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center hover:border-gold-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'book-file-info')">
+                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-gold-500 mb-2"></i>
+                            <p class="text-sm font-bold text-slate-700 mb-1">اسحب ملف الكتاب (PDF) وأسقطه هنا أو اضغط للرفع</p>
+                            <p class="text-xs text-slate-400">يمكنك رفع نسختك لربطها وتنزيلها لاحقاً</p>
+                            <input type="file" class="hidden" id="book-input" onchange="handleFileSelect(event, 'book-file-info')">
+                            <div id="book-file-info" class="mt-3 text-xs font-bold text-teal-700"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <a href="#" download class="bg-gold-500 hover:bg-gold-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-download"></i> تنزيل ملف الكتاب (PDF)
+                        </a>
+                        <button onclick="closeModal('modal-book')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm">إغلاق الصفحة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: الفيديو التعليمي -->
+    <div id="modal-video" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-video text-red-500 text-2xl"></i>
+                    <h3 class="text-xl font-bold">٢- الفيديو التعليمي الملحق</h3>
+                </div>
+                <button onclick="closeModal('modal-video')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-6">
+                <div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-circle-info text-red-500 ml-2"></i> نبذة عن الفيديو الشارح:</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        عُرض بأسلوب بصري وممتع يلخص محاور الكتاب ويشرح التطبيقات العملية لنظريات التعلم داخل القاعة الدراسية.
+                    </p>
+                </div>
+
+                <!-- Embedded Video Player Placeholder / Frame -->
+                <div class="aspect-video bg-slate-900 rounded-2xl overflow-hidden shadow-lg flex items-center justify-center relative group">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="video.mp4" type="video/mp4">
+                        متصفحك لا يدعم مشغل الفيديو مباشر.
+                    </video>
+                </div>
+
+                <!-- Dropzone for Video -->
+                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-red-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'video-file-info')">
+                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-upload ml-1"></i> تحميل/إفلات فيديو جديد للربط داخل الصفحة</p>
+                    <div id="video-file-info" class="mt-1 text-xs text-teal-700"></div>
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+                    <a href="https://youtube.com" target="_blank" class="text-red-600 font-bold text-sm hover:underline flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-lg"></i> مشاهدة مباشرة عبر يوتيوب
+                    </a>
+                    <button onclick="closeModal('modal-video')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: البودكاست -->
+    <div id="modal-podcast" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-podcast text-amber-500 text-2xl"></i>
+                    <h3 class="text-xl font-bold">٣- البودكاست الصوتي والمرئي</h3>
+                </div>
+                <button onclick="closeModal('modal-podcast')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-6">
+                <div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-align-right text-amber-500 ml-2"></i> نبذة عن حلقة البودكاست:</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        حلقة إثرائية مميزة تناقش وتلخص زبدة كتاب نظريات التعلم، مصممة للاستماع السريع أثناء التنقل أو الاستمتاع بمشاهدتها مرئياً.
+                    </p>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm">
+                    <h5 class="text-sm font-bold text-amber-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-headphones text-amber-600"></i> البودكاست الصوتي:</h5>
+                    <audio controls class="w-full h-10">
+                        <source src="podcast.mp3" type="audio/mpeg">
+                        المتصفح لا يدعم مشغل الصوت.
+                    </audio>
+                </div>
+
+                <!-- Video Podcast -->
+                <div class="bg-slate-900 rounded-2xl p-4 text-center text-white">
+                    <h5 class="text-sm font-bold text-amber-400 mb-2 flex items-center justify-center gap-2"><i class="fa-solid fa-tv"></i> البودكاست المرئي:</h5>
+                    <div class="aspect-video bg-slate-800 rounded-xl flex items-center justify-center">
+                        <p class="text-slate-400 text-xs">مشغل البودكاست المرئي جاهز للعرض مباشرة</p>
+                    </div>
+                </div>
+
+                <!-- Dropzone for Podcast -->
+                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-amber-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'podcast-file-info')">
+                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> تحميل أو إفلات تسجيل بودكاست صوتي/مرئي جديد</p>
+                    <div id="podcast-file-info" class="mt-1 text-xs text-teal-700"></div>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-2">
+                    <button onclick="closeModal('modal-podcast')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: العرض التقديمي (PowerPoint) -->
+    <div id="modal-ppt" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-file-powerpoint text-orange-500 text-2xl"></i>
+                    <h3 class="text-xl font-bold">٤- العرض التقديمي (PowerPoint)</h3>
+                </div>
+                <button onclick="closeModal('modal-ppt')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-6">
+                <div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-desktop text-orange-500 ml-2"></i> عن ملف العرض التقديمي:</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        شرائح عرض جاهزة ومصممة بأسلوب احترافي مخصص للمعلمين والأكاديميين لاستخدامها المباشر في الشرح والمحاضرات.
+                    </p>
+                </div>
+
+                <div class="border border-slate-200 rounded-2xl p-8 bg-slate-50 text-center">
+                    <i class="fa-solid fa-file-powerpoint text-6xl text-orange-500 mb-4"></i>
+                    <h5 class="text-base font-bold text-slate-800">عرض شرائح كتاب نظريات التعلم.pptx</h5>
+                    <p class="text-xs text-slate-500 mt-1">جاهز للمعاينة والتحميل المباشر</p>
+                </div>
+
+                <!-- Dropzone for PPT -->
+                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-orange-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'ppt-file-info')">
+                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-file-arrow-up ml-1"></i> افلت أو حمل ملف عرض تقديم جديد (PPTX)</p>
+                    <div id="ppt-file-info" class="mt-1 text-xs text-teal-700"></div>
+                </div>
+
+                <div class="flex justify-between items-center pt-2">
+                    <a href="#" download class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> تحميل العرض (PPTX)
+                    </a>
+                    <button onclick="closeModal('modal-ppt')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2.5 rounded-xl text-sm">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: الخرائط والملحقات -->
+    <div id="modal-maps" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-map-location-dot text-teal-500 text-2xl"></i>
+                    <h3 class="text-xl font-bold">٥- الخرائط والصور والملحقات الإثرائية</h3>
+                </div>
+                <button onclick="closeModal('modal-maps')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-6">
+                <div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2"><i class="fa-solid fa-folder-open text-teal-600 ml-2"></i> حقيبة الملحقات والخرائط الذهنية:</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        تتضمن هذه الصفحة ملفات PDF، صور توضيحية عالية الجودة، وأوراق عمل إثرائية داعمة لكتاب نظريات التعلم.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="border border-slate-200 rounded-xl p-4 flex items-center gap-4 bg-slate-50">
+                        <i class="fa-solid fa-file-pdf text-3xl text-red-500"></i>
+                        <div>
+                            <h5 class="text-sm font-bold text-slate-800">خرائط المفاهيم الذهنية.pdf</h5>
+                            <a href="#" download class="text-xs text-teal-600 hover:underline font-semibold">استعراض وتحميل</a>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl p-4 flex items-center gap-4 bg-slate-50">
+                        <i class="fa-solid fa-file-image text-3xl text-blue-500"></i>
+                        <div>
+                            <h5 class="text-sm font-bold text-slate-800">انفوجرافيك النظرية البنائية.png</h5>
+                            <a href="#" download class="text-xs text-teal-600 hover:underline font-semibold">استعراض وتحميل</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dropzone for PDFs/Images -->
+                <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-teal-500 transition-colors cursor-pointer bg-slate-50 dropzone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'maps-file-info')">
+                    <p class="text-xs font-bold text-slate-600"><i class="fa-solid fa-cloud-arrow-up ml-1"></i> اسحب وأسقط أي ملف PDF أو صورة لإضافتها للملحقات</p>
+                    <div id="maps-file-info" class="mt-1 text-xs text-teal-700"></div>
+                </div>
+
+                <div class="flex justify-end pt-2">
+                    <button onclick="closeModal('modal-maps')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-5 py-2 rounded-xl text-sm">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6: لعبة التحدي -->
+    <div id="modal-game" class="fixed inset-0 z-50 hidden overflow-y-auto modal-overlay bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 flex items-center justify-center">
+        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden modal-body relative">
+            <div class="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-gamepad text-purple-500 text-2xl"></i>
+                    <h3 class="text-xl font-bold">٦- لعبة التحدي (اختبر فهمك)</h3>
+                </div>
+                <button onclick="closeModal('modal-game')" class="text-slate-400 hover:text-white text-2xl font-bold w-10 h-10 rounded-full hover:bg-slate-800 flex items-center justify-center">×</button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-6 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <div class="w-20 h-20 bg-purple-100 text-purple-600 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-4">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h4 class="text-2xl font-black text-slate-900 mb-2">طريقة وطبيعة اللعبة</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        لعبة إلكترونية تفاعلية تحتوي على أسئلة ومواقف تربوية ممتعة تهدف لقياس وتثبيت المفاهيم التي وردت في كتاب نظريات التعلم بأسلوب التحدي والمكافآت.
+                    </p>
+
+                    <a href="play.html" class="inline-flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg px-10 py-4 rounded-2xl shadow-xl transition-transform hover:scale-105 mb-4">
+                        <i class="fa-solid fa-play"></i> انقر هنا لفتح وبدء اللعبة المباشرة
+                    </a>
+                </div>
+
+                <div class="pt-4 border-t border-slate-200 flex justify-center">
+                    <button onclick="closeModal('modal-game')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-2 rounded-xl text-sm">العودة للمكتبة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactive Logic -->
+    <script>
+        // Modal Handlers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function scrollToBottom() {
+            document.getElementById('thoughts-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Toggle Thought Form
+        function toggleThoughtInput() {
+            const form = document.getElementById('thought-form-container');
+            form.classList.toggle('hidden');
+        }
+
+        // Save New Thought to Screen & LocalStorage
+        function saveNewThought() {
+            const title = document.getElementById('thought-title').value.trim();
+            const tag = document.getElementById('thought-tag').value;
+            const content = document.getElementById('thought-content').value.trim();
+
+            if (!title || !content) {
+                alert('لطفاً اكتبي العنوان ونص الخاطرة قبل النشر.');
+                return;
+            }
+
+            const thoughtsGrid = document.getElementById('thoughts-grid');
+            
+            const card = document.createElement('div');
+            card.className = "bg-slate-800/80 rounded-2xl p-6 border border-slate-700/60 flex flex-col justify-between";
+            card.innerHTML = `
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gold-500/10 text-gold-400 mb-4">${tag}</span>
+                    <h3 class="text-lg font-bold text-white mb-2">${title}</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">${content}</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-xs text-slate-400">
+                    <span>د. رباب الشامي</span>
+                    <i class="fa-solid fa-quote-left text-slate-600 text-lg"></i>
+                </div>
+            `;
+
+            thoughtsGrid.prepend(card);
+
+            // Reset inputs
+            document.getElementById('thought-title').value = '';
+            document.getElementById('thought-content').value = '';
+            toggleThoughtInput();
+        }
+
+        // File Drag and Drop Handlers
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dropzone-active');
+        }
+
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('dropzone-active');
+        }
+
+        function handleDrop(e, outputId) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dropzone-active');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                const fileName = e.dataTransfer.files[0].name;
+                document.getElementById(outputId).innerText = "تم إفلات الملف بنجاح: " + fileName;
+            }
+        }
+
+        function handleFileSelect(e, outputId) {
+            if (e.target.files && e.target.files[0]) {
+                const fileName = e.target.files[0].name;
+                document.getElementById(outputId).innerText = "تم اختيار الملف: " + fileName;
+            }
+        }
+    </script>
+</body>
+</html>
